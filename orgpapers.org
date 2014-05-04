@@ -92,9 +92,8 @@ preparation system that has following features.
     cited in your papers and included in the paper when a final output
     is produced.
 
-
 * Installing necessary software
-This set up will work with any operating systems (linux, Mac OS-X, or
+This set up will work with any operating system (linux, Mac OS-X, or
 Windows).
 
 You need to install the following
@@ -106,14 +105,15 @@ You need to install the following
 * Basics of Emacs
 
 GNU Emacs is an extensible platform. Although its primary function is
-as an editor, it can be extended to do almost anything. It is a
-worthwhile aim to slowly shift an increasing number of tasks you do on
-your computer to emacs-based solutions. For each major task you do on
-your computer, ask if it can be done using emacs. For almost
+as an editor, it can be extended to do almost anything that you would
+want your computer to do. Now, that really is not an overstatement. It
+is a worthwhile aim to slowly shift an increasing number of tasks you
+do on your computer to emacs-based solutions. For each major task you
+do on your computer, ask if it can be done using emacs. For almost
 everything, the answer is yes, and in most cases, emacs does it better
 than other software you are used to. Many emacs users have learnt
 emacs by shifting, one-by-one, to emacs for all major tasks that they
-do on the computer. 
+do on the computer.
 
 I am not going to give a detailed guide to use of emacs. A few tasks
 for which I use Emacs include
@@ -193,7 +193,6 @@ shortcuts and starts using them instead of the verbose versions.
 | *undo*                    | =C-x u=      | /undoes the last command typed, in case you made a mistake/                                                    |
 
 * Basics of Org-mode
-
 ** Sections and headlines
 
 A headline in org starts with one or more stars (*) followed by a
@@ -225,8 +224,6 @@ leave section numbering for org-mode to handle automatically.
 : offending commanded my an. Change wholly say why eldest period. Are
 : projection put celebrated particular unreserved joy unsatiable its. In
 : then dare good am rose bred or. On am in nearer square wanted.
-  
-
 : ** What are the major disputes in the literature
 : *** adulterated text
 : Instrument cultivated alteration any favourable expression law far
@@ -234,7 +231,6 @@ leave section numbering for org-mode to handle automatically.
 : Oh to as principles devonshire companions unsatiable an delightful.
 : The ourselves suffering the sincerity. Inhabit her manners adapted age
 : certain. Debating offended at branched striking be subjects.
-
 : *** Unadulterated prose
 : Announcing of invitation principles in. Cold in late or deal.
 : Terminated resolution no am frequently collecting insensible he do
@@ -245,8 +241,6 @@ leave section numbering for org-mode to handle automatically.
 : astonished expression boisterous. Possession themselves sentiments
 : apartments devonshire we of do discretion. Enjoyment discourse ye
 : continued pronounce we necessary abilities.
-
-
 : * Methodology
 : * Results
 : ** Result 1
@@ -274,11 +268,15 @@ star is removed).
 
 Org-mode has an in-built table editor, which is very simple to use.
 
+We shall directly create only those tables in Org that present content
+that is not being produced through statistical analysis. For tables
+that are created through statistical analysis, we shall embed R
+programs rather than the tables themselves. This is discussed in
+Section [[Org-mode and R]] of this guide.
 
-
+Org-mode creates tables by separating columns using 
 
 ** Images
-
 
 * Org-mode and R
 ** Embedding R Code in an Org buffer
@@ -290,7 +288,7 @@ Org-mode has an in-built table editor, which is very simple to use.
 + Building your bibtex database
 + biblatex is the citation manager of choice.
   + Setting up use of biblatex
-+ integration with reftex
++ Integration with reftex
   + Can also use other bibtex managers (JabRef or BibDesk (for OS-X
     only) are very good).
 + 
