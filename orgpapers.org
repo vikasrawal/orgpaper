@@ -274,9 +274,89 @@ that are created through statistical analysis, we shall embed R
 programs rather than the tables themselves. This is discussed in
 Section [[Org-mode and R]] of this guide.
 
-Org-mode creates tables by separating columns using 
+See the Org syntax for a sample table below.
+
+: | Serial no | Name   | Age |
+: |-----------+--------+-----|
+: |         1 | Satish |  43 |
+: |         2 | Ramesh |  21 |
+: |         3 | Alicia |  42 |
+: |         4 | Begum  |  52 |
+
++ Org-mode creates tables by separating columns using  |.
++ Once you create the first row by separating columns using |,
+  pressing tabs takes you from the first column to the next.
++ At the end of the row, pressing tab again, creates a new blank row.
+  You can also create a new blank row by pressing return anywhere in
+  the last row.
++ For creating a horizontal line anywhere, type |- at the starting of
+  the line, and press tab. 
++ Contents of each cell are aligned automatically by Org.
++ To delete a row, use C-k (M-x kill-line).
+
+Org provides various commands for manipulating design of tables. Table
+[[org-table-commands]] provides the most important ones. Note that Table
+[[org-table-commands]] is created using Org mode. It also gives you an
+idea of how the table would look eventually.
+
+#+NAME: org-table-commands
+#+CAPTION: Commands to manipulate tables in Org
+| Command     | Description                                            |
+|-------------+--------------------------------------------------------|
+| M-<left>    | Move the column left                                   |
+| M-<right>   | Move the column right                                  |
+| M-S-<left>  | Delete the current column                              |
+| M-S-<right> | Insert a new column to the left of the cursor position |
+| M-<up>      | Move row up                                            |
+| M-<down>    | Move row down                                          |
+| M-S-<up>    | Delete the current row or horizontal line              |
+| M-S-<down>  | Insert a new row above the current row                 |
+
+For more commands for manipulating tables, see [[http://www.orgmode.org/manual/Tables.html][this section of the Org
+manual]]. In particular, you may want to look at spreadsheet-like
+functions of the table editor.
 
 ** Images
+
+You can insert images in documents as follows
+
+: [[a.jpg]]
+
+Once again, graphs produced by R, will be inserted automatically.
+
+** Captions and cross-references
+
+As shown below, a line starting by #+CAPTION adds a title to Tables or
+images. All Tables and Figures will be automatically numbered. 
+: #+CAPTION: Percentage of literate men and women, by country (per cent)
+
+For referring to these Tables and Figures in the text, we shall name
+each table and figure in a line starting with #+NAME as below.
+
+: #+NAME: literacy-rate
+
+Finally, an image will be inserted as follows.
+: #+NAME: literacy-rate
+: #+CAPTION: Percentage of literate men and women, by country (per cent)
+: [[a.jpg]]
+
+Similarly, a table will be inserted as follows.
+
+: #+NAME: literacy-rate-table
+: #+CAPTION: Percentage of literate men and women, by country (per cent)
+: | Country    | Men | Women |
+: | India      |  75 |    43 |
+: | Bangladesh |  83 |    63 |
+: | Rwanda     |  77 |    60 |
+
+To refer to the Table above in the text, write Table [ [
+literacy-rate-table ] ], that is, enclose table name between double
+square brackets. When the formatted output is produced, it would be
+automatically converted to the appropriate number.
+
+All objects with captions are numbered, and cross-references to these
+named objects, are converted to these numbers. If new objects are
+inserted in the paper, numbering will be adjusted automatically.
 
 * Org-mode and R
 ** Embedding R Code in an Org buffer
@@ -298,6 +378,7 @@ Org-mode creates tables by separating columns using
 + Garamond font
 + Geometry for margins
 + Acknowledgements in footnote
++ floatbarrier
 
 * Presentations
 * Creating Openoffice/MS-Word Documents
