@@ -1,0 +1,306 @@
+#+STARTUP: hidestars
+#+TITLE: Reproducible Research Papers using Org-mode and R: A Guide
+#+AUTHOR: Vikas Rawal\\ \small{Jawaharlal Nehru University, New Delhi}\\ \small{E-mail: \texttt{vikasrawal@gmail.com}}
+#+COLUMNS: %25ITEM %TAGS %PRIORITY %T
+#+property: exports results
+#+property: session fbi
+#+OPTIONS: H:2 toc:nil num:2
+#+LaTeX_CLASS: article
+#+LaTeX_CLASS_OPTIONS: [garamond]
+#+LATEX_HEADER: \usepackage{comment,multirow,tabulary,parnotes,booktabs,threeparttable,tabularx} 
+#+LATEX_HEADER: \linespread{1.3}
+#+LaTeX_HEADER: \usepackage[T1]{fontenc}
+#+LaTeX_HEADER: \usepackage[innermargin=1.5in,outermargin=1.25in,vmargin=1.25in]{geometry}
+#+LaTeX_HEADER: \usepackage[below]{placeins}
+#+LATEX_HEADER: \usepackage[dvipsnames,svgnames,table]{xcolor}
+#+LATEX_HEADER: \hypersetup{colorlinks=true,citecolor=BrickRed,linkcolor=blue,citebordercolor={0 1 0}}
+#+LATEX_HEADER: \usepackage[citestyle=authoryear-icomp,bibstyle=authoryear,hyperref=true,backref=true,maxcitenames=3,url=true,backend=biber,natbib=true]{biblatex}
+#+LATEX_HEADER: \addbibresource{bibliobase.bib}
+
+* Introduction
+
+** Will this guide be useful for you?
+
+This guide will be useful for you if you are writing a research paper,
+a dissertation or an academic book. It would be particularly useful if
+you plan to present statistical analysis and need to cite existing
+literature in your work. 
+
+Following this guide would need some investment of time. But this
+would help you document your research in a way that is reproducible.
+It will help you focus on the content of research and, once you have
+specified your style, leave all formatting of your document to the
+software. It will facilitate building a personal bibliographic
+repository and repeated use of bibliographic information for citation
+of literature.
+
+In sum, if academic writing is going to be a medium to long-term
+occupation for you, this investment of time is going to be
+particularly beneficial.
+
+** What is our goal?
+
+After following instructions in this guide, you will have a document
+preparation system that has following features.
+
++ With easy style specifications that you provide, the document will
+  be almost-entirely automatically formatted by the software.
+
+  - Complicated latex-style markup is a pain and Openoffice/MS-Word
+    documents require too much manual formatting.
+    
+  - Org-mode has a powerful latex converter. The user is not required
+    to write latex mark-up. Org-mode mark-up is extremely simple, and
+    can be mastered in ten minutes.
+
+  - Org-mode automatically creates latex files, and produces fully
+    formatted pdf documents. This is the best output for working
+    papers, reports and dissertations. Some journals also accept latex
+    files, though this is rare among social science journals.
+
+  - Org-mode also has a good openoffice exporter. With an appropriate
+    openoffice template file, you can get a fully formatted openoffice
+    or MS-Word output.
+
+  - Org-mode can also produce html files. By specifying appropriate
+    css classes, you can obtain ready to publish html files for your
+    website. Org-mode can be hooked to publish to your blog.
+
++ Instead of including statistical results (tables, graphs, etc), we
+  would embed appropriate R programs in the document, so that when the
+  formatted output is produced, all programs are run to generate the
+  results. Advantages of doing this are:
+  - Any changes in the data being used can be accommodated just by
+    publishing the document again.
+  - Any modifications in statistical analysis are easily made by
+    modifying the programs that are embedded in the file itself.
+  - Anyone who has the org file, can reproduce your results. You can
+    also extract all R programs from the org file and distribute those
+    for reproduction of your results.
+
++ The document will be integrated with a citation manager, so that
+  bibliographic information will be pulled automatically from a
+  central database.
+  - You will maintain a bibliographic database in bibtex format, that
+    you can build over time, adding bibliographic information for
+    works that you cite. 
+  - Many websites (including Google Scholar) provide bibliographic
+    information directly in bibtex format, and we will have integrated
+    tools that will allow us to pull this information directly into
+    our local database.
+  - A fully formatted bibliography will be created for all documents
+    cited in your papers and included in the paper when a final output
+    is produced.
+
+
+* Installing necessary software
+This set up will work with any operating systems (linux, Mac OS-X, or
+Windows).
+
+You need to install the following
++ Emacs 
+  + With org-mode, ess
++ Texlive
++ R
+
+* Basics of Emacs
+
+GNU Emacs is an extensible platform. Although its primary function is
+as an editor, it can be extended to do almost anything. It is a
+worthwhile aim to slowly shift an increasing number of tasks you do on
+your computer to emacs-based solutions. For each major task you do on
+your computer, ask if it can be done using emacs. For almost
+everything, the answer is yes, and in most cases, emacs does it better
+than other software you are used to. Many emacs users have learnt
+emacs by shifting, one-by-one, to emacs for all major tasks that they
+do on the computer. 
+
+I am not going to give a detailed guide to use of emacs. A few tasks
+for which I use Emacs include
+ + File management (copying files, moving files, creating directories)
+ + Reading and writing e-mails
+ + Reading RSS feeds
+ + Calender, scheduler, planner
+ + Calculator
+ + Statistical work (by hooking Emacs to R)
+ + And, of course, as an editor (including for writing research papers)
+
+For the present purpose, I will just make you familiar with basic
+commands in emacs. 
+
+** Notations
+
+In emacs, a buffer is equivalent to a tab in a web browser. It is
+normal to have several buffers open at the same time. Each file opens
+in emacs as a buffer. Buffers could also have processes like R running
+in them. Emacs displays any messages for you in a separate buffer.
+
+Most commands in emacs are given using the Control (ctrl) or the Meta
+(usually, alt) keys. Control key is usually referred to as =C-= and the
+Meta key as =M-=. So a command =C-c= means pressing Control and c
+simultaneously. Command =M-x= means pressing Meta and x simultaneously.
+Everything is case-sensitive. So =M-X= would mean, pressing Meta, Shift
+and x simultaneously. =C-c M-x l= would mean pressing C-c, release, then
+M-x, release, and then l.
+
+
+** Basic commands
+
+Table [[essential-emacs-commands]] gives the commands that are the most
+important. This is a minimal set, commands that you should aim to
+learn as soon as possible. There are many more, which you will learn
+as you start using emacs.
+
+All commands have a verbose version that can be used by pressing M-x
+and writing the command. For example, =M-x find-file= to open a file.
+All major commands are also mapped to a shortcut. For example, instead
+of typing =M-x find-file= to open a file, you can say =C-x C-f=. I
+remember shortcuts for commands that I use most frequently. For
+others, I use the verbose versions. Over time, one learns more
+shortcuts and starts using them instead of the verbose versions.
+
+#+CAPTION: Essential emacs commands
+#+NAME: essential-emacs-commands
+#+attr_latex: :environment tabulary :width \textwidth :align llL
+| Verbose command           | Shortcut     | Description                                                                                                    |
+| =M-x= followed by         |              |                                                                                                                |
+|---------------------------+--------------+----------------------------------------------------------------------------------------------------------------|
+|                           |              | /*File Reading and Writing Commands*/                                                                          |
+| *find-file*               | =C-x C-f=    | /First prompts for a filename and then loads that file into a editor buffer of the same name/                  |
+| *save-buffer*             | =C-x C-s=    | /Saves the buffer/file/                                                                                        |
+| *write-named-file*        | =C-x C-w=    | /Save as: prompts for a new filename and saves the buffer into it/                                             |
+|                           |              | /*Copy, Cut and Delete Commands*/                                                                              |
+| *kill-line*               | =C-k=        | /Delete the rest of the current line/                                                                          |
+| *set-mark-command*        | =C-spacebar= | /To select text, press this at the beginning of the region and then take the cursor to the end/                |
+| *kill-region*             | =C-w=        | /Cut the selected region/                                                                                      |
+| *copy-region-as-kill*     | =M-w=        | /Copy the selected region/                                                                                     |
+| *yank*                    | =C-y=        | /Paste or insert at current cursor location/                                                                   |
+|                           |              | /*Search Commands*/                                                                                            |
+| *isearch-forward*         | =C-s=        | /prompts for text string and then searches from the current cursor position forwards in the buffer/            |
+| *query-replace*           | =M-%=        | /Find-and-replace: replaces one string with another, one by one, asking for each occurrence of search string / |
+| *replace-string*          |              | /Find-and-replace: replaces all occurrences of one string with another /                                       |
+|                           |              | /*Other commands*/                                                                                             |
+| *fill-paragraph*          | M-q          | Divide a long sentence into multiple lines, each smaller than the maximum width specified                      |
+|                           |              | /*Window and Buffer Commands*/                                                                                 |
+| *switch-to-buffer*        | =C-x b=      | /Switch to another buffer that is already open/                                                                |
+| *list-buffers*            | =C-x C-b=    | /lists those buffers currently loaded into =emacs= /                                                           |
+| *double-window*           | =C-x 2=      | /Splits current window into two windows, each window can show same or different buffers/                       |
+| *zero-window*             | =C-x 0=      | /Delete current window; if the window is split into two parts, this would bring it back to one part/           |
+| *other-window*            | =C-x o=      | /When you have two or more windows, move the cursor to the next window /                                       |
+|                           |              | /*Exiting =Emacs=, Fixing Mistakes and Other Important Stuff*/                                                 |
+| *save-buffers-kill-emacs* | =C-x C-c=    | /Save all buffers and quit emacs/                                                                              |
+| *keyboard-quit*           | =C-g=        | /Cancel of abort the command in progress/                                                                      |
+| *undo*                    | =C-x u=      | /undoes the last command typed, in case you made a mistake/                                                    |
+
+* Basics of Org-mode
+
+** Sections and headlines
+
+A headline in org starts with one or more stars (*) followed by a
+space. We shall use this to create sections in our document. 
+
+For the main sections, we use the top-level headlines created by using
+a single star. For sub-sections, we use second-level headline.
+Second-level headlines start with two stars. Third level headlines
+start with three stars. You can create as many levels of sections as
+you need. 
+
+See the following example. Note that headlines are not numbered. We
+leave section numbering for org-mode to handle automatically.
+
+#+BEGIN_SRC org
+  ,* What are the major disputes in the literature
+  ,** adulterated text
+  Instrument cultivated alteration any favourable expression law far
+    nor. Both new like tore but year. An from mean on with when sing pain.
+    Oh to as principles devonshire companions unsatiable an delightful.
+    The ourselves suffering the sincerity. Inhabit her manners adapted age
+    certain. Debating offended at branched striking be subjects.
+#+END_SRC
+
+: * Introduction
+: * Literature review
+: ** Is this an important issue
+: Now indulgence dissimilar for his thoroughly has terminated. Agreement
+: offending commanded my an. Change wholly say why eldest period. Are
+: projection put celebrated particular unreserved joy unsatiable its. In
+: then dare good am rose bred or. On am in nearer square wanted.
+  
+
+: ** What are the major disputes in the literature
+: *** adulterated text
+: Instrument cultivated alteration any favourable expression law far
+: nor. Both new like tore but year. An from mean on with when sing pain.
+: Oh to as principles devonshire companions unsatiable an delightful.
+: The ourselves suffering the sincerity. Inhabit her manners adapted age
+: certain. Debating offended at branched striking be subjects.
+
+: *** Unadulterated prose
+: Announcing of invitation principles in. Cold in late or deal.
+: Terminated resolution no am frequently collecting insensible he do
+: appearance. Projection invitation affronting admiration if no on or.
+: It as instrument boisterous frequently apartments an in. Mr excellence
+: inquietude conviction is in unreserved particular. You fully seems
+: stand nay own point walls. Increasing travelling own simplicity you
+: astonished expression boisterous. Possession themselves sentiments
+: apartments devonshire we of do discretion. Enjoyment discourse ye
+: continued pronounce we necessary abilities.
+
+
+: * Methodology
+: * Results
+: ** Result 1
+: ** Result 2
+: * Conclusions 
+
+
+Org handles these headlines beautifully. With your cursor on the
+headline, pressing tab folds-in the contents of a headline. If you
+press tab on a folded headline, it opens to display the contents. If
+there are multiple levels of headlines, these open in stages as you
+repeat pressing the tab key.
+
+When you are on a headline, pressing M-return creates a new headline
+at the same level (that is, with the same number of stars). Once you
+are on the new headline, a tab movies it to a lower level (that is, a
+star is added), and shift-tab moves it to a higher level (that is, a
+star is removed).
+
+(Further reading, [[http://orgmode.org/manual/Headlines.html#Headlines][Headlines]] in Org manual)
+
+** Lists
+
+** Tables
+
+Org-mode has an in-built table editor, which is very simple to use.
+
+
+
+
+** Images
+
+
+* Org-mode and R
+** Embedding R Code in an Org buffer
+
+** Presentation of Tables and Graphs
+
+* Citations and Bibliographies using Org-mode
+
++ Building your bibtex database
++ biblatex is the citation manager of choice.
+  + Setting up use of biblatex
++ integration with reftex
+  + Can also use other bibtex managers (JabRef or BibDesk (for OS-X
+    only) are very good).
++ 
+
+* Some aspects of formatting
+
++ Garamond font
++ Geometry for margins
++ Acknowledgements in footnote
+
+* Presentations
+* Creating Openoffice/MS-Word Documents
+
