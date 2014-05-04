@@ -92,15 +92,64 @@ preparation system that has following features.
     cited in your papers and included in the paper when a final output
     is produced.
 
+ 
 * Installing necessary software
 This set up will work with any operating system (linux, Mac OS-X, or
 Windows).
 
 You need to install the following
-+ Emacs 
-  + With org-mode, ess
++ Emacs 24
+  + With org-mode, ess add-on packages
 + Texlive
-+ R
++ R (and, of course, whatever additional R packages you want to use)
+
+** Emacs                                                             :CHECK:
+
+Emacs can be installed using package managers of all GNU/Linux
+distributions. Latest versions of most common distributions provide
+version 24. I strongly recommend using the latest version of Emacs.
+
+For Mac OS-X, either use Aquamacs 3.0 or install Emacs using homebrew.
+The built-in emacs on OS-X is an older version, and it would be a good
+idea to install the latest version instead.
+
+Starting version 24, Emacs include a package-manager. You can install
+ess and org-mode using the package manager. 
+
+To use the package manager, press alt-x in emacs, and then type
+package-list-packages and press return. This would bring up a list of
+packages. Find ess, and with the cursor on it, press return. Then
+click install. 
+
+You could also install org-mode similarly. However, since org-mode is
+under heavy development, and it is really a good idea to keep up with
+the latest development, it is better to clone it from the git
+repository of org-mode, and update it regularly.
+
+** Texlive
+
+Texlive can also be installed from package managers in most GNU/Linux
+distribution. 
+
+For OS-X, you could install MacTeX from http://www.tug.org/mactex/
+
+For Windows, download Texlive and follow instructions from
+https://www.tug.org/texlive/doc.html
+
+
+** R (http://www.r-project.org)
+
+In this guide, I assume that you are familiar with R. I will not cover
+R programming in this guide. 
+
+For GNU/Linux, R can be installed from native package managers (look
+for r-base in debian and debian-based distributions). For Mac OS-X and
+Windows, download and see installation instructions at
+http://www.r-project.org
+ 
+** Customising emacs
+
+org customisation
 
 * Basics of Emacs
 
@@ -187,10 +236,12 @@ shortcuts and starts using them instead of the verbose versions.
 | *double-window*           | =C-x 2=      | /Splits current window into two windows, each window can show same or different buffers/                       |
 | *zero-window*             | =C-x 0=      | /Delete current window; if the window is split into two parts, this would bring it back to one part/           |
 | *other-window*            | =C-x o=      | /When you have two or more windows, move the cursor to the next window /                                       |
-|                           |              | /*Exiting =Emacs=, Fixing Mistakes and Other Important Stuff*/                                                 |
+|                           |              | /*Exiting =Emacs= and Other Important Stuff*/                                                                  |
 | *save-buffers-kill-emacs* | =C-x C-c=    | /Save all buffers and quit emacs/                                                                              |
 | *keyboard-quit*           | =C-g=        | /Cancel of abort the command in progress/                                                                      |
 | *undo*                    | =C-x u=      | /undoes the last command typed, in case you made a mistake/                                                    |
+
+\FloatBarrier
 
 * Basics of Org-mode
 ** Sections and headlines
@@ -316,6 +367,11 @@ For more commands for manipulating tables, see [[http://www.orgmode.org/manual/T
 manual]]. In particular, you may want to look at spreadsheet-like
 functions of the table editor.
 
+One major limitation of Org tables is lack of support for merging of
+cells. 
+
+\FloatBarrier
+
 ** Images
 
 You can insert images in documents as follows
@@ -326,8 +382,9 @@ Once again, graphs produced by R, will be inserted automatically.
 
 ** Captions and cross-references
 
-As shown below, a line starting by #+CAPTION adds a title to Tables or
-images. All Tables and Figures will be automatically numbered. 
+As shown below, a line starting by #+CAPTION placed just about a table
+or a figure adds a title to it. All Tables and Figures titles will be
+automatically numbered.
 : #+CAPTION: Percentage of literate men and women, by country (per cent)
 
 For referring to these Tables and Figures in the text, we shall name
@@ -361,7 +418,11 @@ inserted in the paper, numbering will be adjusted automatically.
 * Org-mode and R
 ** Embedding R Code in an Org buffer
 
-** Presentation of Tables and Graphs
+** Presentation of Tables 
+
+** Presentation of Graphs
+
+
 
 * Citations and Bibliographies using Org-mode
 
@@ -374,11 +435,13 @@ inserted in the paper, numbering will be adjusted automatically.
 + 
 
 * Some aspects of formatting
-
++ Emacs theme
 + Garamond font
 + Geometry for margins
 + Acknowledgements in footnote
 + floatbarrier
++ wrapping text in Table columns
++ running code at the time of export?
 
 * Presentations
 * Creating Openoffice/MS-Word Documents
