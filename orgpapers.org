@@ -3,7 +3,6 @@
 #+AUTHOR: Vikas Rawal\\ \small{Jawaharlal Nehru University, New Delhi}\\ \small{E-mail: \texttt{vikasrawal@gmail.com}}
 #+COLUMNS: %25ITEM %TAGS %PRIORITY %T
 #+property: exports results
-#+property: session fbi
 #+OPTIONS: H:2 toc:nil num:2
 #+LaTeX_CLASS: article
 #+LaTeX_CLASS_OPTIONS: [garamond]
@@ -262,15 +261,15 @@ Table [[special-lines]] gives details of a few major special lines that we shall
 #+NAME: special-lines
 #+CAPTION: Main special lines to be used at the top of an Org buffer
 #+attr_latex: :environment tabulary :width \textwidth :align lL
-| Keyword   | Purpose                                                                                                                            |
-|-----------+------------------------------------------------------------------------------------------------------------------------------------|
-| #+TITLE   | To declare title of the paper                                                                                                      |
-| #+AUTHOR  | To declare author/s of the paper                                                                                                   |
-| #+DATE    | Sets the date. If blank, no date is used. If this keyword is omitted, current date is used.                                        |
-| #+OPTIONS | Following options are useful. Multiple options can be separated by a space and specified on the same line.                         |
-|           | toc:nil (Do not include a Table of contents)                                                                                       |
-|           | H:2  (Treat top two levels of headlines as section levels, and anything below that as item list. Modify the number as appropriate) |
-|           | num:2 (Number top two levels of headlines. Modify the number as appropriate.)                                                      |
+| Keyword     | Purpose                                                                                                                            |
+|-------------+------------------------------------------------------------------------------------------------------------------------------------|
+| =#+TITLE=   | To declare title of the paper                                                                                                      |
+| =#+AUTHOR=  | To declare author/s of the paper                                                                                                   |
+| =#+DATE=    | Sets the date. If blank, no date is used. If this keyword is omitted, current date is used.                                        |
+| =#+OPTIONS= | Following options are useful. Multiple options can be separated by a space and specified on the same line.                         |
+|             | toc:nil (Do not include a Table of contents)                                                                                       |
+|             | H:2  (Treat top two levels of headlines as section levels, and anything below that as item list. Modify the number as appropriate) |
+|             | num:2 (Number top two levels of headlines. Modify the number as appropriate.)                                                      |
 
 ** Sections and headlines
 
@@ -383,7 +382,7 @@ See the Org syntax for a sample table below.
 + For creating a horizontal line anywhere, type |- at the starting of
   the line, and press tab. 
 + Contents of each cell are aligned automatically by Org.
-+ To delete a row, use C-k (M-x kill-line).
++ To delete a row, use =C-k= (=M-x kill-line=).
 
 Org provides various commands for manipulating design of tables. Table
 [[org-table-commands]] provides the most important ones. Note that Table
@@ -392,16 +391,16 @@ idea of how the table would look eventually.
 
 #+NAME: org-table-commands
 #+CAPTION: Commands to manipulate tables in Org
-| Command     | Description                                            |
-|-------------+--------------------------------------------------------|
-| M-<left>    | Move the column left                                   |
-| M-<right>   | Move the column right                                  |
-| M-S-<left>  | Delete the current column                              |
-| M-S-<right> | Insert a new column to the left of the cursor position |
-| M-<up>      | Move row up                                            |
-| M-<down>    | Move row down                                          |
-| M-S-<up>    | Delete the current row or horizontal line              |
-| M-S-<down>  | Insert a new row above the current row                 |
+| Command       | Description                                            |
+|---------------+--------------------------------------------------------|
+| =M-<left>=    | Move the column left                                   |
+| =M-<right>=   | Move the column right                                  |
+| =M-S-<left>=  | Delete the current column                              |
+| =M-S-<right>= | Insert a new column to the left of the cursor position |
+| =M-<up>=      | Move row up                                            |
+| =M-<down>=    | Move row down                                          |
+| =M-S-<up>=    | Delete the current row or horizontal line              |
+| =M-S-<down>=  | Insert a new row above the current row                 |
 
 For more commands for manipulating tables, see [[http://www.orgmode.org/manual/Tables.html][this section of the Org
 manual]]. In particular, you may want to look at spreadsheet-like
@@ -425,15 +424,15 @@ Once again, graphs produced by R, will be inserted automatically.
 We add two lines above a table or an image to give it a title and to
 be able to cross-refer it from the text.
  
-+ A line starting with #+CAPTION placed just above a table or a figure
++ A line starting with ~#+CAPTION~ placed just above a table or a figure
   adds a title to it. All Tables and Figures titles are automatically
   numbered.
 
 + For referring to these Tables and Figures in the text, we shall name
-  each table and figure in a line starting with #+NAME as below.
+  each table and figure in a line starting with ~#+NAME~ as below.
 
-To illustrate, for inserting an image, with the caption and a name,
-this is what we shall do.
+To illustrate, for inserting an image, with a caption and a name, this
+is what we shall do.
 
 #+BEGIN_SRC org :exports code
   ,#+NAME: literacy-rate
@@ -454,26 +453,102 @@ Similarly, a table will be inserted as follows.
 
 #+end_src
 
-To refer to the Table above in the text, write Table [ [
-literacy-rate-table ] ], that is, enclose table name between double
-square brackets. When the formatted output is produced, it would be
-automatically converted to the appropriate number.
+To refer to the Table above in the text, write Table
+~[[literacy-rate-table]]~. As an illustration, see the following sentence.
 
-By default, all objects with captions are numbered, and
-cross-references to these named objects, are converted to these
+#+BEGIN_SRC org :exports code
+  Tables [[literacy-rate-table]] and [[health-table]], and Figure
+  [[literacy-figure]], show the level of underdevelopment.
+#+end_src
+
+By default, all objects with captions are numbered, and names are used
+to anchor cross-references. When the formatted output is produced, all
+the references would be automatically converted to appropriate
 numbers. If new objects are inserted in the paper, numbering will be
-adjusted automatically.
+adjusted automatically when you create the formatted output.
 
 * Org-mode and R
 ** Embedding R Code in an Org buffer
 
-There are three kinds of scenarios that I normally use.
+*** Configuration
+
+Following code in vikasorg.el enables Org to run different types of
+code. If you have installed vikasorg.el as specified in [[Customising
+emacs]], these are already enabled. 
+
+I have included here the languages that I commonly use. See Org
+manual, if you would like to add any more.
+
+#+BEGIN_SRC emacs-lisp :exports code
+(org-babel-do-load-languages
+   'org-babel-load-languages
+   '((R . t)
+     (org . t)
+     (ditaa . t)
+     (latex . t)
+     (dot . t)
+     (emacs-lisp . t)
+     (gnuplot . t)
+     (screen . nil)
+     (shell . t)
+     (sql . nil)
+     (sqlite . t)))
+#+END_SRC
+
+#+RESULTS:
+| (R . t) | (org . t) | (ditaa . t) | (latex . t) | (dot . t) | (emacs-lisp . t) | (gnuplot . t) | (screen) | (shell . t) | (sql) | (sqlite . t) |
+
+*** Special lines for R  
+
+Org allows you to run multiple R sessions simultaneously, if you are
+working on two documents side by side, and would like to keep
+statistical work for the two separately.
+
+This is done by naming the R session which a particular Org file is
+linked to. All R code in this file would be run in the specified R
+session. You could have, at the same time, another R session, with a
+different name, being called by another Org buffer.
+
+We can give a name to the R session (let us say, my-r-session) that
+our Org buffer should be linked to by adding the following line at the
+top (in the preamble, that is).
+
+: #+property: session my-r-session
+
+*** Basics
+
+R code is embedded into Org as a source block. The basic syntax is
+
+#+BEGIN_SRC org export code
+  ,#+BEGIN_SRC R
+
+Your R code goes here.
+
+  ,#+END_SRC 
+#+END_SRC 
+
+You first write the =BEGIN_SRC= and the =END_SRC= lines. Then with
+your cursor in between these two lines, give the command C-c ' (that
+is, press Ctrl-C, release, and press ').
+
+This would open a new buffer, using ESS (emacs-speaks-statistics)
+mode. If you type your code in this buffer, you will see that ESS is
+syntax-aware and nicely highlights R code. ESS also allows you to run
+(evaluate) the code that you write, to test what your code is doing.
+Use C-j for evaluating a single line of code, C-b for evaluating the
+whole ess buffer, or C-r for a marked region within the ess buffer.
+
+Once you have finished writing a code block, press C-c ' again to come
+back to your Org buffer.
+
+In your Org buffer, with your cursor in a source-block, press =C-c C-c= to
+evaluate the whole code block.
+
+*** Presentation of Statistical Results in Tables 
 
 
 
-** Presentation of Tables 
-
-** Presentation of Graphs
+*** Presentation of Statistical Graphics
 
 
 
