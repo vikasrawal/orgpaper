@@ -249,10 +249,11 @@ shortcuts and starts using them instead of the verbose versions.
 An Org file has a few special lines at the top that set up the
 environment. Following lines are an example of the minimal set of
 lines that we shall use.
-: #+TITLE: Reproducible Research Papers using Org-mode and R: A Guide
-: #+AUTHOR: Vikas Rawal
-: #+DATE: May 4, 2014
-
+#+BEGIN_SRC org :exports code
+  ,#+TITLE: Reproducible Research Papers using Org-mode and R: A Guide
+  ,#+AUTHOR: Vikas Rawal
+  ,#+DATE: May 4, 2014
+#+end_src
 As you can see, each line starts with a keyword, and the values for
 this keyword are specified after the colon.
 
@@ -273,6 +274,11 @@ Table [[special-lines]] gives details of a few major special lines that we shall
 
 ** Sections and headlines
 
+After the special lines on the top, we start writing the paper. 
+
+The content in org is organised under a hierarchy of headlines. Think
+of these headlines as sections of your paper.
+
 A headline in org starts with one or more stars (*) followed by a
 space. We shall use this to create sections in our document. 
 
@@ -286,40 +292,45 @@ See the following example. Note that headlines are not numbered. We
 leave section numbering for org-mode to handle automatically.
 
 #+BEGIN_SRC org :exports code
-  ,* Introduction
-  ,* Literature review
-  ,** Is this an important issue
-  Now indulgence dissimilar for his thoroughly has terminated. Agreement
-  offending commanded my an. Change wholly say why eldest period. Are
-  projection put celebrated particular unreserved joy unsatiable its. In
-  then dare good am rose bred or. On am in nearer square wanted.
-  ,** What are the major disputes in the literature
-  ,*** adulterated text
-  Instrument cultivated alteration any favourable expression law far
-  nor. Both new like tore but year. An from mean on with when sing pain.
-  Oh to as principles devonshire companions unsatiable an delightful.
-  The ourselves suffering the sincerity. Inhabit her manners adapted age
-  certain. Debating offended at branched striking be subjects.
-  ,*** Unadulterated prose
-  Announcing of invitation principles in. Cold in late or deal.
-  Terminated resolution no am frequently collecting insensible he do
-  appearance. Projection invitation affronting admiration if no on or.
-  It as instrument boisterous frequently apartments an in. Mr excellence
-  inquietude conviction is in unreserved particular. You fully seems
-  stand nay own point walls. Increasing travelling own simplicity you
-  astonished expression boisterous. Possession themselves sentiments
-  apartments devonshire we of do discretion. Enjoyment discourse ye
-  continued pronounce we necessary abilities.
-  ,* Methodology
-  This is the next top-level section. There are no sub-sections under this.
-  ,* Results
-  This is the third top-level section. Theere are sub-sections under this. 
-  ,** Result 1
-  This is a sub-section under section Results.
-  ,** Result 2
-  This is another sub-section under section Results
-  ,* Conclusions 
-  This is the next and final top-level section. There are  no sub-sections under it.
+    ,#+TITLE: Reproducible Research Papers using Org-mode and R: A Guide
+    ,#+AUTHOR: Vikas Rawal
+    ,#+DATE: May 4, 2014
+    ,* Introduction
+    This is the first section. Add your content here.
+    ,* Literature review
+    ,** Is this an important issue
+    This is a sub-section under top-level section "Literture review"  
+    Now indulgence dissimilar for his thoroughly has terminated. Agreement
+    offending commanded my an. Change wholly say why eldest period. Are
+    projection put celebrated particular unreserved joy unsatiable its. In
+    then dare good am rose bred or. On am in nearer square wanted.
+    ,** What are the major disputes in the literature
+    ,*** adulterated text
+    Instrument cultivated alteration any favourable expression law far
+    nor. Both new like tore but year. An from mean on with when sing pain.
+    Oh to as principles devonshire companions unsatiable an delightful.
+    The ourselves suffering the sincerity. Inhabit her manners adapted age
+    certain. Debating offended at branched striking be subjects.
+    ,*** Unadulterated prose
+    Announcing of invitation principles in. Cold in late or deal.
+    Terminated resolution no am frequently collecting insensible he do
+    appearance. Projection invitation affronting admiration if no on or.
+    It as instrument boisterous frequently apartments an in. Mr excellence
+    inquietude conviction is in unreserved particular. You fully seems
+    stand nay own point walls. Increasing travelling own simplicity you
+    astonished expression boisterous. Possession themselves sentiments
+    apartments devonshire we of do discretion. Enjoyment discourse ye
+    continued pronounce we necessary abilities.
+    ,* Methodology
+    This is the next top-level section. There are no sub-sections under this.
+    ,* Results
+    This is the third top-level section. Theere are sub-sections under this. 
+    ,** Result 1
+    This is a sub-section under section Results.
+    ,** Result 2
+    This is another sub-section under section Results
+    ,* Conclusions 
+    This is the next and final top-level section. There are  no sub-sections under it.
 #+END_SRC
 
 
