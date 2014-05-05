@@ -184,11 +184,11 @@ in emacs as a buffer. Buffers could also have processes like R running
 in them. Emacs displays any messages for you in a separate buffer.
 
 Most commands in emacs are given using the Control (ctrl) or the Meta
-(usually, alt) keys. Control key is usually referred to as =C-= and the
-Meta key as =M-=. So a command =C-c= means pressing Control and c
-simultaneously. Command =M-x= means pressing Meta and x simultaneously.
-Everything is case-sensitive. So =M-X= would mean, pressing Meta, Shift
-and x simultaneously. =C-c M-x l= would mean pressing C-c, release, then
+(usually, alt) keys. Control key is usually referred to as ~C-~ and the
+Meta key as ~M-~. So a command ~C-c~ means pressing Control and c
+simultaneously. Command ~M-x~ means pressing Meta and x simultaneously.
+Everything is case-sensitive. So ~M-X~ would mean, pressing Meta, Shift
+and x simultaneously. ~C-c M-x l~ would mean pressing C-c, release, then
 M-x, release, and then l.
 
 
@@ -199,10 +199,10 @@ important. This is a minimal set, commands that you should aim to
 learn as soon as possible. There are many more, which you will learn
 as you start using emacs.
 
-All commands have a verbose version that can be used by pressing M-x
-and writing the command. For example, =M-x find-file= to open a file.
+All commands have a verbose version that can be used by pressing ~M-x~
+and writing the command. For example, ~M-x find-file~ to open a file.
 All major commands are also mapped to a shortcut. For example, instead
-of typing =M-x find-file= to open a file, you can say =C-x C-f=. I
+of typing ~M-x find-file~ to open a file, you can say ~C-x C-f~. I
 remember shortcuts for commands that I use most frequently. For
 others, I use the verbose versions. Over time, one learns more
 shortcuts and starts using them instead of the verbose versions.
@@ -210,35 +210,35 @@ shortcuts and starts using them instead of the verbose versions.
 #+CAPTION: Essential emacs commands
 #+NAME: essential-emacs-commands
 #+attr_latex: :environment tabulary :width \textwidth :align Lll
-| Description                                                                                                    | Verbose command           | Shortcut     |
-|                                                                                                                | =M-x= followed by         |              |
-|----------------------------------------------------------------------------------------------------------------+---------------------------+--------------|
-| /*Opening files, saving and closing*/                                                                          |                           |              |
-| /Open a file/                                                                                                  | *find-file*               | =C-x C-f=    |
-| /Save the buffer/file/                                                                                         | *save-buffer*             | =C-x C-s=    |
-| /Save as: prompts for a new filename and saves the buffer into it/                                             | *write-named-file*        | =C-x C-w=    |
-| /Save all buffers and quit emacs/                                                                              | *save-buffers-kill-emacs* | =C-x C-c=    |
-| /*Copy, Cut and Delete Commands*/                                                                              |                           |              |
-| /Delete the rest of the current line/                                                                          | *kill-line*               | =C-k=        |
-| /To select text, press this at the beginning of the region and then take the cursor to the end/                | *set-mark-command*        | =C-spacebar= |
-| /Cut the selected region/                                                                                      | *kill-region*             | =C-w=        |
-| /Copy the selected region/                                                                                     | *copy-region-as-kill*     | =M-w=        |
-| /Paste or insert at current cursor location/                                                                   | *yank*                    | =C-y=        |
-| /*Search Commands*/                                                                                            |                           |              |
-| /prompts for text string and then searches from the current cursor position forwards in the buffer/            | *isearch-forward*         | =C-s=        |
-| /Find-and-replace: replaces one string with another, one by one, asking for each occurrence of search string / | *query-replace*           | =M-%=        |
-| /Find-and-replace: replaces all occurrences of one string with another /                                       | *replace-string*          |              |
-| /*Other commands*/                                                                                             |                           |              |
-| Divide a long sentence into multiple lines, each smaller than the maximum width specified                      | *fill-paragraph*          | M-q          |
-| /*Window and Buffer Commands*/                                                                                 |                           |              |
-| /Switch to another buffer that is already open/                                                                | *switch-to-buffer*        | =C-x b=      |
-| /lists those buffers currently loaded into =emacs= /                                                           | *list-buffers*            | =C-x C-b=    |
-| /Splits current window into two windows, each window can show same or different buffers/                       | *double-window*           | =C-x 2=      |
-| /Delete current window; if the window is split into two parts, this would bring it back to one part/           | *zero-window*             | =C-x 0=      |
-| /When you have two or more windows, move the cursor to the next window /                                       | *other-window*            | =C-x o=      |
-| /*Canceling and undoing*/                                                                                      |                           |              |
-| /Cancel of abort the command in progress/                                                                      | *keyboard-quit*           | =C-g=        |
-| /undoes the last command typed, in case you made a mistake/                                                    | *undo*                    | =C-x u=      |
+| Description                                                                                                   | Verbose command           | Shortcut     |
+|                                                                                                               | =M-x= followed by         |              |
+|---------------------------------------------------------------------------------------------------------------+---------------------------+--------------|
+| /*Opening files, saving and closing*/                                                                         |                           |              |
+| /Open a file/                                                                                                 | =find-file=               | =C-x C-f=    |
+| /Save the buffer/file/                                                                                        | =save-buffer=             | =C-x C-s=    |
+| /Save as: prompts for a new filename and saves the buffer into it/                                            | =write-named-file=        | =C-x C-w=    |
+| /Save all buffers and quit emacs/                                                                             | =save-buffers-kill-emacs= | =C-x C-c=    |
+| /*Copy, Cut and Delete Commands*/                                                                             |                           |              |
+| /Delete the rest of the current line/                                                                         | =kill-line=               | =C-k=        |
+| /To select text, press this at the beginning of the region and then take the cursor to the end/               | =set-mark-command=        | =C-spacebar= |
+| /Cut the selected region/                                                                                     | =kill-region=             | =C-w=        |
+| /Copy the selected region/                                                                                    | =copy-region-as-kill=     | =M-w=        |
+| /Paste or insert at current cursor location/                                                                  | =yank=                    | =C-y=        |
+| /*Search Commands*/                                                                                           |                           |              |
+| /prompts for text string and then searches from the current cursor position forwards in the buffer/           | =isearch-forward=         | =C-s=        |
+| /Find-and-replace: replaces one string with another, one by one, asking for each occurrence of search string/ | =query-replace=           | =M-%=        |
+| /Find-and-replace: replaces all occurrences of one string with another/                                       | =replace-string=          |              |
+| /*Other commands*/                                                                                            |                           |              |
+| Divide a long sentence into multiple lines, each smaller than the maximum width specified                     | =fill-paragraph=          | =M-q=        |
+| /*Window and Buffer Commands*/                                                                                |                           |              |
+| /Switch to another buffer/                                                                                    | =switch-to-buffer=        | =C-x b=      |
+| /List all buffers/                                                                                            | =list-buffers=            | =C-x C-b=    |
+| /Split current window into two windows; each window can show same or different buffers/                       | =double-window=           | =C-x 2=      |
+| /Remove the split/                                                                                            | =zero-window=             | =C-x 0=      |
+| /When you have two or more windows, move the cursor to the next window/                                       | =other-window=            | =C-x o=      |
+| /*Canceling and undoing*/                                                                                     |                           |              |
+| /Cancel of abort the command in progress/                                                                     | =keyboard-quit=           | =C-g=        |
+| /undoes the last command typed, in case you made a mistake/                                                   | =undo=                    | =C-x u=      |
 
 \FloatBarrier
 
@@ -263,10 +263,10 @@ Table [[special-lines]] gives details of a few major special lines that we shall
 #+attr_latex: :environment tabulary :width \textwidth :align lL
 | Keyword     | Purpose                                                                                                                            |
 |-------------+------------------------------------------------------------------------------------------------------------------------------------|
-| =#+TITLE=   | To declare title of the paper                                                                                                      |
-| =#+AUTHOR=  | To declare author/s of the paper                                                                                                   |
-| =#+DATE=    | Sets the date. If blank, no date is used. If this keyword is omitted, current date is used.                                        |
-| =#+OPTIONS= | Following options are useful. Multiple options can be separated by a space and specified on the same line.                         |
+| ~#+TITLE~   | To declare title of the paper                                                                                                      |
+| ~#+AUTHOR~  | To declare author/s of the paper                                                                                                   |
+| ~#+DATE~    | Sets the date. If blank, no date is used. If this keyword is omitted, current date is used.                                        |
+| ~#+OPTIONS~ | Following options are useful. Multiple options can be separated by a space and specified on the same line.                         |
 |             | toc:nil (Do not include a Table of contents)                                                                                       |
 |             | H:2  (Treat top two levels of headlines as section levels, and anything below that as item list. Modify the number as appropriate) |
 |             | num:2 (Number top two levels of headlines. Modify the number as appropriate.)                                                      |
