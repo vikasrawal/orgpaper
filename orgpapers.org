@@ -495,8 +495,6 @@ manual, if you would like to add any more.
      (sqlite . t)))
 #+END_SRC
 
-#+RESULTS:
-| (R . t) | (org . t) | (ditaa . t) | (latex . t) | (dot . t) | (emacs-lisp . t) | (gnuplot . t) | (screen) | (shell . t) | (sql) | (sqlite . t) |
 
 *** Special lines for R  
 
@@ -549,7 +547,6 @@ evaluate the whole code block.
 
 
 *** Presentation of Statistical Graphics
-
 
 
 * Citations and Bibliographies using Org-mode
