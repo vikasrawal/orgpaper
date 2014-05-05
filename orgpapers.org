@@ -210,40 +210,67 @@ shortcuts and starts using them instead of the verbose versions.
 
 #+CAPTION: Essential emacs commands
 #+NAME: essential-emacs-commands
-#+attr_latex: :environment tabulary :width \textwidth :align llL
-| Verbose command           | Shortcut     | Description                                                                                                    |
-| =M-x= followed by         |              |                                                                                                                |
-|---------------------------+--------------+----------------------------------------------------------------------------------------------------------------|
-|                           |              | /*File Reading and Writing Commands*/                                                                          |
-| *find-file*               | =C-x C-f=    | /First prompts for a filename and then loads that file into a editor buffer of the same name/                  |
-| *save-buffer*             | =C-x C-s=    | /Saves the buffer/file/                                                                                        |
-| *write-named-file*        | =C-x C-w=    | /Save as: prompts for a new filename and saves the buffer into it/                                             |
-|                           |              | /*Copy, Cut and Delete Commands*/                                                                              |
-| *kill-line*               | =C-k=        | /Delete the rest of the current line/                                                                          |
-| *set-mark-command*        | =C-spacebar= | /To select text, press this at the beginning of the region and then take the cursor to the end/                |
-| *kill-region*             | =C-w=        | /Cut the selected region/                                                                                      |
-| *copy-region-as-kill*     | =M-w=        | /Copy the selected region/                                                                                     |
-| *yank*                    | =C-y=        | /Paste or insert at current cursor location/                                                                   |
-|                           |              | /*Search Commands*/                                                                                            |
-| *isearch-forward*         | =C-s=        | /prompts for text string and then searches from the current cursor position forwards in the buffer/            |
-| *query-replace*           | =M-%=        | /Find-and-replace: replaces one string with another, one by one, asking for each occurrence of search string / |
-| *replace-string*          |              | /Find-and-replace: replaces all occurrences of one string with another /                                       |
-|                           |              | /*Other commands*/                                                                                             |
-| *fill-paragraph*          | M-q          | Divide a long sentence into multiple lines, each smaller than the maximum width specified                      |
-|                           |              | /*Window and Buffer Commands*/                                                                                 |
-| *switch-to-buffer*        | =C-x b=      | /Switch to another buffer that is already open/                                                                |
-| *list-buffers*            | =C-x C-b=    | /lists those buffers currently loaded into =emacs= /                                                           |
-| *double-window*           | =C-x 2=      | /Splits current window into two windows, each window can show same or different buffers/                       |
-| *zero-window*             | =C-x 0=      | /Delete current window; if the window is split into two parts, this would bring it back to one part/           |
-| *other-window*            | =C-x o=      | /When you have two or more windows, move the cursor to the next window /                                       |
-|                           |              | /*Exiting =Emacs= and Other Important Stuff*/                                                                  |
-| *save-buffers-kill-emacs* | =C-x C-c=    | /Save all buffers and quit emacs/                                                                              |
-| *keyboard-quit*           | =C-g=        | /Cancel of abort the command in progress/                                                                      |
-| *undo*                    | =C-x u=      | /undoes the last command typed, in case you made a mistake/                                                    |
+#+attr_latex: :environment tabulary :width \textwidth :align Lll
+| Description                                                                                                    | Verbose command           | Shortcut     |
+|                                                                                                                | =M-x= followed by         |              |
+|----------------------------------------------------------------------------------------------------------------+---------------------------+--------------|
+| /*Opening files, saving and closing*/                                                                          |                           |              |
+| /Open a file/                                                                                                  | *find-file*               | =C-x C-f=    |
+| /Save the buffer/file/                                                                                         | *save-buffer*             | =C-x C-s=    |
+| /Save as: prompts for a new filename and saves the buffer into it/                                             | *write-named-file*        | =C-x C-w=    |
+| /Save all buffers and quit emacs/                                                                              | *save-buffers-kill-emacs* | =C-x C-c=    |
+| /*Copy, Cut and Delete Commands*/                                                                              |                           |              |
+| /Delete the rest of the current line/                                                                          | *kill-line*               | =C-k=        |
+| /To select text, press this at the beginning of the region and then take the cursor to the end/                | *set-mark-command*        | =C-spacebar= |
+| /Cut the selected region/                                                                                      | *kill-region*             | =C-w=        |
+| /Copy the selected region/                                                                                     | *copy-region-as-kill*     | =M-w=        |
+| /Paste or insert at current cursor location/                                                                   | *yank*                    | =C-y=        |
+| /*Search Commands*/                                                                                            |                           |              |
+| /prompts for text string and then searches from the current cursor position forwards in the buffer/            | *isearch-forward*         | =C-s=        |
+| /Find-and-replace: replaces one string with another, one by one, asking for each occurrence of search string / | *query-replace*           | =M-%=        |
+| /Find-and-replace: replaces all occurrences of one string with another /                                       | *replace-string*          |              |
+| /*Other commands*/                                                                                             |                           |              |
+| Divide a long sentence into multiple lines, each smaller than the maximum width specified                      | *fill-paragraph*          | M-q          |
+| /*Window and Buffer Commands*/                                                                                 |                           |              |
+| /Switch to another buffer that is already open/                                                                | *switch-to-buffer*        | =C-x b=      |
+| /lists those buffers currently loaded into =emacs= /                                                           | *list-buffers*            | =C-x C-b=    |
+| /Splits current window into two windows, each window can show same or different buffers/                       | *double-window*           | =C-x 2=      |
+| /Delete current window; if the window is split into two parts, this would bring it back to one part/           | *zero-window*             | =C-x 0=      |
+| /When you have two or more windows, move the cursor to the next window /                                       | *other-window*            | =C-x o=      |
+| /*Canceling and undoing*/                                                                                      |                           |              |
+| /Cancel of abort the command in progress/                                                                      | *keyboard-quit*           | =C-g=        |
+| /undoes the last command typed, in case you made a mistake/                                                    | *undo*                    | =C-x u=      |
 
 \FloatBarrier
 
 * Basics of Org-mode
+** Preamble
+
+An Org file has a few special lines at the top that set up the
+environment. Following lines are an example of the minimal set of
+lines that we shall use.
+: #+TITLE: Reproducible Research Papers using Org-mode and R: A Guide
+: #+AUTHOR: Vikas Rawal
+: #+DATE: May 4, 2014
+
+As you can see, each line starts with a keyword, and the values for
+this keyword are specified after the colon.
+
+Table [[special-lines]] gives details of a few major special lines that we shall use.
+
+#+NAME: special-lines
+#+CAPTION: Main special lines to be used at the top of an Org buffer
+#+attr_latex: :environment tabulary :width \textwidth :align lL
+| Keyword   | Purpose                                                                                                                            |
+|-----------+------------------------------------------------------------------------------------------------------------------------------------|
+| #+TITLE   | To declare title of the paper                                                                                                      |
+| #+AUTHOR  | To declare author/s of the paper                                                                                                   |
+| #+DATE    | Sets the date. If blank, no date is used. If this keyword is omitted, current date is used.                                        |
+| #+OPTIONS | Following options are useful. Multiple options can be separated by a space and specified on the same line.                         |
+|           | toc:nil (Do not include a Table of contents)                                                                                       |
+|           | H:2  (Treat top two levels of headlines as section levels, and anything below that as item list. Modify the number as appropriate) |
+|           | num:2 (Number top two levels of headlines. Modify the number as appropriate.)                                                      |
+
 ** Sections and headlines
 
 A headline in org starts with one or more stars (*) followed by a
@@ -258,45 +285,42 @@ you need.
 See the following example. Note that headlines are not numbered. We
 leave section numbering for org-mode to handle automatically.
 
-#+BEGIN_SRC org
-  ,* What are the major disputes in the literature
-  ,** adulterated text
+#+BEGIN_SRC org :exports code
+  ,* Introduction
+  ,* Literature review
+  ,** Is this an important issue
+  Now indulgence dissimilar for his thoroughly has terminated. Agreement
+  offending commanded my an. Change wholly say why eldest period. Are
+  projection put celebrated particular unreserved joy unsatiable its. In
+  then dare good am rose bred or. On am in nearer square wanted.
+  ,** What are the major disputes in the literature
+  ,*** adulterated text
   Instrument cultivated alteration any favourable expression law far
-    nor. Both new like tore but year. An from mean on with when sing pain.
-    Oh to as principles devonshire companions unsatiable an delightful.
-    The ourselves suffering the sincerity. Inhabit her manners adapted age
-    certain. Debating offended at branched striking be subjects.
+  nor. Both new like tore but year. An from mean on with when sing pain.
+  Oh to as principles devonshire companions unsatiable an delightful.
+  The ourselves suffering the sincerity. Inhabit her manners adapted age
+  certain. Debating offended at branched striking be subjects.
+  ,*** Unadulterated prose
+  Announcing of invitation principles in. Cold in late or deal.
+  Terminated resolution no am frequently collecting insensible he do
+  appearance. Projection invitation affronting admiration if no on or.
+  It as instrument boisterous frequently apartments an in. Mr excellence
+  inquietude conviction is in unreserved particular. You fully seems
+  stand nay own point walls. Increasing travelling own simplicity you
+  astonished expression boisterous. Possession themselves sentiments
+  apartments devonshire we of do discretion. Enjoyment discourse ye
+  continued pronounce we necessary abilities.
+  ,* Methodology
+  This is the next top-level section. There are no sub-sections under this.
+  ,* Results
+  This is the third top-level section. Theere are sub-sections under this. 
+  ,** Result 1
+  This is a sub-section under section Results.
+  ,** Result 2
+  This is another sub-section under section Results
+  ,* Conclusions 
+  This is the next and final top-level section. There are  no sub-sections under it.
 #+END_SRC
-
-: * Introduction
-: * Literature review
-: ** Is this an important issue
-: Now indulgence dissimilar for his thoroughly has terminated. Agreement
-: offending commanded my an. Change wholly say why eldest period. Are
-: projection put celebrated particular unreserved joy unsatiable its. In
-: then dare good am rose bred or. On am in nearer square wanted.
-: ** What are the major disputes in the literature
-: *** adulterated text
-: Instrument cultivated alteration any favourable expression law far
-: nor. Both new like tore but year. An from mean on with when sing pain.
-: Oh to as principles devonshire companions unsatiable an delightful.
-: The ourselves suffering the sincerity. Inhabit her manners adapted age
-: certain. Debating offended at branched striking be subjects.
-: *** Unadulterated prose
-: Announcing of invitation principles in. Cold in late or deal.
-: Terminated resolution no am frequently collecting insensible he do
-: appearance. Projection invitation affronting admiration if no on or.
-: It as instrument boisterous frequently apartments an in. Mr excellence
-: inquietude conviction is in unreserved particular. You fully seems
-: stand nay own point walls. Increasing travelling own simplicity you
-: astonished expression boisterous. Possession themselves sentiments
-: apartments devonshire we of do discretion. Enjoyment discourse ye
-: continued pronounce we necessary abilities.
-: * Methodology
-: * Results
-: ** Result 1
-: ** Result 2
-: * Conclusions 
 
 
 Org handles these headlines beautifully. With your cursor on the
@@ -314,7 +338,7 @@ star is removed).
 (Further reading, [[http://orgmode.org/manual/Headlines.html#Headlines][Headlines]] in Org manual)
 
 ** Lists
-
+** Footnotes
 ** Tables
 
 Org-mode has an in-built table editor, which is very simple to use.
@@ -383,7 +407,7 @@ Once again, graphs produced by R, will be inserted automatically.
 ** Captions and cross-references
 
 As shown below, a line starting by #+CAPTION placed just about a table
-or a figure adds a title to it. All Tables and Figures titles will be
+or a figure adds a title to it. All Tables and Figures titles are
 automatically numbered.
 : #+CAPTION: Percentage of literate men and women, by country (per cent)
 
@@ -393,18 +417,25 @@ each table and figure in a line starting with #+NAME as below.
 : #+NAME: literacy-rate
 
 Finally, an image will be inserted as follows.
-: #+NAME: literacy-rate
-: #+CAPTION: Percentage of literate men and women, by country (per cent)
-: [[a.jpg]]
+
+#+BEGIN_SRC org :exports code
+  ,#+NAME: literacy-rate
+  ,#+CAPTION: Percentage of literate men and women, by country (per cent)
+  [[a.jpg]]
+#+end_src
 
 Similarly, a table will be inserted as follows.
 
-: #+NAME: literacy-rate-table
-: #+CAPTION: Percentage of literate men and women, by country (per cent)
-: | Country    | Men | Women |
-: | India      |  75 |    43 |
-: | Bangladesh |  83 |    63 |
-: | Rwanda     |  77 |    60 |
+#+BEGIN_SRC org :exports code
+  ,#+NAME: literacy-rate-table
+  ,#+CAPTION: Percentage of literate men and women, by country (per cent)
+  | Country    | Men | Women |
+  |------------+-----+-------|
+  | India      |  75 |    43 |
+  | Bangladesh |  83 |    63 |
+  | Rwanda     |  77 |    60 |
+
+#+end_src
 
 To refer to the Table above in the text, write Table [ [
 literacy-rate-table ] ], that is, enclose table name between double
@@ -417,6 +448,10 @@ inserted in the paper, numbering will be adjusted automatically.
 
 * Org-mode and R
 ** Embedding R Code in an Org buffer
+
+There are three kinds of scenarios that I normally use.
+
+
 
 ** Presentation of Tables 
 
