@@ -7,10 +7,7 @@
 #+LaTeX_CLASS: article
 #+LaTeX_CLASS_OPTIONS: [garamond]
 #+LATEX_HEADER: \linespread{1.3}
-#+LATEX_HEADER: \addbibresource{bibliobase.bib}
 #+LATEX_HEADER: \renewcommand{\TPTminimum}{\linewidth}
-#+LATEX_HEADER: \usepackage{bibentry}
-#+LATEX_HEADER: \addbibresource{/Users/vikas/Documents/bibtex/bibliobase.bib}
 
 * Introduction
 ** Will this guide be useful for you?
@@ -191,10 +188,16 @@ formats.
 
 ** Customising emacs
 
-Starting version 24, Emacs includes a package-manager. You can
-install/update add-on packages using the package manager.
+I recommend using Eric Schulte's Emacs Starter Kit to go most of the
+customisation. 
 
-To use the package manager, press alt-x in emacs, and then type
+To install the kit, go to
+http://eschulte.github.io/emacs24-starter-kit/#installation and follow
+the instructions.
+
+Starting version 24, Emacs includes a package-manager. You can
+install/update add-on packages using the package manager. To use the
+package manager, press alt-x in emacs, and then type
 package-list-packages and press return. This would bring up a list of
 packages. Find ess, and with the cursor on it, mark it by pressing i.
 Similarly, find bibretrieve and mark it. Then press x to install them.
@@ -202,7 +205,12 @@ Similarly, find bibretrieve and mark it. Then press x to install them.
 Org-mode should be pre-installed with Emacs. However, since Org-mode
 is under heavy development, and it is really a good idea to keep up
 with the latest version, it is better to clone it from the git
-repository of Org-mode, and update it regularly.
+repository of Org-mode, and update it regularly. You can keep org-mode
+under ~/.emacs.d/src/org and compile it.
+
+I also recommend using vikas.org, provided with this repository. To
+use it, git clone this repository, and move vikas.org to
+~/.emacs.d/yourusername.org.
 
 * Emacs basics
 
@@ -720,8 +728,8 @@ The notes use a little bit of direct LaTeX coding.
 * Org-mode and R
 ** Configuration
 
-Following code in vikasorg.el enables Org to run different types of
-code. If you have installed vikasorg.el as specified in [[Customising
+Following code in vikas.org enables Org to run different types of
+code. If you have installed vikas.org as specified in [[Customising
 emacs]], these are already enabled. 
 
 I have included here the languages that I commonly use. See Org
@@ -1021,9 +1029,9 @@ https://github.com/indianstatistics/bibliobase/blob/master/bibliobase.bib.
 ** Using biblatex with Org
 *** Setup
 Using biblatex with Org requires some customisation of variables. This
-is already done for you if you have loaded vikasorg.el. 
+is already done for you if you have loaded vikas.org. 
 
-The operative part in vikasorg.el is the following:
+The operative part in vikas.org is the following:
 : (setq org-latex-to-pdf-process 
 :   '("pdflatex %f" "biber %b" "pdflatex %f" "pdflatex %f"))
 
@@ -1031,13 +1039,13 @@ Once this is done, every time you export the document to pdf via
 latex, it runs pdflatex, then runs biber and then runs pdflatex twice
 again. This is necessary to get the citations in the pdf file.
 
-In vikasorg.el, the package biblatex is loaded with following options:
+In vikas.org, the package biblatex is loaded with following options:
 : ("citestyle=authoryear-icomp,bibstyle=authoryear,hyperref=true,backref=true,
 : maxcitenames=3,url=true,backend=biber,natbib=true" "biblatex" t)
 
 You may want to modify this if you want to change the citation and
 bibliography styles. If you want to do it differently in each
-document, you can remove this line from vikasorg.el, and add the
+document, you can remove this line from vikas.org, and add the
 following special line in your document.
 : #+LATEX_HEADER: \usepackage["citestyle=authoryear-icomp,bibstyle=authoryear, \
 : hyperref=true,backref=true,maxcitenames=3,url=true,backend=biber,natbib=true"] {biblatex}
@@ -1138,7 +1146,7 @@ http://www.indianstatistics.org).
 
 The built-in exporter can support BibTex citations using ox-BibTex.el,
 which is including in Org, and will be loaded if you have used
-vikasorg.el. You may need to install BibTex2html separately to make it
+vikas.org. You may need to install BibTex2html separately to make it
 work.
 
 However, ox-BibTex.el uses BibTex2html for converting citations and
@@ -1161,7 +1169,7 @@ It is good to use a color-theme that highlights text in Org well. This
 makes it easier to work in Org.
 
 I use color theme caled leuven. The code for loading leuven is
-including in vikasorg.el but is commented out. If you wish to use it,
+including in vikas.org but is commented out. If you wish to use it,
 remove ;; from the front of the relevant lines, and you will have
 Leuven.
 
@@ -1175,7 +1183,7 @@ the top:
 ** Margins
 
 In LaTeX, package Geometry allows you to modify page margins. The
-following line in vikasorg.el sets the margins. You can tweak this to
+following line in vikas.org sets the margins. You can tweak this to
 define the margins as you like.
 
 : ("innermargin=1.5in,outermargin=1.25in,vmargin=1.25in" "geometry" t)
