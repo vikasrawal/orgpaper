@@ -26,11 +26,10 @@ It will help you focus on the content of research and, once you have
 specified your style, leave all formatting of your document to the
 software. It will facilitate building a personal bibliographic
 repository and repeated use of bibliographic information for citation
-of literature.
-
-Finally, building a personal bibliographic database that is integrated
-with your writing system will be particularly beneficial if academic
-writing is going to be a medium to long-term occupation for you.
+of literature. Building a personal bibliographic database that is
+integrated with your writing system will be particularly beneficial if
+academic writing is going to be a medium to long-term occupation for
+you.
 
 ** What is our goal?
 
