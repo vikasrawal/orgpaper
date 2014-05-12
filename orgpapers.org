@@ -945,58 +945,6 @@ As with the tables, we shall add a caption and a name to it as follows
 
 You can now refer to this graph in the text using ~[[my-bmi-graph]]~.
 
-** Notes for tables and figures
-
-I usually need to specify notes and sources below a table.
-
-#+BEGIN_SRC org
-    ,#+NAME: table-yield
-    ,#+CAPTION: Average yields of selected crops in Gharsondi, Gwalior, Madhya Pradesh and India, 2007-08 (kilograms per acre)
-    ,#+begin_table
-    ,#+begin_threeparttable
-    ,#+attr_latex: :environment tabularx :width \textwidth :align Xrrrr
-      | State          | Yield |
-      |----------------+-------|
-      | Madhya Pradesh |   669 |
-      | Haryana        |   300 |
-      | Punjab         |   260 |
-    #+begin_tablenotes
-    \item[] \footnotesize Notes: 
-    \item[1] \footnotesize This table is very nice but this note is
-    very long, so long that it goes wider than the table
-    \item[2] \footnotesize This is a second note. But this is not
-    very wide.
-    \item[] \footnotesize Source: http://www.indianstatistics.org}
-    ,#+end_tablenotes
-    ,#+end_threeparttable
-    ,#+end_table
-#+END_SRC
-
-#+NAME: gharsondi-yield
-#+CAPTION: Average yields of selected crops in Gharsondi, Gwalior, Madhya Pradesh and India, 2007-08 (kilograms per acre)
-#+begin_table
-#+begin_threeparttable
-#+attr_latex: :environment tabulary :width \textwidth :align Lrrrr
-#+RESULTS: gharsondi-yield-in
-| Crop      | India | Argentina | China | Bandladesh |
-|-----------+-------+-----------+-------+------------|
-| Soybean   |   nil |       689 |   442 |        500 |
-| Paddy     |  1553 |       866 |   569 |       1337 |
-| Urad      |    53 |       142 |   142 |        192 |
-| Sesame    |   101 |       127 |   153 |        170 |
-| Wheat     |   824 |       664 |   652 |       1134 |
-| Chick pea |   462 |       445 |   288 |        308 |
-| Rapeseed  |   501 |       280 |   375 |        405 |
-#+begin_tablenotes
-\item[] \footnotesize Notes: 
-\item[1] \footnotesize This table is very nice but this note is
-very long, so long that it goes wider than the table
-\item[2] \footnotesize This is a second note. But this is not
-very wide.
-\item[] \footnotesize Source: http://www.indianstatistics.org}
-#+end_tablenotes
-#+end_threeparttable
-#+end_table
 
 * Citations and Bibliographies using Org-mode
 ** Building your database
