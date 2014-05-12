@@ -112,9 +112,9 @@ I would particularly like to thank
 + Eric Schulte, the main author of Babel, which gave Org mode the
   ability to execute code. I used to use Org-mode as a task manager
   and for taking notes. I discovered org-babel in the summer of 2010,
-  when I was doing fieldwork in eastern India. This discovery
-  completely changed my work flow, and Org-mode became central to all
-  my academic work.
+  when I was doing fieldwork in villages in eastern India. This
+  discovery completely changed my work flow, and Org-mode became
+  central to all my academic work.
 + Suvayu Ali for responses to several of my queries on the mailing
   list.
 + All members of the Org-mode community who have generously
