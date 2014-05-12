@@ -43,8 +43,8 @@ you will set up using this guide?
     documents require too much manual formatting.
     
   - Org-mode has a powerful LaTeX converter. The user is not required
-    to write latex mark-up. Org-mode mark-up is extremely simple, and
-    can be mastered in ten minutes.
+    to write latex mark-up. Basis Org-mode mark-up is extremely
+    simple, and can be mastered in very little time.
 
   - Org-mode automatically creates LaTeX files, and produces fully
     formatted pdf documents. This is the best output for working
