@@ -208,9 +208,14 @@ with the latest version, it is better to clone it from the git
 repository of Org-mode, and update it regularly. You can keep org-mode
 under ~/.emacs.d/src/org and compile it.
 
-I also recommend using vikas.org, provided with this repository. To
-use it, git clone this repository, and move vikas-general.org to
-~/.emacs.d/yourusername.org.
+I also recommend using vikas-general.org, provided with this
+repository. To use it, create a directory with your username under
+~/.emacs.d/, git clone this repository, and move vikas-general.org to
+this directory the directory with your name that you have just
+created. 
+
+For any other personal customisation that you may need to do, you can
+create .org or .el files in this directory.
 
 * Emacs basics
 
