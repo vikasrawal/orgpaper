@@ -128,7 +128,7 @@ this setup, you need to install Emacs (Version 24 along with a few
 additional Emacs packages), Texlive, R (along with whatever
 additional R packages you want to use) and Pandoc.
 
-** Emacs                                                             :CHECK:
+** Emacs                                                             
 
 + GNU/Linux
 
@@ -151,17 +151,17 @@ additional R packages you want to use) and Pandoc.
 
 + GNU/Linux
 
-Texlive can also be installed from package managers in most GNU/Linux
-distribution. 
+  Texlive can also be installed from package managers in most
+  GNU/Linux distribution.
 
 + Mac OS-X 
 
-For OS-X, install MacTeX from http://www.tug.org/mactex/
+  For OS-X, install MacTeX from http://www.tug.org/mactex/
 
 + Microsoft Windows
 
-For Windows, download Texlive and follow instructions from
-https://www.tug.org/texlive/doc.html
+  For Windows, download Texlive and follow instructions from
+  https://www.tug.org/texlive/doc.html
 
 ** R (http://www.r-project.org)
 
