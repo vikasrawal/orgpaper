@@ -89,7 +89,7 @@ you will set up using this guide?
     cited in your papers and included in the paper when a final output
     is produced.
  
-** Acknowledgements                                               :noexport:
+** Acknowledgements                                               
 In my adaptation of Org, I have benefitted immensely from the great
 community of Orgers. The [[http://orgmode.org/manual/][Org-mode manual]], [[http://orgmode.org/worg/][Worg]], and archives of the
 [[http://orgmode.org/community.html][Org-mode mailing list]] have been the most important resources. In
