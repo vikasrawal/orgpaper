@@ -477,6 +477,13 @@ Note that:
   line with the same level of indentation.
 
 ** Inserting footnotes 
+
++ To insert footnotes at any point, use ~C-c C-x f~
+
++ To reorder and renumber footnotes after inserting a footnote in a
+  text that already has some footnotes after the point where a new
+  footnote is being inserted, use ~C-u C-c C-x f S~
+
 ** Tables
 *** Sample code 
 
