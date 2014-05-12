@@ -175,9 +175,9 @@ http://www.r-project.org
  
 ** Pandoc (http://johnmacfarlane.net/pandoc/)
 
-Pandoc is an extremely powerful converter, that can convert from one
-markup to another. It supports conversion between many formats, and
-supports "syntax for footnotes, tables, flexible ordered lists,
+Pandoc is an extremely powerful converter, which can translate one
+markup to another. It supports conversion between many file formats,
+and supports "syntax for footnotes, tables, flexible ordered lists,
 definition lists, fenced code blocks, superscript, subscript,
 strikeout, title blocks, automatic tables of contents, embedded LaTeX
 math, citations, and markdown inside HTML block elements." That is
@@ -188,8 +188,8 @@ formats.
 
 ** Customising emacs
 
-I recommend using Eric Schulte's Emacs Starter Kit to go most of the
-customisation. 
+I recommend using Eric Schulte's Emacs Starter Kit to take care of
+most of the customisation.[fn:5]
 
 To install the kit, go to
 http://eschulte.github.io/emacs24-starter-kit/#installation and follow
@@ -208,11 +208,11 @@ with the latest version, it is better to clone it from the git
 repository of Org-mode, and update it regularly. You can keep org-mode
 under ~/.emacs.d/src/org and compile it.
 
-I also recommend using vikas-general.org, provided with this
-repository. To use it, create a directory with your username under
-~/.emacs.d/, git clone this repository, and move vikas-general.org to
-this directory the directory with your name that you have just
-created. 
+I also recommend using, in addition, vikas-general.org, available from
+(https://raw.githubusercontent.com/vikasrawal/orgpaper/master/vikas-general.org). To
+use it, create a directory with your username under ~/.emacs.d/, git
+clone this repository, and move vikas-general.org to this directory
+the directory with your name that you have just created.
 
 For any other personal customisation that you may need to do, you can
 create .org or .el files in this directory.
@@ -1303,5 +1303,9 @@ citations into odt exports, but that is not a part of Org-mode and
 needs to be installed separately. In any case, since our toolkit
 primarily uses LaTeX, using Pandoc to create odt or docx files from
 LaTeX export works better.
+
+[fn:5] Eric's Emacs Starter Kit is a beautiful illustration of power
+of Org-mode. It uses Org-mode source blocks to systematically document
+all Emacs customisation.
 
 
