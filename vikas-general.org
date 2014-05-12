@@ -99,7 +99,7 @@ These are additional customisations to be used with Eric Schulte's Starter Kit.
                "\\documentclass[presentation]{beamer}"
                ("\\section{%s}" . "\\section*{%s}")
                ("\\subsection{%s}" . "\\subsection*{%s}")
-               ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}")))
 #+end_src
 
 ** ox-beamer customisation
@@ -251,10 +251,4 @@ Default LaTeX packages I like to be included into any LaTeX export. Modify as ne
 #+end_src
 
 
-** org-remember, capture, agenda
 
-#+begin_src emacs-lisp
-(require 'remember)
-(require 'org-remember)
-(org-remember-insinuate)
-#+end_src
