@@ -1,0 +1,260 @@
+#+TITLE: Personal customisations for the starter kit
+#+OPTIONS: toc:nil num:nil ^:nil
+
+* Customisations for the starter kit
+
+These are additional customisations to be used with Eric Schulte's Starter Kit.
+** Loading additional starter kit modules
+
+#+begin_src emacs-lisp
+(starter-kit-load "misc")
+(starter-kit-load "misc-recommended")
+(starter-kit-load "yasnippet")
+#+end_src
+
+** Loading additional org modules
+
+#+begin_src emacs-lisp
+(require 'ox-latex)
+(require 'ox-beamer)
+(require 'ox-odt)
+(require 'ox-html)
+(require 'ox-deck)
+(require 'ox-publish)
+(require 'ox-bibtex)
+(require 'ox-koma-letter)
+(require 'org-notmuch)
+(require 'ox-reveal)
+#+end_src
+
+** A few sane customisations
+
+#+begin_src emacs-lisp
+(setq org-confirm-babel-evaluate nil)
+(setq org-startup-indented t)
+(setq org-src-fontify-natively t)
+(setq org-src-tab-acts-natively t)
+'(org-cycle-include-plain-lists t)
+'(org-hide-leading-stars t)
+'(org-alphabetical-lists t)
+#+end_src
+
+** unicode utf-8 stuff
+
+#+begin_src emacs-lisp
+(prefer-coding-system 'utf-8)
+(set-charset-priority 'unicode)
+(setq default-process-coding-system '(utf-8-unix . utf-8-unix))
+#+end_src
+
+** org-mode color
+
+#+begin_src emacs-lisp
+(org-add-link-type
+ "color" nil
+ (lambda (path desc format)p
+  (cond
+   ((eq format 'html)
+    (format "<span style=\"color:%s;\">%s</span>" path desc))
+   ((eq format 'latex)
+    (format "{\\color{%s}%s}" path desc)))))
+#+end_src
+
+** org-mode highlight
+
+#+begin_src emacs-lisp
+(org-add-link-type
+ "hl" nil
+ (lambda (path desc format)
+  (cond
+   ((eq format 'html)
+    (format "<font style=\"background-color:%s;\">%s</font>" path desc))
+   ((eq format 'latex)
+    (format "\\colorbox{%s}{%s}" path desc))))) ;; require \usepackage{color}
+#+end_src
+
+** Custom code blocks
+
+#+begin_src emacs-lisp
+(org-babel-do-load-languages
+   'org-babel-load-languages
+   '((R . t)
+     (org . t)
+     (ditaa . t)
+     (latex . t)
+     (dot . t)
+     (emacs-lisp . t)
+     (gnuplot . t)
+     (screen . nil)
+     (shell . t)
+     (sql . nil)
+     (sqlite . t)))
+#+end_src
+
+** Customisation of org-latex-classes for the new exporter
+
+#+begin_src emacs-lisp
+(add-to-list 'org-latex-classes
+             '("beamer"
+               "\\documentclass[presentation]{beamer}"
+               ("\\section{%s}" . "\\section*{%s}")
+               ("\\subsection{%s}" . "\\subsection*{%s}")
+               ("\\subsubsection{%s}" . "\\subsubsection*{%s}"))
+#+end_src
+
+** ox-beamer customisation
+
+#+begin_src emacs-lisp
+(add-to-list 'org-beamer-environments-extra
+             '("onlyenv" "O" "\\begin{onlyenv}%a" "\\end{onlyenv}"))
+(add-to-list 'org-beamer-environments-extra
+             '("textpos" "X" "\\begin{textblock}{10}(3,3) \\visible %a {" "} \\end{textblock}"))
+(add-to-list 'org-beamer-environments-extra
+             '("textpos1" "w" "\\begin{textblock}{%h}(3,3) \\visible %a {" "} \\end{textblock}"))
+#+end_src
+
+** LaTeX customisations
+
+*** For biber
+
+This customises LaTeX export to run pdflatex, biber and then pdflatex. Needed for citations.
+
+#+begin_src emacs-lisp
+(setq org-latex-to-pdf-process 
+   '("pdflatex %f" "biber %b" "pdflatex %f" "pdflatex %f"))
+#+end_src
+
+
+#+begin_src emacs-lisp
+(defun my-bibliography-selector-hook (backend)
+    (case backend
+      (latex
+       (when (save-excursion
+               (re-search-forward "^[ \t]*\\bibliography\\(?:style\\)?{" nil t))
+         (while (re-search-forward "^[ \t]*#+BIBLIOGRAPHY:.*$" nil t)
+           (when (eq (org-element-type (save-match-data (org-element-at-point)))
+                     'keyword)
+             (replace-match "")))))
+      (html
+       (when (save-excursion
+               (re-search-forward "^[ \t]*#+BIBLIOGRAPHY:.*$" nil t))
+         (while (re-search-forward "^[ \t]*\\bibliography\\(?:style\\)?{.*$" nil t)
+           (replace-match ""))))))
+
+(add-hook 'org-export-before-parsing-hook 'my-bibliography-selector-hook)
+#+end_src
+
+*** RefTex integration
+
+This defines C-c ) to call reftex for citation.
+
+#+begin_src emacs-lisp
+(require 'reftex) 
+(defun org-mode-reftex-setup ()
+  (load-library "reftex")
+  (and (buffer-file-name)
+       (file-exists-p (buffer-file-name))
+       (reftex-parse-all))
+  (reftex-set-cite-format
+   "\\citep{%l}")
+  (define-key org-mode-map (kbd "C-c )") 'reftex-citation))
+(add-hook 'org-mode-hook 'org-mode-reftex-setup)
+#+end_src
+
+*** Default bibliography
+
+This defines default bibliographic database used by reftex. Please modify file name and path.
+
+#+begin_src emacs-lisp
+(setq reftex-default-bibliography '("/Users/vikas/Documents/bibtex/bibliobase.bib"))
+#+end_src
+
+*** Bibretrieve customisations
+
+#+begin_src emacs-lisp
+(add-to-list 'load-path "~/.emacs.d/elpa/bibretrieve-20131013.1132/bibretrieve")
+(byte-recompile-directory "~/.emacs.d/elpa/bibretrieve-20131013.1132" 0)
+(load "bibretrieve")
+(setq bibretrieve-backends '(("citebase" . 10) ("mrl" . 10) ("arxiv" . 5) ("zbm" . 5)))
+
+(defun bibretrieve-scholar-create-url (author title)
+
+  (let ((tempfile (make-temp-file "scholar" nil ".bib")))
+
+    (call-process-shell-command "~/bin/gscholar/gscholar/gscholar.py --all" nil nil nil 
+                (if (> (length author) 0) (concat "\"" author "\""))
+                (if (> (length title) 0)  (concat "\"" title "\""))
+                (concat " > " tempfile))
+    (concat "file://" tempfile)
+))
+
+(defun bibretrieve-scholar ()
+  (interactive)
+  (setq mm-url-use-external t)
+  (setq bibretrieve-backends '(("scholar" . 5)))
+  (bibretrieve)
+  (setq mm-url-use-external nil)
+)
+
+(defun bibretrieve-amazon-create-url (author title)
+  (concat "http://lead.to/amazon/en/?key="(mm-url-form-encode-xwfu title) "&si=ble&op=bt&bn=&so=sa&ht=us"))
+
+(defun bibretrieve-amazon ()
+  (interactive)
+  (setq mm-url-use-external t)
+  (setq mm-url-program "w3m")
+  (setq mm-url-arguments (list "-dump"))
+  (setq bibretrieve-backends '(("amazon" . 5)))
+  (bibretrieve)
+  (setq mm-url-use-external nil)
+)
+#+end_src
+
+*** Default latex packages to be included into any latex export
+
+Default LaTeX packages I like to be included into any LaTeX export. Modify as necessary.
+
+#+begin_src emacs-lisp
+(setq org-latex-default-packages-alist
+     '(("AUTO" "inputenc" t)
+   ("" "lmodern" nil)
+   ("T1" "fontenc" nil)
+   ("" "fixltx2e" nil)
+   ("" "graphicx" t)
+   ("" "longtable" nil)
+   ("" "float" nil)
+   ("" "wrapfig" nil)
+   ("" "rotating"  nil)
+   ("normalem" "ulem" t)
+   ("" "amsmath" t)
+   ("" "textcomp" nil)
+   ("" "marvosym" t)
+   ("" "wasysym" t)
+   ("" "amssymb" t)
+   ("" "amsmath" t)
+   ("version=3" "mhchem" t)
+   ("" "url" t)
+   ("" "underscore" t)
+   ("" "threeparttable" t)
+   ("" "tabulary" t)
+   ("" "parnotes" t)
+   ("" "comment" t)
+   ("" "multirow" t)
+   ("" "booktabs" t)
+   ("T1" "fontenc" t)
+   ("innermargin=1.5in,outermargin=1.25in,vmargin=1.25in" "geometry" t)
+   ("below" "placeins" t)
+   ("dvipsnames,svgnames,table" "xcolor" t)
+   ("citestyle=authoryear-icomp,bibstyle=authoryear,hyperref=true,backref=true,maxcitenames=3,url=true,backend=biber,natbib=true" "biblatex" t)
+   ("linktocpage,pdfstartview=FitH,colorlinks,linkcolor=blue,anchorcolor=blue,citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue,citebordercolor={0 1 0}" "hyperref" nil)
+   ("" "attachfile" nil)))
+#+end_src
+
+
+** org-remember, capture, agenda
+
+#+begin_src emacs-lisp
+(require 'remember)
+(require 'org-remember)
+(org-remember-insinuate)
+#+end_src
