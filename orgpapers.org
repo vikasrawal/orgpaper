@@ -304,8 +304,6 @@ shortcuts and starts using them instead of the verbose versions.
 | /Abort the command in progress/                                                                               | =keyboard-quit=           | =C-g=        |
 | /Undo/                                                                                                        | =undo=                    | =C-_=        |
 
-\FloatBarrier
-
 * Org-mode basics
 ** Preamble
 
