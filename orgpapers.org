@@ -115,11 +115,8 @@ I would particularly like to thank
   when I was doing fieldwork in villages in eastern India. This
   discovery completely changed my work flow, and Org-mode became
   central to all my academic work.
-+ Suvayu Ali for responses to several of my queries on the mailing
-  list.
-+ All members of the Org-mode community who have generously
-  contributed code and who keep responding to queries on the mailing
-  list.
++ In addition to the above, Suvayu Ali, for responses to several of my
+  queries on the mailing list.
 
 * Installing necessary software
 This set up will work with any operating system. I have tested it on
