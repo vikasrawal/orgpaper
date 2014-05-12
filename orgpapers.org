@@ -51,9 +51,9 @@ you will set up using this guide?
     papers, reports and dissertations. Some journals also accept
     LaTeX files, though this is rare among social science journals.
 
-  - Org-mode also has a good openoffice exporter. With an appropriate
-    openoffice template file, you can get a fully formatted openoffice
-    or MS-Word output.
+  - The setup also provides tools for producing odt/docx files. With
+    well defined template files, you can get a fully formatted
+    openoffice or MS-Word output.
 
   - Org-mode can also produce html files. By specifying appropriate
     css classes, you can obtain ready to publish html files for your
