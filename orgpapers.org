@@ -331,19 +331,17 @@ topics are discussed.
 
 ** Sections and headlines
 
-Main body of the Org file follows the special lines at the top.
+After the special lines at the top comes the main body of the Org
+file.
 
 The content in any Org file is organised in a hierarchy of headlines.
 Think of these headlines as sections of your paper.
 
 A headline in Org starts with one or more stars (*) followed by a
-space. We shall use this to create sections in our document.
-
-For the main sections, we use the top-level headlines created by using
-a single star. For sub-sections, we use second-level headline.
-Second-level headlines start with two stars. Third level headlines
-start with three stars. You can create as many levels of sections as
-you need. 
+space. A single star denotes the main sections, double star denote the
+subsections, three stars denote sub-subsections, and so on. We shall
+use this to create the section structure of our document. You can
+create as many levels of sections as you need.
 
 See the following example. Note that headlines are not numbered. We
 leave section numbering for org-mode to handle automatically.
