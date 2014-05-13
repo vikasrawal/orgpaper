@@ -10,6 +10,17 @@
 #+LATEX_HEADER: \renewcommand{\TPTminimum}{\linewidth}
 
 * Introduction
+
+This guide introduces an open-source toolkit for writing research
+papers and monographs. The main features of this toolkit centered
+around Emacs and Org-mode are: 
++ embedded R code in the document that allows for statistical results
+  to be revised and reproduced,
++ bibliographic citations from a personal bibliographic database,
++ formatting using well defined styles with minimal markup,
++ support for production of final output as pdf, odt, docx, html and
+  many other formats.
+
 ** Will this guide be useful for you?
 
 This guide will be useful for you if you are writing a research paper,
@@ -944,7 +955,6 @@ As with the tables, we shall add a caption and a name to it as follows
 #+END_SRC
 
 You can now refer to this graph in the text using ~[[my-bmi-graph]]~.
-
 
 * Citations and Bibliographies using Org-mode
 ** Building your database
