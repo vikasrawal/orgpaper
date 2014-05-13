@@ -322,12 +322,12 @@ Table [[special-lines]] gives details of a few major special lines that we shall
 |             | H:2  (Treat top two levels of headlines as section levels, and anything below that as item list. Modify the number as appropriate)                         |
 |             | num:2 (Number top two levels of headlines. Modify the number as appropriate.)                                                                              |
 
-In addition to these, we shall use LaTeX specific options for
-formatting the PDF output, ODT specific options for formatting the
-ODT/DOCX output, and R specific options for setting up the R
-environment. These would also be specified using special lines at the
-top of the file. I shall provide details of these in Sections where
-these topics are discussed.
+In addition to these, we can use LaTeX specific options for formatting
+the pdf output, odt specific options for formatting the odt/docx
+output, and R specific options for setting up the R environment. These
+would also be specified using special lines at the top of the file. I
+shall provide details of some of these in the Sections where these
+topics are discussed.
 
 ** Sections and headlines
 
