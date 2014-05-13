@@ -883,7 +883,7 @@ Like any Org table, you can cross-refer to this table using
 These code blocks can have a series of commands. The last command
 produces a graph that we would like to be included in the document.
 
-Code ~[[mygraph-code]]~ shows an example of a code block that produces a
+The following code shows an example of a code block that produces a
 graph.
 
 #+BEGIN_SRC org
@@ -897,19 +897,20 @@ As before, for creating your graph, you first write the ~#+NAME~,
 ~BEGIN_SRC~ and the ~END_SRC~ lines, and then go into a temporary ESS
 buffer by using C-c '. 
 
-Once in this temporary ESS buffer, you can write the R commands for
-making your graph. As you write, you can evaluate the commands using
-~C-j~, ~C-r~ and ~C-b~ and see what your output looks like. The output
-is displayed on your screen using the default graphic device used by R
-(X11, quartz or windows graphic device depending upon your operating
-system).
++ Once in this temporary ESS buffer, you can write the R commands for
+  making your graph. 
++ As you write, you can evaluate the commands using ~C-j~, ~C-r~ and
+  ~C-b~ and see what your output looks like.
++ The output is displayed on your screen using the default graphic
+  device used by R (X11, quartz or windows graphic device depending
+  upon your operating system).
++ Once you have finalised your graph, you press C-c ' and come back
+  to the Org buffer.
 
-Once you have finalised your graph, you press C-c ' and come back to
-the Org buffer. Note that creation of the image file is left to
-appropriate switches in the ~#+BEGIN_SRC~ line. Org automatically
-chooses appropriate graphic device to produce the file. When you
-evaluate this code using ~C-c C-c~, the results are displayed below
-the code block as follows.
+Note that creation of the image file is left to appropriate switches
+in the ~#+BEGIN_SRC~ line. Org automatically chooses appropriate
+graphic device to produce the file. When you evaluate this code using
+~C-c C-c~, the results are displayed below the code block as follows.
 
 #+BEGIN_SRC org
   ,#+RESULTS: mygraph-code
