@@ -939,17 +939,17 @@ You can now refer to this graph in the text using ~[[my-bmi-graph]]~.
 ** Building your database
 
 We shall use a master bibliographic database to contain bibliographic
-records for the literature that we cite. The database, in biber or
-BibTex format, will be stored in a text file with .bib extension. 
+records for the literature that we cite. The database, in Biber or
+BibTex format, is stored in a text file with .bib extension.
 
-In BibTex/biber database, each bibliographic entry is given a unique
-key, which is used to cite it. Each entry is recognised as one among
-various categories of publications, and for any publication, the
-record specifies values for various fields (author, title, volume,
-publisher, etc). Biber recognises a wider variety of publication types
-and fields than BibTex, and is a better choice to use. Since it is
-compatible with BibTex, you can also add a BibTex record as it is as a
-Biber record.
+In a BibTex/Biber database, each bibliographic record is given a
+unique key, which is used to cite it. Each record is classified as one
+among various categories of publications (journal article, book,
+etc.), and for the given publication type, the record specifies values
+for various fields (author, title, volume, publisher, etc). Biber
+recognises a wider variety of publication types and fields than
+BibTex, and is a better choice to use. Since it is compatible with
+BibTex, you can also add a BibTex record as it is as a Biber record.
 
 To start with, it may be a good idea to use applications like JabRef
 (cross-platform, http://jabref.sourceforge.net/) or BibDesk (OS-X
@@ -959,11 +959,11 @@ Eventually, you should use bibretrieve and RefTeX
 add entries to your database. org-ref.el provided by John Kitchin
 (https://github.com/jkitchin/jmax) has some useful functions.
 
-Bibliographic information in BibTex/biber format is available from
+Bibliographic information in BibTex/Biber format is available from
 many online sources, including Google Scholar. JabRef/BibDesk allow
 you to directly import BibTex citations from online databases rather
 than having to enter everything yourself. Of course, where the
-bibliographic information in BibTex/biber format is not available from
+bibliographic information in BibTex/Biber format is not available from
 any existing database, you may have to enter the information yourself.
 
 As a sample, my own bibliographic database is available from
@@ -972,23 +972,23 @@ https://github.com/indianstatistics/bibliobase/blob/master/bibliobase.bib.
 ** Using biblatex with Org
 *** Setup
 Using biblatex with Org requires some customisation of variables. This
-is already done for you if you have loaded vikas-general.org. 
+is already done for you if you have installed [[https://github.com/vikasrawal/orgpaper/blob/master/vikas-general.org][vikas-general.org]]. 
 
-The operative part in vikas-general.org is the following:
+The operative part in [[https://github.com/vikasrawal/orgpaper/blob/master/vikas-general.org][vikas-general.org]] is the following:
 : (setq org-latex-to-pdf-process 
 :   '("pdflatex %f" "biber %b" "pdflatex %f" "pdflatex %f"))
 
 Once this is done, every time you export the document to pdf via
-latex, it runs pdflatex, then runs biber and then runs pdflatex twice
+latex, it runs pdflatex, then runs Biber and then runs pdflatex twice
 again. This is necessary to get the citations in the pdf file.
 
-In vikas-general.org, the package biblatex is loaded with following options:
+In [[https://github.com/vikasrawal/orgpaper/blob/master/vikas-general.org][vikas-general.org]], the package biblatex is loaded with following options:
 : ("citestyle=authoryear-icomp,bibstyle=authoryear,hyperref=true,backref=true,
 : maxcitenames=3,url=true,backend=biber,natbib=true" "biblatex" t)
 
 You may want to modify this if you want to change the citation and
 bibliography styles. If you want to do it differently in each
-document, you can remove this line from vikas-general.org, and add the
+document, you can remove this line from [[https://github.com/vikasrawal/orgpaper/blob/master/vikas-general.org][vikas-general.org]], and add the
 following special line in your document.
 : #+LATEX_HEADER: \usepackage["citestyle=authoryear-icomp,bibstyle=authoryear, \
 : hyperref=true,backref=true,maxcitenames=3,url=true,backend=biber,natbib=true"] {biblatex}
@@ -996,7 +996,7 @@ following special line in your document.
 *** Adding citations and bibliography in Latex/PDF export
 
 The following special line, to be placed among other special lines at
-the top of the file, specifies the BibTex/biber database that has the
+the top of the file, specifies the BibTex/Biber database that has the
 bibliographic records.
 
 : #+LATEX_HEADER: \addbibresource{filename.bib}
@@ -1050,7 +1050,7 @@ Use ~C-c C-e~ to call the Org export dispatcher.
 + Press l to select LaTeX, and then chose one of the following options.
   + Press l again, if you just want to create a LaTeX file
   + Press p, if you want to create a pdf file. This will first create
-    a latex file, then use pdflatex and biber to create a pdf file.
+    a latex file, then use pdflatex and Biber to create a pdf file.
   + Press o, if you want to create pdf and have it opened in the
     default pdf viewing application.
 
@@ -1088,8 +1088,8 @@ maintain a website using Org (as I do for
 http://www.indianstatistics.org). 
 
 The built-in exporter can support BibTex citations using ox-BibTex.el,
-which is including in Org, and will be loaded if you have used
-vikas-general.org. You may need to install BibTex2html separately to make it
+which is including in Org, and will be loaded if you have installed
+[[https://github.com/vikasrawal/orgpaper/blob/master/vikas-general.org][vikas-general.org]]. You may need to install BibTex2html separately to make it
 work.
 
 However, ox-BibTex.el uses BibTex2html for converting citations and
@@ -1111,7 +1111,7 @@ It is good to use a color-theme that highlights text in Org well. This
 makes it easier to work in Org.
 
 I use color theme caled leuven. The code for loading leuven is
-including in vikas-general.org but is commented out. If you wish to use it,
+including in [[https://github.com/vikasrawal/orgpaper/blob/master/vikas-general.org][vikas-general.org]] but is commented out. If you wish to use it,
 remove ;; from the front of the relevant lines, and you will have
 Leuven.
 
@@ -1142,7 +1142,7 @@ the top:
 ** Margins
 
 In LaTeX, package Geometry allows you to modify page margins. The
-following line in vikas-general.org sets the margins. You can tweak this to
+following line in [[https://github.com/vikasrawal/orgpaper/blob/master/vikas-general.org][vikas-general.org]] sets the margins. You can tweak this to
 define the margins as you like.
 
 : ("innermargin=1.5in,outermargin=1.25in,vmargin=1.25in" "geometry" t)
