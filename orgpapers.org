@@ -473,8 +473,8 @@ Note that:
 We shall directly create only those tables in Org that present content
 not being produced through statistical analysis. For tables that are
 created through statistical analysis, we shall embed R programs rather
-than the tables themselves. This is discussed in Section [[Org-mode and
-R]] of this guide.
+than the tables themselves. This is discussed in Section [[#orgmodeandr]]
+of this guide.
 
 The following sample code produces a fully formated table, with a
 numbered title above the table and a name for cross-referencing the
@@ -715,6 +715,9 @@ The notes use a little bit of direct LaTeX coding.
    slightly smaller font.
 
 * Org-mode and R
+:PROPERTIES:
+:CUSTOM_ID: orgmodeandr
+:END:
 ** Configuration
 
 Following code in vikas-general.org enables Org to run different types of
