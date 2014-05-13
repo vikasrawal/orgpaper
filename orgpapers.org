@@ -20,7 +20,6 @@ around Emacs and Org-mode are:
 + formatting using well defined styles with minimal markup,
 + support for production of final output as pdf, odt, docx, html and
   many other formats.
-
 ** Will this guide be useful for you?
 
 This guide will be useful for you if you are writing a research paper,
@@ -31,16 +30,8 @@ involves one or more of the following:
    graphically)
  + Using mathematical equations
 
-Following this guide would need some investment of time. But this
-would help you document your research in a way that is reproducible.
-It will help you focus on the content of research and, once you have
-specified your style, leave all formatting of your document to the
-software. It will facilitate building a personal bibliographic
-repository and repeated use of bibliographic information for citation
-of literature. Building a personal bibliographic database that is
-integrated with your writing system will be particularly beneficial if
-academic writing is going to be a medium to long-term occupation for
-you.
+Following this guide would need some investment of time but benefits
+far outweigh the investment you make. 
 
 ** What is our goal?
 
@@ -49,34 +40,17 @@ you will set up using this guide?
 
 + With easy style specifications that you provide, the document will
   be almost-entirely automatically formatted by the software.
-
   - Complicated LaTeX-style markup is a pain and Openoffice/MS-Word
-    documents require too much manual formatting.
-    
-  - Org-mode has a powerful LaTeX converter. The user is not required
-    to write latex mark-up. Basis Org-mode mark-up is extremely
-    simple, and can be mastered in very little time.
-
-  - Org-mode automatically creates LaTeX files, and produces fully
-    formatted pdf documents. This is the best output for working
-    papers, reports and dissertations. Some journals also accept
-    LaTeX files, though this is rare among social science journals.
-
-  - The setup also provides tools for producing odt/docx files. With
-    well defined template files, you can get a fully formatted
-    openoffice or MS-Word output.
-
-  - Org-mode can also produce html files. By specifying appropriate
-    css classes, you can obtain ready to publish html files for your
-    website. Org-mode can be hooked to publish to your blog.
+    documents require too much manual formatting. Basis Org-mode
+    mark-up is extremely simple, and can be mastered in very little
+    time.
+  - Org-mode can produce well formatted output in LaTeX, pdf, odt,
+    docx, html and many other formats.
 
 + Instead of including statistical results (tables, graphs, etc), we
   would embed appropriate R programs in the document, so that when the
   formatted output is produced, all programs are run to generate the
-  results. This is not a guide on R programming. The focus of this
-  guide is on writing the papers, and it will only provide a guide to
-  how you can embed R programs into your documents. Advantages of
-  doing this are:
+  results. Advantages of doing this are:
   - Any changes in the data being used can be accommodated just by
     publishing the document again.
   - Any modifications in statistical analysis are easily made by
@@ -87,17 +61,15 @@ you will set up using this guide?
 
 + The document will be integrated with a citation manager, so that
   bibliographic information will be pulled automatically from a
-  central database.
+  central database to create a fully formatted bibliography.
   - You will maintain a bibliographic database in BibTeX format, that
     you can build over time, adding bibliographic information for
     works that you cite. 
   - Many websites (including Google Scholar) provide bibliographic
-    information directly in bibtex format, and we will have integrated
+    information directly in BibTeX format, and we will have integrated
     tools that will allow us to pull this information directly into
     our local database.
-  - A fully formatted bibliography will be created for all documents
-    cited in your papers and included in the paper when a final output
-    is produced.
+ 
  
 ** Acknowledgements                                               
 In my adaptation of Org, I have benefitted immensely from the great
