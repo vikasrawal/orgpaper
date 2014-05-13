@@ -166,6 +166,9 @@ We shall use pandoc to convert our file from latex to odt/docx/html
 formats.
 
 ** Customising emacs
+:PROPERTIES:
+:CUSTOM_ID: customemacs
+:END:
 
 I recommend using Eric Schulte's Emacs Starter Kit to take care of
 most of the customisation.[fn:5]
@@ -720,9 +723,9 @@ The notes use a little bit of direct LaTeX coding.
 :END:
 ** Configuration
 
-Following code in vikas-general.org enables Org to run different types of
-code. If you have installed vikas-general.org as specified in [[Customising
-emacs]], these are already enabled. 
+Following code in vikas-general.org enables Org to run different types
+of code. If you have installed vikas-general.org as specified in
+[[#customemacs]], these are already enabled.
 
 I have included here the languages that I commonly use. See Org
 manual, if you would like to add any more.
