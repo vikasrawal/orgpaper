@@ -41,7 +41,7 @@ you will set up using this guide?
 + With easy style specifications that you provide, the document will
   be almost-entirely automatically formatted by the software.
   - Complicated LaTeX-style markup is a pain and Openoffice/MS-Word
-    documents require too much manual formatting. Basis Org-mode
+    documents require too much manual formatting. Basic Org-mode
     mark-up is extremely simple, and can be mastered in very little
     time.
   - Org-mode can produce well formatted output in LaTeX, pdf, odt,
