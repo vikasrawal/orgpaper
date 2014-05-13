@@ -309,15 +309,15 @@ Table [[special-lines]] gives details of a few major special lines that we shall
 #+NAME: special-lines
 #+CAPTION: Main special lines to be used at the top of an Org buffer
 #+attr_latex: :environment tabulary :width \textwidth :align lL
-| Keyword     | Purpose                                                                                                                            |
-|-------------+------------------------------------------------------------------------------------------------------------------------------------|
-| ~#+TITLE~   | To declare title of the paper                                                                                                      |
-| ~#+AUTHOR~  | To declare author/s of the paper                                                                                                   |
-| ~#+DATE~    | Sets the date. If blank, no date is used. If this keyword is omitted, current date is used.                                        |
-| ~#+OPTIONS~ | Following options are useful. Multiple options can be separated by a space and specified on the same line.                         |
-|             | toc:nil (Do not include a Table of contents), toc:n (Include n levels of sections and sub-sections in Table of contents)           |
-|             | H:2  (Treat top two levels of headlines as section levels, and anything below that as item list. Modify the number as appropriate) |
-|             | num:2 (Number top two levels of headlines. Modify the number as appropriate.)                                                      |
+| Keyword     | Purpose                                                                                                                                                    |
+|-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ~#+TITLE~   | To declare title of the paper                                                                                                                              |
+| ~#+AUTHOR~  | To declare author/s of the paper                                                                                                                           |
+| ~#+DATE~    | Sets the date. If blank, no date is used. If this keyword is omitted, current date is used.                                                                |
+| ~#+OPTIONS~ | There are many options you can give. These are what I find the most important Multiple options can be separated by a space and specified on the same line. |
+|             | toc:nil (Do not include a Table of contents), toc:n (Include n levels of sections and sub-sections in Table of contents)                                   |
+|             | H:2  (Treat top two levels of headlines as section levels, and anything below that as item list. Modify the number as appropriate)                         |
+|             | num:2 (Number top two levels of headlines. Modify the number as appropriate.)                                                                              |
 
 In addition to these, we shall use LaTeX specific options for
 formatting the PDF output, ODT specific options for formatting the
