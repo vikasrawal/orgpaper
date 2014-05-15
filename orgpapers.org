@@ -191,14 +191,14 @@ with the latest version, it is better to clone it from the git
 repository of Org-mode, and update it regularly. You can keep org-mode
 under ~/.emacs.d/src/org and compile it.
 
-I also recommend using, in addition, research-toolkit.org, available from
-(https://raw.githubusercontent.com/vikasrawal/orgpaper/master/research-toolkit.org). To
-use it, create a directory with your username under ~/.emacs.d/, git
-clone this repository, and move research-toolkit.org to this directory
-the directory with your name that you have just created.
+I also recommend using, in addition, [[https://raw.githubusercontent.com/vikasrawal/orgpaper/master/research-toolkit.org][research-toolkit.org]], available
+from
+https://raw.githubusercontent.com/vikasrawal/orgpaper/master/research-toolkit.org. To
+use it, create a directory with your username under ~/.emacs.d/, and
+save the file in this directory.
 
 For any other personal customisation that you may need to do, you can
-create .org or .el files in this directory.
+create more .org or .el files in this directory.
 
 * Emacs basics
 
