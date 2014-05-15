@@ -8,6 +8,7 @@
 #+LaTeX_CLASS_OPTIONS: [garamond]
 #+LATEX_HEADER: \linespread{1.3}
 #+LATEX_HEADER: \renewcommand{\TPTminimum}{\linewidth}
+#+LATEX_HEADER: \usepackage[section]{placeins}
 
 * Introduction
 
@@ -190,10 +191,10 @@ with the latest version, it is better to clone it from the git
 repository of Org-mode, and update it regularly. You can keep org-mode
 under ~/.emacs.d/src/org and compile it.
 
-I also recommend using, in addition, vikas-general.org, available from
-(https://raw.githubusercontent.com/vikasrawal/orgpaper/master/vikas-general.org). To
+I also recommend using, in addition, research-toolkit.org, available from
+(https://raw.githubusercontent.com/vikasrawal/orgpaper/master/research-toolkit.org). To
 use it, create a directory with your username under ~/.emacs.d/, git
-clone this repository, and move vikas-general.org to this directory
+clone this repository, and move research-toolkit.org to this directory
 the directory with your name that you have just created.
 
 For any other personal customisation that you may need to do, you can
@@ -721,8 +722,8 @@ The notes use a little bit of direct LaTeX coding.
 :END:
 ** Configuration
 
-Following code in vikas-general.org enables Org to run different types
-of code. If you have installed vikas-general.org as specified in
+Following code in research-toolkit.org enables Org to run different types
+of code. If you have installed research-toolkit.org as specified in
 [[#customemacs]], these are already enabled.
 
 I have included here the languages that I commonly use. See Org
@@ -970,9 +971,9 @@ https://github.com/indianstatistics/bibliobase/blob/master/bibliobase.bib.
 ** Using biblatex with Org
 *** Setup
 Using biblatex with Org requires some customisation of variables. This
-is already done for you if you have installed [[https://github.com/vikasrawal/orgpaper/blob/master/vikas-general.org][vikas-general.org]]. 
+is already done for you if you have installed [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]]. 
 
-The operative part in [[https://github.com/vikasrawal/orgpaper/blob/master/vikas-general.org][vikas-general.org]] is the following:
+The operative part in [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]] is the following:
 : (setq org-latex-to-pdf-process 
 :   '("pdflatex %f" "biber %b" "pdflatex %f" "pdflatex %f"))
 
@@ -980,13 +981,13 @@ Once this is done, every time you export the document to pdf via
 latex, it runs pdflatex, then runs Biber and then runs pdflatex twice
 again. This is necessary to get the citations in the pdf file.
 
-In [[https://github.com/vikasrawal/orgpaper/blob/master/vikas-general.org][vikas-general.org]], the package biblatex is loaded with following options:
+In [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]], the package biblatex is loaded with following options:
 : ("citestyle=authoryear-icomp,bibstyle=authoryear,hyperref=true,backref=true,
 : maxcitenames=3,url=true,backend=biber,natbib=true" "biblatex" t)
 
 You may want to modify this if you want to change the citation and
 bibliography styles. If you want to do it differently in each
-document, you can remove this line from [[https://github.com/vikasrawal/orgpaper/blob/master/vikas-general.org][vikas-general.org]], and add the
+document, you can remove this line from [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]], and add the
 following special line in your document.
 : #+LATEX_HEADER: \usepackage["citestyle=authoryear-icomp,bibstyle=authoryear, \
 : hyperref=true,backref=true,maxcitenames=3,url=true,backend=biber,natbib=true"] {biblatex}
@@ -1087,7 +1088,7 @@ http://www.indianstatistics.org).
 
 The built-in exporter can support BibTex citations using ox-BibTex.el,
 which is including in Org, and will be loaded if you have installed
-[[https://github.com/vikasrawal/orgpaper/blob/master/vikas-general.org][vikas-general.org]]. You may need to install BibTex2html separately to make it
+[[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]]. You may need to install BibTex2html separately to make it
 work.
 
 However, ox-BibTex.el uses BibTex2html for converting citations and
@@ -1109,7 +1110,7 @@ It is good to use a color-theme that highlights text in Org well. This
 makes it easier to work in Org.
 
 I use color theme caled leuven. The code for loading leuven is
-including in [[https://github.com/vikasrawal/orgpaper/blob/master/vikas-general.org][vikas-general.org]] but is commented out. If you wish to use it,
+including in [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]] but is commented out. If you wish to use it,
 remove ;; from the front of the relevant lines, and you will have
 Leuven.
 
@@ -1140,7 +1141,7 @@ the top:
 ** Margins
 
 In LaTeX, package Geometry allows you to modify page margins. The
-following line in [[https://github.com/vikasrawal/orgpaper/blob/master/vikas-general.org][vikas-general.org]] sets the margins. You can tweak this to
+following line in [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]] sets the margins. You can tweak this to
 define the margins as you like.
 
 : ("innermargin=1.5in,outermargin=1.25in,vmargin=1.25in" "geometry" t)

@@ -1,4 +1,4 @@
-#+TITLE: Personal customisations for the starter kit
+#+TITLE: Org-mode customisation
 #+OPTIONS: toc:nil num:nil ^:nil
 
 * Customisations for the starter kit
@@ -34,6 +34,7 @@ These are additional customisations to be used with Eric Schulte's Starter Kit.
 (setq org-startup-indented t)
 (setq org-src-fontify-natively t)
 (setq org-src-tab-acts-natively t)
+(setq org-export-with-smart-quotes t)
 '(org-cycle-include-plain-lists t)
 '(org-hide-leading-stars t)
 '(org-alphabetical-lists t)
@@ -114,7 +115,6 @@ These are additional customisations to be used with Eric Schulte's Starter Kit.
 #+end_src
 
 ** LaTeX customisations
-
 *** For biber
 
 This customises LaTeX export to run pdflatex, biber and then pdflatex. Needed for citations.
@@ -149,16 +149,16 @@ This customises LaTeX export to run pdflatex, biber and then pdflatex. Needed fo
 This defines C-c ) to call reftex for citation.
 
 #+begin_src emacs-lisp
-(require 'reftex) 
-(defun org-mode-reftex-setup ()
-  (load-library "reftex")
-  (and (buffer-file-name)
-       (file-exists-p (buffer-file-name))
-       (reftex-parse-all))
-  (reftex-set-cite-format
-   "\\citep{%l}")
-  (define-key org-mode-map (kbd "C-c )") 'reftex-citation))
-(add-hook 'org-mode-hook 'org-mode-reftex-setup)
+;(require 'reftex) 
+;(defun org-mode-reftex-setup ()
+;  (load-library "reftex")
+;  (and (buffer-file-name)
+;       (file-exists-p (buffer-file-name))
+;       (reftex-parse-all))
+;  (reftex-set-cite-format
+;   "\\citep{%l}")
+;  (define-key org-mode-map (kbd "C-c )") 'reftex-citation))
+;(add-hook 'org-mode-hook 'org-mode-reftex-setup)
 #+end_src
 
 *** Default bibliography
@@ -243,7 +243,6 @@ Default LaTeX packages I like to be included into any LaTeX export. Modify as ne
    ("" "booktabs" t)
    ("T1" "fontenc" t)
    ("innermargin=1.5in,outermargin=1.25in,vmargin=1.25in" "geometry" t)
-   ("below" "placeins" t)
    ("dvipsnames,svgnames,table" "xcolor" t)
    ("citestyle=authoryear-icomp,bibstyle=authoryear,hyperref=true,backref=true,maxcitenames=3,url=true,backend=biber,natbib=true" "biblatex" t)
    ("linktocpage,pdfstartview=FitH,colorlinks,linkcolor=blue,anchorcolor=blue,citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue,citebordercolor={0 1 0}" "hyperref" nil)
