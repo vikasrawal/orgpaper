@@ -107,7 +107,6 @@ GNU/Linux and Mac OS-X, but it should work on Windows as well. For
 this setup, you need to install Emacs (Version 24 along with a few
 additional Emacs packages), Texlive, R (along with whatever
 additional R packages you want to use) and Pandoc.
-
 ** Emacs                                                             
 
 + GNU/Linux
@@ -118,9 +117,19 @@ additional R packages you want to use) and Pandoc.
 
 + Mac OS-X 
 
-  For Mac OS-X, either use Aquamacs 3.0 or install Emacs using
-  homebrew. The built-in Emacs on OS-X is an older version, and it
-  would be a good idea to install the latest version instead.
+  The built-in Emacs on OS-X is an older version, and it would be a
+  good idea to install the latest version instead.
+
+  The best option is to install it via homebrew. I like the version
+  available from railwaycat/emacsmacport tap
+  (https://github.com/railwaycat/emacs-mac-port).
+  
+  After installing homebrew, or if you already have it installed, just
+  do the following from the terminal
+
+  ~$ brew tap railwaycat/emacsmacport~
+
+  ~$ brew install emacs-mac~
 
 + Microsoft Windows 
 
@@ -128,8 +137,6 @@ additional R packages you want to use) and Pandoc.
   http://ftp.gnu.org/gnu/emacs/windows/, and install.
 
 ** Texlive
-
-
 
 + GNU/Linux
 
