@@ -129,6 +129,8 @@ additional R packages you want to use) and Pandoc.
 
 ** Texlive
 
+
+
 + GNU/Linux
 
   Texlive can also be installed from package managers in most
@@ -143,25 +145,27 @@ additional R packages you want to use) and Pandoc.
   For Windows, download Texlive and follow instructions from
   https://www.tug.org/texlive/doc.html
 
-** R (http://www.r-project.org)
+** R
 
-In this guide, I assume that you are familiar with R. I will not cover
-R programming in this guide. 
+In this guide, I assume that you are familiar with R
+(http://www.r-project.org). I will not cover R programming in this
+guide.
 
 For GNU/Linux, R can be installed from native package managers (look
 for r-base in debian and debian-based distributions). For Mac OS-X and
 Windows, download and see installation instructions at
 http://www.r-project.org
  
-** Pandoc (http://johnmacfarlane.net/pandoc/)
+** Pandoc 
 
-Pandoc is an extremely powerful converter, which can translate one
-markup to another. It supports conversion between many file formats,
-and supports "syntax for footnotes, tables, flexible ordered lists,
-definition lists, fenced code blocks, superscript, subscript,
-strikeout, title blocks, automatic tables of contents, embedded LaTeX
-math, citations, and markdown inside HTML block elements." That is
-pretty much everything I use.
+Pandoc (http://johnmacfarlane.net/pandoc/) is an extremely powerful
+converter, which can translate one markup to another. It supports
+conversion between many file formats, and supports "syntax for
+footnotes, tables, flexible ordered lists, definition lists, fenced
+code blocks, superscript, subscript, strikeout, title blocks,
+automatic tables of contents, embedded LaTeX math, citations, and
+markdown inside HTML block elements." That is pretty much everything I
+use.
 
 We shall use pandoc to convert our file from latex to odt/docx/html
 formats.
@@ -194,8 +198,8 @@ under ~/.emacs.d/src/org and compile it.
 I also recommend using, in addition, [[https://raw.githubusercontent.com/vikasrawal/orgpaper/master/research-toolkit.org][research-toolkit.org]], available
 from
 https://raw.githubusercontent.com/vikasrawal/orgpaper/master/research-toolkit.org. To
-use it, create a directory with your username under ~/.emacs.d/, and
-save the file in this directory.
+use it, create a directory with your _username_ under ~/.emacs.d/, and
+save the file in this directory.[fn:2]
 
 For any other personal customisation that you may need to do, you can
 create more .org or .el files in this directory.
@@ -236,7 +240,7 @@ in emacs as a buffer. Buffers could also have processes like R running
 in them. Emacs displays any messages for you in a separate buffer.
 
 Most commands in emacs are given using the Control (ctrl) or the Meta
-(often mapped to alt) keys.[fn:2] Control key is usually referred to as ~C-~
+(often mapped to alt) keys.[fn:3] Control key is usually referred to as ~C-~
 and the Meta key as ~M-~. So a command ~C-c~ means pressing Control
 and c together. Command ~M-x~ means pressing Meta and x
 together. Everything is case-sensitive. So ~M-X~ would mean, pressing
@@ -811,7 +815,7 @@ to use, call the libraries that I use, and define a few functions of
 my own that I plan to use. I want this code block to be evaluated, so
 that these data, libraries and functions become available in my R
 environment. But no output from such code blocks is expected to be
-included into the document.[fn:3]
+included into the document.[fn:4]
 
 Code block [[readdata-code]] is an example of such a code block. Note
 ~:results value silent~ switch used in the  ~#+begin_src~ line.
@@ -919,7 +923,7 @@ graphic device to produce the file. When you evaluate this code using
 Note that, taking the file name from our ~#+BEGIN_SRC~ line, a file
 called =bmi2.png= was automatically created and linked, so that the
 graph would be inserted in the document when you produce the formatted
-output.[fn:4] Every time you evaluate the code using ~C-c C-c~, the
+output.[fn:5] Every time you evaluate the code using ~C-c C-c~, the
 underlying image file containing the graph is overwritten by a new
 file.
 
@@ -1059,7 +1063,7 @@ There is a built-in odt exporter in Org. While it works well for most
 situations, there are two components of the setup proposed here that
 it does not support. It does not support biblatex and it does not
 support LaTeX-specific solution we have for Notes under Tables and
-Images.[fn:5]
+Images.[fn:6]
 
 Fortunately, [[http://johnmacfarlane.net/pandoc/][Pandoc]] provides an excellent solution for converting
 LaTeX output to odt or docx documents. Pandoc supports all the LaTeX
@@ -1100,7 +1104,6 @@ as for other LaTeX components like Table notes explained in this
 document, you can use Pandoc for converting LaTeX  to html.
 
 * Additional tips and tricks
-
 This section points some additional solutions that you may like to
 use. Some of these may come handy when you start using Org for
 documenting your research.
@@ -1202,7 +1205,7 @@ Tables and Images within their own sections.
 : #+LATEX_HEADER: \usepackage[section]{placeins}
 
 An extension to placeins package, [[http://lexfridman.com/blogs/research/2011/03/06/prevent-figures-from-floating-outside-sections-in-latex/][extraplaceins]] can be used if you
-want to restrict the Tables and Images within subsections.[fn:6]
+want to restrict the Tables and Images within subsections.[fn:7]
 
 ** Customising Biblatex style
 
@@ -1243,28 +1246,33 @@ that folder.
 of Org-mode. It uses Org-mode source blocks to systematically document
 all Emacs customisation.
 
-[fn:2] Depending on the keyboard and the default configuration of the
+[fn:2] If you do not know, ~echo $USER~ in the terminal tells you your
+username.
+
+[fn:3] Depending on the keyboard and the default configuration of the
 flavour of emacs you have installed, Meta may instead be mapped to a
 different key (for example, Windows key, or Option or Command key in
 Apple computers.
 
-[fn:3] For libraries and functions that you need to call, it is even
+[fn:4] For libraries and functions that you need to call, it is even
 better to include them in a .Rprofile file in your working
 directory. These libraries and functions would then be called when R
 is started, and not each time you evaluate code blocks in your
 document.
 
-[fn:4] Of various image formats, I find that png files are most
+[fn:5] Of various image formats, I find that png files are most
 versatile. png files support transparency, and are rendered well both
 on the web and in print. You can also specify jpeg or pdf files. pdf
 files for images work very well if you are only going to produce a pdf
 document.
 
-[fn:5] Author of the odt exporter has chosen to develop the exporter
+[fn:6] Author of the odt exporter has chosen to develop the exporter
 outside Org-mode. He has developed a JabRef exporter to integrate
 citations into odt exports, but that is not a part of Org-mode and
 needs to be installed separately. In any case, since our toolkit
 primarily uses LaTeX, using Pandoc to create odt or docx files from
 LaTeX export works better.
 
-[fn:6] See http://lexfridman.com/blogs/research/2011/03/06/prevent-figures-from-floating-outside-sections-in-latex/
+[fn:7] See http://lexfridman.com/blogs/research/2011/03/06/prevent-figures-from-floating-outside-sections-in-latex/
+
+
