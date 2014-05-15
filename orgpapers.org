@@ -172,7 +172,7 @@ formats.
 :END:
 
 I recommend using Eric Schulte's Emacs Starter Kit to take care of
-most of the customisation.[fn:5]
+most of the customisation.[fn:1]
 
 To install the kit, go to
 http://eschulte.github.io/emacs24-starter-kit/#installation and follow
@@ -180,7 +180,7 @@ the instructions.
 
 Starting version 24, Emacs includes a package-manager. You can
 install/update add-on packages using the package manager. To use the
-package manager, press alt-x in emacs, and then type
+package manager, press M-x in emacs, and then type
 package-list-packages and press return. This would bring up a list of
 packages. Find ess, and with the cursor on it, mark it by pressing i.
 Similarly, find bibretrieve and mark it. Then press x to install them.
@@ -236,12 +236,12 @@ in emacs as a buffer. Buffers could also have processes like R running
 in them. Emacs displays any messages for you in a separate buffer.
 
 Most commands in emacs are given using the Control (ctrl) or the Meta
-(usually, alt) keys. Control key is usually referred to as ~C-~ and
-the Meta key as ~M-~. So a command ~C-c~ means pressing Control and c
-together. Command ~M-x~ means pressing Meta and x together. Everything
-is case-sensitive. So ~M-X~ would mean, pressing Meta, Shift and x
-together. ~C-c M-x l~ would mean pressing C-c, release, then M-x,
-release, and then l.
+(often mapped to alt) keys.[fn:2] Control key is usually referred to as ~C-~
+and the Meta key as ~M-~. So a command ~C-c~ means pressing Control
+and c together. Command ~M-x~ means pressing Meta and x
+together. Everything is case-sensitive. So ~M-X~ would mean, pressing
+Meta, Shift and x together. ~C-c M-x l~ would mean pressing C-c,
+release, then M-x, release, and then l.
 
 ** Basic commands
 
@@ -811,7 +811,7 @@ to use, call the libraries that I use, and define a few functions of
 my own that I plan to use. I want this code block to be evaluated, so
 that these data, libraries and functions become available in my R
 environment. But no output from such code blocks is expected to be
-included into the document.[fn:1]
+included into the document.[fn:3]
 
 Code block [[readdata-code]] is an example of such a code block. Note
 ~:results value silent~ switch used in the  ~#+begin_src~ line.
@@ -919,7 +919,7 @@ graphic device to produce the file. When you evaluate this code using
 Note that, taking the file name from our ~#+BEGIN_SRC~ line, a file
 called =bmi2.png= was automatically created and linked, so that the
 graph would be inserted in the document when you produce the formatted
-output.[fn:2] Every time you evaluate the code using ~C-c C-c~, the
+output.[fn:4] Every time you evaluate the code using ~C-c C-c~, the
 underlying image file containing the graph is overwritten by a new
 file.
 
@@ -1059,7 +1059,7 @@ There is a built-in odt exporter in Org. While it works well for most
 situations, there are two components of the setup proposed here that
 it does not support. It does not support biblatex and it does not
 support LaTeX-specific solution we have for Notes under Tables and
-Images.[fn:4]
+Images.[fn:5]
 
 Fortunately, [[http://johnmacfarlane.net/pandoc/][Pandoc]] provides an excellent solution for converting
 LaTeX output to odt or docx documents. Pandoc supports all the LaTeX
@@ -1202,7 +1202,7 @@ Tables and Images within their own sections.
 : #+LATEX_HEADER: \usepackage[section]{placeins}
 
 An extension to placeins package, [[http://lexfridman.com/blogs/research/2011/03/06/prevent-figures-from-floating-outside-sections-in-latex/][extraplaceins]] can be used if you
-want to restrict the Tables and Images within subsections.[fn:3]
+want to restrict the Tables and Images within subsections.[fn:6]
 
 ** Customising Biblatex style
 
@@ -1239,29 +1239,32 @@ that folder.
 
 * Footnotes
 
-[fn:1] For libraries and functions that you need to call, it is even
-  better to include them in a .Rprofile file in your working
-  directory. These libraries and functions would then be called when R
-  is started, and not each time you evaluate code blocks in your
-  document.
+[fn:1] Eric's Emacs Starter Kit is a beautiful illustration of power
+of Org-mode. It uses Org-mode source blocks to systematically document
+all Emacs customisation.
 
-[fn:2] Of various image formats, I find that png files are most
-  versatile. png files support transparency, and are rendered well both
-  on the web and in print. You can also specify jpeg or pdf files. pdf
-  files for images work very well if you are only going to produce a pdf
-  document.
+[fn:2] Depending on the keyboard and the default configuration of the
+flavour of emacs you have installed, Meta may instead be mapped to a
+different key (for example, Windows key, or Option or Command key in
+Apple computers.
 
-[fn:3] See http://lexfridman.com/blogs/research/2011/03/06/prevent-figures-from-floating-outside-sections-in-latex/
+[fn:3] For libraries and functions that you need to call, it is even
+better to include them in a .Rprofile file in your working
+directory. These libraries and functions would then be called when R
+is started, and not each time you evaluate code blocks in your
+document.
 
-[fn:4] Author of the odt exporter has chosen to develop the exporter
+[fn:4] Of various image formats, I find that png files are most
+versatile. png files support transparency, and are rendered well both
+on the web and in print. You can also specify jpeg or pdf files. pdf
+files for images work very well if you are only going to produce a pdf
+document.
+
+[fn:5] Author of the odt exporter has chosen to develop the exporter
 outside Org-mode. He has developed a JabRef exporter to integrate
 citations into odt exports, but that is not a part of Org-mode and
 needs to be installed separately. In any case, since our toolkit
 primarily uses LaTeX, using Pandoc to create odt or docx files from
 LaTeX export works better.
 
-[fn:5] Eric's Emacs Starter Kit is a beautiful illustration of power
-of Org-mode. It uses Org-mode source blocks to systematically document
-all Emacs customisation.
-
-
+[fn:6] See http://lexfridman.com/blogs/research/2011/03/06/prevent-figures-from-floating-outside-sections-in-latex/
