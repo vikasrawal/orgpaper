@@ -10,6 +10,7 @@
 #+LATEX_HEADER: \renewcommand{\TPTminimum}{\linewidth}
 #+LATEX_HEADER: \usepackage[section]{placeins}
 
+
 * Introduction
 
 This guide introduces an open-source toolkit for writing research
@@ -185,16 +186,21 @@ formats.
 I recommend using Eric Schulte's Emacs Starter Kit to take care of
 most of the customisation.[fn:1]
 
-To install the kit, go to
-http://eschulte.github.io/emacs24-starter-kit/#installation and follow
-the instructions.
-
-Starting version 24, Emacs includes a package-manager. You can
+However, using the starter-kit requires you to first update org. Starting 
+version 24, Emacs includes a package-manager. You can
 install/update add-on packages using the package manager. To use the
 package manager, press M-x in emacs, and then type
 package-list-packages and press return. This would bring up a list of
 packages. Find ess, and with the cursor on it, mark it by pressing i.
 Similarly, find bibretrieve and mark it. Then press x to install them.
+
+
+To install the kit, go to
+http://eschulte.github.io/emacs24-starter-kit/#installation and follow
+the instructions.
+
+
+
 
 Org-mode should be pre-installed with Emacs. However, since Org-mode
 is under heavy development, and it is really a good idea to keep up
