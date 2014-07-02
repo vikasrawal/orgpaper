@@ -15,7 +15,7 @@
 
 This guide introduces an open-source toolkit for writing research
 papers and monographs. The main features of this toolkit centered
-around Emacs and Org-mode are: 
+around Emacs and Org-mode are:
 + embedded R code in the document that allows for statistical results
   to be revised and reproduced,
 + bibliographic citations from a personal bibliographic database,
@@ -33,7 +33,7 @@ involves one or more of the following:
  + Using mathematical equations
 
 Following this guide would need some investment of time but benefits
-far outweigh the investment you make. 
+far outweigh the investment you make.
 
 ** What is our goal?
 
@@ -66,14 +66,14 @@ you will set up using this guide?
   central database to create a fully formatted bibliography.
   - You will maintain a bibliographic database in BibTeX format, that
     you can build over time, adding bibliographic information for
-    works that you cite. 
+    works that you cite.
   - Many websites (including Google Scholar) provide bibliographic
     information directly in BibTeX format, and we will have integrated
     tools that will allow us to pull this information directly into
     our local database.
- 
- 
-** Acknowledgements                                               
+
+
+** Acknowledgements
 In my adaptation of Org, I have benefitted immensely from the great
 community of Orgers. The [[http://orgmode.org/manual/][Org-mode manual]], [[http://orgmode.org/worg/][Worg]], and archives of the
 [[http://orgmode.org/community.html][Org-mode mailing list]] have been the most important resources. In
@@ -84,7 +84,7 @@ provided by various people, not only in the material posted on Orgmode
 website, but also in response to specific queries made by me. The
 community has been extremely generous in providing these.
 
-I would particularly like to thank 
+I would particularly like to thank
 
 + Carsten Dominik, the author of Org-mode
 + Bastien Guerry, who has been a great maintainer of Org-mode, after
@@ -92,7 +92,7 @@ I would particularly like to thank
 + Nicolas Goaziou, who wrote the brilliant new exporter framework. The
   amount of code Nicolas has contributed to Org over the last two
   years or so is incredible . Nicolas very kindly responded to several
-  of my queries. 
+  of my queries.
 + Eric Schulte, the main author of Babel, which gave Org mode the
   ability to execute code. I used to use Org-mode as a task manager
   and for taking notes. I discovered org-babel in the summer of 2010,
@@ -108,7 +108,7 @@ GNU/Linux and Mac OS-X, but it should work on Windows as well. For
 this setup, you need to install Emacs (Version 24 along with a few
 additional Emacs packages), Texlive, R (along with whatever
 additional R packages you want to use) and Pandoc.
-** Emacs                                                             
+** Emacs
 
 + GNU/Linux
 
@@ -116,7 +116,7 @@ additional R packages you want to use) and Pandoc.
   distributions. Latest versions of most common distributions provide
   version 24. I strongly recommend using the latest version of Emacs.
 
-+ Mac OS-X 
++ Mac OS-X
 
   The built-in Emacs on OS-X is an older version, and it would be a
   good idea to install the latest version instead.
@@ -124,7 +124,7 @@ additional R packages you want to use) and Pandoc.
   The best option is to install it via homebrew. I like the version
   available from railwaycat/emacsmacport tap
   (https://github.com/railwaycat/emacs-mac-port).
-  
+
   After installing homebrew, or if you already have it installed, just
   do the following from the terminal
 
@@ -132,7 +132,7 @@ additional R packages you want to use) and Pandoc.
 
   ~$ brew install emacs-mac~
 
-+ Microsoft Windows 
++ Microsoft Windows
 
   Download the latest version of Emacs from
   http://ftp.gnu.org/gnu/emacs/windows/, and install.
@@ -144,7 +144,7 @@ additional R packages you want to use) and Pandoc.
   Texlive can also be installed from package managers in most
   GNU/Linux distribution.
 
-+ Mac OS-X 
++ Mac OS-X
 
   For OS-X, install MacTeX from http://www.tug.org/mactex/
 
@@ -163,8 +163,8 @@ For GNU/Linux, R can be installed from native package managers (look
 for r-base in debian and debian-based distributions). For Mac OS-X and
 Windows, download and see installation instructions at
 http://www.r-project.org
- 
-** Pandoc 
+
+** Pandoc
 
 Pandoc (http://johnmacfarlane.net/pandoc/) is an extremely powerful
 converter, which can translate one markup to another. It supports
@@ -186,7 +186,7 @@ formats.
 I recommend using Eric Schulte's Emacs Starter Kit to take care of
 most of the customisation.[fn:1]
 
-However, using the starter-kit requires you to first update org. Starting 
+However, using the starter-kit requires you to first update org. Starting
 version 24, Emacs includes a package-manager. You can
 install/update add-on packages using the package manager. To use the
 package manager, press M-x in emacs, and then type
@@ -397,12 +397,12 @@ leave section numbering for org-mode to handle automatically.
   ,* Methodology
   This is the next top-level section. There are no sub-sections under this.
   ,* Results
-  This is the third top-level section. Theere are sub-sections under this. 
+  This is the third top-level section. Theere are sub-sections under this.
   ,** Result 1
   This is a sub-section under section Results.
   ,** Result 2
   This is another sub-section under section Results
-  ,* Conclusions 
+  ,* Conclusions
   This is the next and final top-level section. There are  no sub-sections under it.
 #+END_SRC
 
@@ -430,7 +430,7 @@ the paper develops.
 Following syntax produces unordered (bulleted) lists:
 
 #+BEGIN_SRC org
-+ bullet 
++ bullet
 + bullet
   - bullet2 1
   - bullet2 2
@@ -440,7 +440,7 @@ Following syntax produces unordered (bulleted) lists:
 
 This is how this list shows up in the final document
 
-+ bullet 
++ bullet
 + bullet
   - bullet2 1
   - bullet2 2
@@ -451,7 +451,7 @@ This is how this list shows up in the final document
 Following syntax produces ordered/numbered lists:
 
 #+BEGIN_SRC org
-1. Item 1 
+1. Item 1
 2. Item 2
   1) Item 2.1
   2) Item 2.2
@@ -461,7 +461,7 @@ Following syntax produces ordered/numbered lists:
 
 This is how the ordered list shows up in the final document.
 
-1. Item 1 
+1. Item 1
 2. Item 2
   1) Item 2.1
   2) Item 2.2
@@ -478,7 +478,7 @@ Note that:
   M-return inserts a new line with a bullet/number below the present
   line with the same level of indentation.
 
-** Inserting footnotes 
+** Inserting footnotes
 
 + To insert a footnote at any point, use ~C-c C-x f~
 
@@ -487,7 +487,7 @@ Note that:
   footnote is being inserted, use ~C-u C-c C-x f S~
 
 ** Tables
-*** Sample code 
+*** Sample code
 
 We shall directly create only those tables in Org that present content
 not being produced through statistical analysis. For tables that are
@@ -533,7 +533,7 @@ Org-mode has an in-built table editor, which is very simple to use.
   You can also create a new blank row by pressing return anywhere in
   the last row.
 + For creating a horizontal line anywhere, type |- at the starting of
-  the line, and press tab. 
+  the line, and press tab.
 + Contents of each cell are aligned automatically by Org.
 + To delete a row, use =C-k= (=M-x kill-line=).
 
@@ -566,7 +566,7 @@ Table.
 
 Please note the first two lines in the code for creating Table
 [[table-yield-3]].
- 
+
 A line starting with ~#+CAPTION:~ placed just above a table adds a
 title to it. All Tables and Figures titles are automatically numbered.
 
@@ -602,7 +602,7 @@ automatically.
 We would like to give a title to our tables and images. And we would
 like to be able to refer to them from the text. These are achieved by
 adding two lines above every table and image.
- 
+
 + A line starting with ~#+CAPTION:~ placed just above a table or a
   figure adds a title to it. All Tables and Figures titles are
   automatically numbered.
@@ -678,7 +678,7 @@ in tabulary package.
 | J    | Justified and wrapped        |
 
 A line of the following type needs to be inserted above an Org table to make it use
-~tabulary~ environment instead of ~tabular~. 
+~tabulary~ environment instead of ~tabular~.
 
 : #+attr_latex: :environment tabulary :width \textwidth :align L|llR
 
@@ -717,7 +717,7 @@ The following code produces a table with notes below.
     | Haryana        |           300 |          25000 |
     | Punjab         |           260 |          35000 |
   ,#+begin_tablenotes
-    \item[] \footnotesize Notes: 
+    \item[] \footnotesize Notes:
     \item[1] \footnotesize This table is very nice but this note is
     very long, so long that it goes wider than the table
     \item[2] \footnotesize This is a second note. But this is not
@@ -729,7 +729,7 @@ The following code produces a table with notes below.
 #+End_SRC
 
 The notes use a little bit of direct LaTeX coding.
- -  ~\item[]~ ensures that each note is in a separate paragraph. 
+ -  ~\item[]~ ensures that each note is in a separate paragraph.
  - ~\footenotesize~, which is optional, renders the notes in a
    slightly smaller font.
 
@@ -762,7 +762,7 @@ manual, if you would like to add any more.
      (sqlite . t)))
 #+END_SRC
 
-** Special lines for R  
+** Special lines for R
 
 Org allows you to run multiple R sessions simultaneously, if you are
 working on two documents side by side, and would like to keep
@@ -791,8 +791,8 @@ embedded into Org as a source block. The basic syntax is
 
     <Your R code goes here.>
 
-  ,#+END_SRC 
-#+END_SRC 
+  ,#+END_SRC
+#+END_SRC
 
 This is how source blocks are created.
 
@@ -805,7 +805,7 @@ This is how source blocks are created.
 
   - This would open a new buffer using ESS mode. If you type your code
     in this buffer, you will see that ESS is syntax-aware and nicely
-    highlights R code. 
+    highlights R code.
   - ESS also allows you to run (evaluate) the code that you write, to
     test what your code is doing. Use ~C-j~ for evaluating a single
     line of code, ~C-b~ for evaluating the whole ess buffer, or ~C-r~
@@ -814,7 +814,7 @@ This is how source blocks are created.
 + Once you have finished writing a code block and tested it, press
   C-c ' again to come back to your Org buffer.
 
-+ In your Org buffer, with your cursor in a source-block, 
++ In your Org buffer, with your cursor in a source-block,
   press ~C-c C-c~ to evaluate the whole code block and have the results included
   in your document.
 
@@ -835,8 +835,8 @@ Code block [[readdata-code]] is an example of such a code block. Note
 
 #+BEGIN_SRC org
   ,#+NAME: readdata-code
-  ,#+BEGIN_SRC R :results value silent  
- 
+  ,#+BEGIN_SRC R :results value silent
+
   read.data("datafile1.csv",sep=",",header=T)->mydata1
 
 
@@ -860,9 +860,9 @@ create a table that shows average BMI by country.
 #+BEGIN_SRC org
   ,#+NAME: bmi-table-code
   ,#+BEGIN_SRC R :results value :colnames yes :hline yes
-  aggregate(height~Country,data=mydata1,mean)->a1  
+  aggregate(height~Country,data=mydata1,mean)->a1
   read.data("datafile2.csv",sep=",",header=T)->mydata2
-  aggregate(weight~Country,data=mydata2,mean)->a2  
+  aggregate(weight~Country,data=mydata2,mean)->a2
   merge(a1,a2,by="Country")->a1
   a1$weight/a1$height->a1$BMI
   subset(a1,select=c("Country","BMI"))
@@ -911,10 +911,10 @@ graph.
 
 As before, for creating your graph, you first write the ~#+NAME~,
 ~BEGIN_SRC~ and the ~END_SRC~ lines, and then go into a temporary ESS
-buffer by using C-c '. 
+buffer by using C-c '.
 
 + Once in this temporary ESS buffer, you can write the R commands for
-  making your graph. 
+  making your graph.
 + As you write, you can evaluate the commands using ~C-j~, ~C-r~ and
   ~C-b~ and see what your output looks like.
 + The output is displayed on your screen using the default graphic
@@ -930,7 +930,7 @@ graphic device to produce the file. When you evaluate this code using
 
 #+BEGIN_SRC org
   ,#+RESULTS: mygraph-code
-  [[bmi2.png]] 
+  [[bmi2.png]]
 #+END_SRC
 
 Note that, taking the file name from our ~#+BEGIN_SRC~ line, a file
@@ -946,7 +946,7 @@ As with the tables, we shall add a caption and a name to it as follows
   ,#+NAME: my-bmi-graph
   ,#+CAPTION: Average BMI, by Country
   ,#+RESULTS: mygraph-code
-  [[gini.png]] 
+  [[gini.png]]
 #+END_SRC
 
 You can now refer to this graph in the text using ~[[my-bmi-graph]]~.
@@ -988,10 +988,10 @@ https://github.com/indianstatistics/bibliobase/blob/master/bibliobase.bib.
 ** Using biblatex with Org
 *** Setup
 Using biblatex with Org requires some customisation of variables. This
-is already done for you if you have installed [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]]. 
+is already done for you if you have installed [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]].
 
 The operative part in [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]] is the following:
-: (setq org-latex-to-pdf-process 
+: (setq org-latex-to-pdf-process
 :   '("pdflatex %f" "biber %b" "pdflatex %f" "pdflatex %f"))
 
 Once this is done, every time you export the document to pdf via
@@ -1025,7 +1025,7 @@ is:
 
 Where ~[<prenote>]~ refers to any text you want before citation (for
 example "for more details, see") and ~[<postnote>]~ refers to any text
-you want after citation (for example, "Chapter 2"). 
+you want after citation (for example, "Chapter 2").
 
 The two most useful citation commands are ~\parencite~ (or ~\citep~) and
 ~\citet~. Their usage is illustrated in Table [[citation-commands]].
@@ -1061,7 +1061,7 @@ org-export-dispatch~.
 
 ** Creating LaTeX and/or PDF files
 
-Use ~C-c C-e~ to call the Org export dispatcher. 
+Use ~C-c C-e~ to call the Org export dispatcher.
 
 + Press l to select LaTeX, and then chose one of the following options.
   + Press l again, if you just want to create a LaTeX file
@@ -1096,12 +1096,12 @@ If you want, you can use --template to specify an ott or a .dotx
 template file, so that the fonts and other formatting attributes are
 to your liking.
 
-** HTML 
+** HTML
 
 For html as well, there is a built-in exporter in Org. The built-in
 exporter is very good, and the way to go if you are planning to
 maintain a website using Org (as I do for
-http://www.indianstatistics.org). 
+http://www.indianstatistics.org).
 
 The built-in exporter can support BibTex citations using ox-BibTex.el,
 which is including in Org, and will be loaded if you have installed
@@ -1110,7 +1110,7 @@ work.
 
 However, ox-BibTex.el uses BibTex2html for converting citations and
 bibliography to html. BibTex2html provides limited support for
-citation and bibliography styles. 
+citation and bibliography styles.
 
 If you want full support for bibliography and citation styles, as well
 as for other LaTeX components like Table notes explained in this
@@ -1133,7 +1133,7 @@ Leuven.
 ** Evaluating code during export
 
 By default, Org evaluates source code at the time of exporting. If
-your code involves a lot of computation, this can slow down exporting. 
+your code involves a lot of computation, this can slow down exporting.
 
 In such cases, I do not evaluate all source blocks at the time of
 exporting. I evaluate them manually, one by one, using ~C-c C-c~.
@@ -1223,7 +1223,7 @@ want to restrict the Tables and Images within subsections.[fn:7]
 ** Customising Biblatex style
 
 I like to use authoryear bibliography style. However, I need some
-customisations. 
+customisations.
 
 + Use comma in place of period after Journal name.
 + Remove "in: "
@@ -1232,15 +1232,15 @@ customisations.
 
 The file biblatex.cfg included in this repository
 (https://raw.githubusercontent.com/vikasrawal/orgpaper/master/biblatex.cfg)
-takes care of these. 
+takes care of these.
 
 The following command tells you where is your texmf directory
 : kpsewhich -var-value=TEXMFHOME
 
 I created =$TEXMFHOME/tex/latex/biblatex= and put the biblatex.cfg in
-that folder. 
+that folder.
 
-* Important Resources                                             
+* Important Resources
 + [[http://orgmode.org/manual/][Org-mode manual]]
 + [[http://orgmode.org/worg/][Worg]]
 + [[http://orgmode.org/community.html][Org-mode mailing list]]
@@ -1287,5 +1287,3 @@ primarily uses LaTeX, using Pandoc to create odt or docx files from
 LaTeX export works better.
 
 [fn:7] See http://lexfridman.com/blogs/research/2011/03/06/prevent-figures-from-floating-outside-sections-in-latex/
-
-
