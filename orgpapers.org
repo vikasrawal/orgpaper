@@ -6,6 +6,8 @@
 #+OPTIONS: H:4 toc:2 num:2
 #+LaTeX_CLASS: article
 #+LaTeX_CLASS_OPTIONS: [garamond]
+#+LATEX_HEADER: \usepackage{threeparttable}
+#+LATEX_HEADER: \usepackage{tabulary}
 #+LATEX_HEADER: \linespread{1.3}
 #+LATEX_HEADER: \renewcommand{\TPTminimum}{\linewidth}
 #+LATEX_HEADER: \usepackage[section]{placeins}
