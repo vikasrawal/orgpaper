@@ -1261,7 +1261,7 @@ that folder.
 of Org-mode. It uses Org-mode source blocks to systematically document
 all Emacs customisation.
 
-[fn:2] If you do not know, ~echo $USER~ in the terminal tells you your
+[fn:2] If you do not know, ~echo \$USER~ in the terminal tells you your
 username.
 
 [fn:3] Depending on the keyboard and the default configuration of the
