@@ -1,7 +1,7 @@
 # -*- mode: org; org-export-babel-evaluate: nil -*-
 #+STARTUP: hidestars
 #+TITLE: Using Emacs, Org-mode and R for Research Writing in Social Sciences: A Toolkit for Writing Reproducible Research Papers and Monographs
-#+AUTHOR: Vikas Rawal\\ \small{Jawaharlal Nehru University, New Delhi}\\ \small{E-mail: \texttt{vikasrawal@gmail.com}}
+#+AUTHOR: Vikas Rawal\\ {\small Jawaharlal Nehru University, New Delhi\\E-mail: \texttt{vikasrawal@gmail.com}} \thanks{kjhsad kajhsd kjahs d}
 #+COLUMNS: %25ITEM %TAGS %PRIORITY %T
 #+OPTIONS: H:4 toc:2 num:2
 #+LaTeX_CLASS: article
@@ -10,12 +10,11 @@
 #+LATEX_HEADER: \renewcommand{\TPTminimum}{\linewidth}
 #+LATEX_HEADER: \usepackage[section]{placeins}
 
-
 * Introduction
 
 This guide introduces an open-source toolkit for writing research
 papers and monographs. The main features of this toolkit centered
-around Emacs and Org-mode are: 
+around Emacs and Org-mode are:
 + embedded R code in the document that allows for statistical results
   to be revised and reproduced,
 + bibliographic citations from a personal bibliographic database,
@@ -72,27 +71,25 @@ you will set up using this guide?
     tools that will allow us to pull this information directly into
     our local database.
  
- 
-** Acknowledgements                                               
+** Acknowledgements
 In my adaptation of Org, I have benefitted immensely from the great
 community of Orgers. The [[http://orgmode.org/manual/][Org-mode manual]], [[http://orgmode.org/worg/][Worg]], and archives of the
 [[http://orgmode.org/community.html][Org-mode mailing list]] have been the most important resources. In
 addition, I have greatly benefited from solutions provided by various
 people to my specific queries on the Org-mode mailing list. What I
 present in this document is essentially a synthesis of solutions
-provided by various people, not only in the material posted on Orgmode
-website, but also in response to specific queries made by me. The
-community has been extremely generous in providing these.
+provided by various people. The community has been extremely generous
+in providing these.
 
-I would particularly like to thank 
+I would particularly like to thank
 
 + Carsten Dominik, the author of Org-mode
 + Bastien Guerry, who has been a great maintainer of Org-mode, after
   Carsten passed on the baton to him.
 + Nicolas Goaziou, who wrote the brilliant new exporter framework. The
   amount of code Nicolas has contributed to Org over the last two
-  years or so is incredible . Nicolas very kindly responded to several
-  of my queries. 
+  years or so is incredible. Nicolas very kindly responded to several
+  of my queries.
 + Eric Schulte, the main author of Babel, which gave Org mode the
   ability to execute code. I used to use Org-mode as a task manager
   and for taking notes. I discovered org-babel in the summer of 2010,
@@ -108,7 +105,7 @@ GNU/Linux and Mac OS-X, but it should work on Windows as well. For
 this setup, you need to install Emacs (Version 24 along with a few
 additional Emacs packages), Texlive, R (along with whatever
 additional R packages you want to use) and Pandoc.
-** Emacs                                                             
+** Emacs
 
 + GNU/Linux
 
@@ -116,7 +113,7 @@ additional R packages you want to use) and Pandoc.
   distributions. Latest versions of most common distributions provide
   version 24. I strongly recommend using the latest version of Emacs.
 
-+ Mac OS-X 
++ Mac OS-X
 
   The built-in Emacs on OS-X is an older version, and it would be a
   good idea to install the latest version instead.
@@ -124,7 +121,7 @@ additional R packages you want to use) and Pandoc.
   The best option is to install it via homebrew. I like the version
   available from railwaycat/emacsmacport tap
   (https://github.com/railwaycat/emacs-mac-port).
-  
+
   After installing homebrew, or if you already have it installed, just
   do the following from the terminal
 
@@ -132,7 +129,7 @@ additional R packages you want to use) and Pandoc.
 
   ~$ brew install emacs-mac~
 
-+ Microsoft Windows 
++ Microsoft Windows
 
   Download the latest version of Emacs from
   http://ftp.gnu.org/gnu/emacs/windows/, and install.
@@ -241,8 +238,8 @@ for which I use Emacs include
  + And, of course, as an editor (including for writing research papers)
 
 In this guide, I will just provide a minimal set of basic commands in
-emacs to get you started. This is a minimal but a sufficient set to be
-able work. I expect that you would learn more commands as you start
+emacs to get you started. This is a minimal but sufficient set to be
+able to work. I expect that you would learn more commands as you start
 using emacs.
 
 ** Notations
@@ -397,12 +394,12 @@ leave section numbering for org-mode to handle automatically.
   ,* Methodology
   This is the next top-level section. There are no sub-sections under this.
   ,* Results
-  This is the third top-level section. Theere are sub-sections under this. 
+  This is the third top-level section. Theere are sub-sections under this.
   ,** Result 1
   This is a sub-section under section Results.
   ,** Result 2
   This is another sub-section under section Results
-  ,* Conclusions 
+  ,* Conclusions
   This is the next and final top-level section. There are  no sub-sections under it.
 #+END_SRC
 
@@ -414,7 +411,7 @@ repeat pressing the tab key.
 
 When you are on a headline, pressing M-return creates a new headline
 at the same level (that is, with the same number of stars). Once you
-are on the new headline, a tab movies it to a lower level (that is, a
+are on the new headline, a tab moves it to a lower level (that is, a
 star is added), and shift-tab moves it to a higher level (that is, a
 star is removed).
 
@@ -430,7 +427,7 @@ the paper develops.
 Following syntax produces unordered (bulleted) lists:
 
 #+BEGIN_SRC org
-+ bullet 
++ bullet
 + bullet
   - bullet2 1
   - bullet2 2
@@ -440,7 +437,7 @@ Following syntax produces unordered (bulleted) lists:
 
 This is how this list shows up in the final document
 
-+ bullet 
++ bullet
 + bullet
   - bullet2 1
   - bullet2 2
@@ -451,7 +448,7 @@ This is how this list shows up in the final document
 Following syntax produces ordered/numbered lists:
 
 #+BEGIN_SRC org
-1. Item 1 
+1. Item 1
 2. Item 2
   1) Item 2.1
   2) Item 2.2
@@ -461,7 +458,7 @@ Following syntax produces ordered/numbered lists:
 
 This is how the ordered list shows up in the final document.
 
-1. Item 1 
+1. Item 1
 2. Item 2
   1) Item 2.1
   2) Item 2.2
@@ -478,7 +475,7 @@ Note that:
   M-return inserts a new line with a bullet/number below the present
   line with the same level of indentation.
 
-** Inserting footnotes 
+** Inserting footnotes
 
 + To insert a footnote at any point, use ~C-c C-x f~
 
@@ -487,7 +484,7 @@ Note that:
   footnote is being inserted, use ~C-u C-c C-x f S~
 
 ** Tables
-*** Sample code 
+*** Sample code
 
 We shall directly create only those tables in Org that present content
 not being produced through statistical analysis. For tables that are
@@ -533,7 +530,7 @@ Org-mode has an in-built table editor, which is very simple to use.
   You can also create a new blank row by pressing return anywhere in
   the last row.
 + For creating a horizontal line anywhere, type |- at the starting of
-  the line, and press tab. 
+  the line, and press tab.
 + Contents of each cell are aligned automatically by Org.
 + To delete a row, use =C-k= (=M-x kill-line=).
 
@@ -565,15 +562,15 @@ Table.
 *** Captions and cross-references
 
 Please note the first two lines in the code for creating Table
-[[table-yield-3]].
- 
+[[table-yield-2]].
+
 A line starting with ~#+CAPTION:~ placed just above a table adds a
 title to it. All Tables and Figures titles are automatically numbered.
 
 For referring to these Tables from the text, we name each table in a
 line starting with ~#+NAME:~. The table can then be referred to from
-anywhere in the text by usit commit --amend -m "New commit message" " Table ~[[table-yield]]~. As an illustration, see the following
-sentence.
+anywhere in the text by using Table ~[[table-yield]]~. As an illustration,
+see the following sentence.
 
 #+BEGIN_SRC org
   Tables [[table-yield]] and [[health-table]], and Figure
@@ -602,7 +599,7 @@ automatically.
 We would like to give a title to our tables and images. And we would
 like to be able to refer to them from the text. These are achieved by
 adding two lines above every table and image.
- 
+
 + A line starting with ~#+CAPTION:~ placed just above a table or a
   figure adds a title to it. All Tables and Figures titles are
   automatically numbered.
@@ -629,16 +626,7 @@ Similarly, a table will be inserted as follows.
   | India      |  75 |    43 |
   | Bangladesh |  83 |    63 |
   | Rwanda     |  77 |    60 |
-
 #+end_src
-
-,#+NAME: literacy-rate-table
-,#+CAPTION: Percentage of literate men and women, by country (per cent)
-  | Country    | Men | Women |
-  |------------+-----+-------|
-  | India      |  75 |    43 |
-  | Bangladesh |  83 |    63 |
-  | Rwanda     |  77 |    60 |
 
 To refer to the Table above in the text, write Table
 ~[[literacy-rate-table]]~. As an illustration, see the following sentence.
@@ -678,13 +666,13 @@ in tabulary package.
 | J    | Justified and wrapped        |
 
 A line of the following type needs to be inserted above an Org table to make it use
-~tabulary~ environment instead of ~tabular~. 
+~tabulary~ environment instead of ~tabular~.
 
 : #+attr_latex: :environment tabulary :width \textwidth :align L|llR
 
 :width is used to specify the /maximum/ total width of the table that
 the table can take [it may be specified as ~\textwidth~, implying full
-text width, or in centimeters (like, 10cm) or in innces (like, 5in)].
+text width, or in centimeters (like, 10cm) or in inces (like, 5in)].
 Note that, in =tabulary=, the width is the maximum width of the whole
 table. If your columns do not need the entire width that you specify,
 the table turns out narrower than the width.
@@ -692,7 +680,7 @@ the table turns out narrower than the width.
 ~:align~ specifies how to render each columns by using one
 letter (l,L,r,R,c,C or J) for each column. The number of letters
 should exactly match the number of columns in your table. A ~|~
-anywhere implies a vertical column (which should be used sparingly).
+anywhere implies a vertical line.
 
 *** Notes below tables
 
@@ -717,7 +705,7 @@ The following code produces a table with notes below.
     | Haryana        |           300 |          25000 |
     | Punjab         |           260 |          35000 |
   ,#+begin_tablenotes
-    \item[] \footnotesize Notes: 
+    \item[] \footnotesize Notes:
     \item[1] \footnotesize This table is very nice but this note is
     very long, so long that it goes wider than the table
     \item[2] \footnotesize This is a second note. But this is not
@@ -729,7 +717,7 @@ The following code produces a table with notes below.
 #+End_SRC
 
 The notes use a little bit of direct LaTeX coding.
- -  ~\item[]~ ensures that each note is in a separate paragraph. 
+ -  ~\item[]~ ensures that each note is in a separate paragraph.
  - ~\footenotesize~, which is optional, renders the notes in a
    slightly smaller font.
 
@@ -1133,7 +1121,7 @@ Leuven.
 ** Evaluating code during export
 
 By default, Org evaluates source code at the time of exporting. If
-your code involves a lot of computation, this can slow down exporting. 
+your code involves a lot of computation, this can slow down exporting.
 
 In such cases, I do not evaluate all source blocks at the time of
 exporting. I evaluate them manually, one by one, using ~C-c C-c~.
@@ -1223,7 +1211,7 @@ want to restrict the Tables and Images within subsections.[fn:7]
 ** Customising Biblatex style
 
 I like to use authoryear bibliography style. However, I need some
-customisations. 
+customisations.
 
 + Use comma in place of period after Journal name.
 + Remove "in: "
@@ -1232,15 +1220,15 @@ customisations.
 
 The file biblatex.cfg included in this repository
 (https://raw.githubusercontent.com/vikasrawal/orgpaper/master/biblatex.cfg)
-takes care of these. 
+takes care of these.
 
 The following command tells you where is your texmf directory
 : kpsewhich -var-value=TEXMFHOME
 
 I created =$TEXMFHOME/tex/latex/biblatex= and put the biblatex.cfg in
-that folder. 
+that folder.
 
-* Important Resources                                             
+* Important Resources
 + [[http://orgmode.org/manual/][Org-mode manual]]
 + [[http://orgmode.org/worg/][Worg]]
 + [[http://orgmode.org/community.html][Org-mode mailing list]]
@@ -1252,7 +1240,6 @@ that folder.
   research. Journal of Statistical Software, 46(3):1–24, 1 2012.[[http://www.jstatsoft.org/v46/i03][http://www.jstatsoft.org/v46/i03]]
 + [[http://draketo.de/english/emacs/writing-papers-in-org-mode-acpd][Tutorial: Writing scientific papers for ACPD using emacs org-mode, http://draketo.de/english/emacs/writing-papers-in-org-mode-acpd]]
 + [[http://nakkaya.com/2010/09/07/writing-papers-using-org-mode/][Writing papers Using org-mode, http://nakkaya.com/2010/09/07/writing-papers-using-org-mode]]
-
 * Footnotes
 
 [fn:1] Eric's Emacs Starter Kit is a beautiful illustration of power
@@ -1287,5 +1274,6 @@ primarily uses LaTeX, using Pandoc to create odt or docx files from
 LaTeX export works better.
 
 [fn:7] See http://lexfridman.com/blogs/research/2011/03/06/prevent-figures-from-floating-outside-sections-in-latex/
+
 
 
