@@ -6,6 +6,8 @@
 #+OPTIONS: H:4 toc:2 num:2
 #+LaTeX_CLASS: article
 #+LaTeX_CLASS_OPTIONS: [garamond]
+#+LATEX_HEADER: \usepackage{threeparttable}
+#+LATEX_HEADER: \usepackage{tabulary}
 #+LATEX_HEADER: \linespread{1.3}
 #+LATEX_HEADER: \renewcommand{\TPTminimum}{\linewidth}
 #+LATEX_HEADER: \usepackage[section]{placeins}
@@ -32,7 +34,7 @@ involves one or more of the following:
  + Using mathematical equations
 
 Following this guide would need some investment of time but benefits
-far outweigh the investment you make. 
+far outweigh the investment you make.
 
 ** What is our goal?
 
@@ -65,12 +67,12 @@ you will set up using this guide?
   central database to create a fully formatted bibliography.
   - You will maintain a bibliographic database in BibTeX format, that
     you can build over time, adding bibliographic information for
-    works that you cite. 
+    works that you cite.
   - Many websites (including Google Scholar) provide bibliographic
     information directly in BibTeX format, and we will have integrated
     tools that will allow us to pull this information directly into
     our local database.
- 
+
 ** Acknowledgements
 In my adaptation of Org, I have benefitted immensely from the great
 community of Orgers. The [[http://orgmode.org/manual/][Org-mode manual]], [[http://orgmode.org/worg/][Worg]], and archives of the
@@ -141,7 +143,7 @@ additional R packages you want to use) and Pandoc.
   Texlive can also be installed from package managers in most
   GNU/Linux distribution.
 
-+ Mac OS-X 
++ Mac OS-X
 
   For OS-X, install MacTeX from http://www.tug.org/mactex/
 
@@ -160,8 +162,8 @@ For GNU/Linux, R can be installed from native package managers (look
 for r-base in debian and debian-based distributions). For Mac OS-X and
 Windows, download and see installation instructions at
 http://www.r-project.org
- 
-** Pandoc 
+
+** Pandoc
 
 Pandoc (http://johnmacfarlane.net/pandoc/) is an extremely powerful
 converter, which can translate one markup to another. It supports
@@ -183,7 +185,7 @@ formats.
 I recommend using Eric Schulte's Emacs Starter Kit to take care of
 most of the customisation.[fn:1]
 
-However, using the starter-kit requires you to first update org. Starting 
+However, using the starter-kit requires you to first update org. Starting
 version 24, Emacs includes a package-manager. You can
 install/update add-on packages using the package manager. To use the
 package manager, press M-x in emacs, and then type
@@ -750,7 +752,7 @@ manual, if you would like to add any more.
      (sqlite . t)))
 #+END_SRC
 
-** Special lines for R  
+** Special lines for R
 
 Org allows you to run multiple R sessions simultaneously, if you are
 working on two documents side by side, and would like to keep
@@ -779,8 +781,8 @@ embedded into Org as a source block. The basic syntax is
 
     <Your R code goes here.>
 
-  ,#+END_SRC 
-#+END_SRC 
+  ,#+END_SRC
+#+END_SRC
 
 This is how source blocks are created.
 
@@ -793,7 +795,7 @@ This is how source blocks are created.
 
   - This would open a new buffer using ESS mode. If you type your code
     in this buffer, you will see that ESS is syntax-aware and nicely
-    highlights R code. 
+    highlights R code.
   - ESS also allows you to run (evaluate) the code that you write, to
     test what your code is doing. Use ~C-j~ for evaluating a single
     line of code, ~C-b~ for evaluating the whole ess buffer, or ~C-r~
@@ -802,7 +804,7 @@ This is how source blocks are created.
 + Once you have finished writing a code block and tested it, press
   C-c ' again to come back to your Org buffer.
 
-+ In your Org buffer, with your cursor in a source-block, 
++ In your Org buffer, with your cursor in a source-block,
   press ~C-c C-c~ to evaluate the whole code block and have the results included
   in your document.
 
@@ -823,8 +825,8 @@ Code block [[readdata-code]] is an example of such a code block. Note
 
 #+BEGIN_SRC org
   ,#+NAME: readdata-code
-  ,#+BEGIN_SRC R :results value silent  
- 
+  ,#+BEGIN_SRC R :results value silent
+
   read.data("datafile1.csv",sep=",",header=T)->mydata1
 
 
@@ -848,9 +850,9 @@ create a table that shows average BMI by country.
 #+BEGIN_SRC org
   ,#+NAME: bmi-table-code
   ,#+BEGIN_SRC R :results value :colnames yes :hline yes
-  aggregate(height~Country,data=mydata1,mean)->a1  
+  aggregate(height~Country,data=mydata1,mean)->a1
   read.data("datafile2.csv",sep=",",header=T)->mydata2
-  aggregate(weight~Country,data=mydata2,mean)->a2  
+  aggregate(weight~Country,data=mydata2,mean)->a2
   merge(a1,a2,by="Country")->a1
   a1$weight/a1$height->a1$BMI
   subset(a1,select=c("Country","BMI"))
@@ -899,10 +901,10 @@ graph.
 
 As before, for creating your graph, you first write the ~#+NAME~,
 ~BEGIN_SRC~ and the ~END_SRC~ lines, and then go into a temporary ESS
-buffer by using C-c '. 
+buffer by using C-c '.
 
 + Once in this temporary ESS buffer, you can write the R commands for
-  making your graph. 
+  making your graph.
 + As you write, you can evaluate the commands using ~C-j~, ~C-r~ and
   ~C-b~ and see what your output looks like.
 + The output is displayed on your screen using the default graphic
@@ -918,7 +920,7 @@ graphic device to produce the file. When you evaluate this code using
 
 #+BEGIN_SRC org
   ,#+RESULTS: mygraph-code
-  [[bmi2.png]] 
+  [[bmi2.png]]
 #+END_SRC
 
 Note that, taking the file name from our ~#+BEGIN_SRC~ line, a file
@@ -934,7 +936,7 @@ As with the tables, we shall add a caption and a name to it as follows
   ,#+NAME: my-bmi-graph
   ,#+CAPTION: Average BMI, by Country
   ,#+RESULTS: mygraph-code
-  [[gini.png]] 
+  [[gini.png]]
 #+END_SRC
 
 You can now refer to this graph in the text using ~[[my-bmi-graph]]~.
@@ -976,10 +978,10 @@ https://github.com/indianstatistics/bibliobase/blob/master/bibliobase.bib.
 ** Using biblatex with Org
 *** Setup
 Using biblatex with Org requires some customisation of variables. This
-is already done for you if you have installed [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]]. 
+is already done for you if you have installed [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]].
 
 The operative part in [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]] is the following:
-: (setq org-latex-to-pdf-process 
+: (setq org-latex-to-pdf-process
 :   '("pdflatex %f" "biber %b" "pdflatex %f" "pdflatex %f"))
 
 Once this is done, every time you export the document to pdf via
@@ -1013,7 +1015,7 @@ is:
 
 Where ~[<prenote>]~ refers to any text you want before citation (for
 example "for more details, see") and ~[<postnote>]~ refers to any text
-you want after citation (for example, "Chapter 2"). 
+you want after citation (for example, "Chapter 2").
 
 The two most useful citation commands are ~\parencite~ (or ~\citep~) and
 ~\citet~. Their usage is illustrated in Table [[citation-commands]].
@@ -1049,7 +1051,7 @@ org-export-dispatch~.
 
 ** Creating LaTeX and/or PDF files
 
-Use ~C-c C-e~ to call the Org export dispatcher. 
+Use ~C-c C-e~ to call the Org export dispatcher.
 
 + Press l to select LaTeX, and then chose one of the following options.
   + Press l again, if you just want to create a LaTeX file
@@ -1084,12 +1086,12 @@ If you want, you can use --template to specify an ott or a .dotx
 template file, so that the fonts and other formatting attributes are
 to your liking.
 
-** HTML 
+** HTML
 
 For html as well, there is a built-in exporter in Org. The built-in
 exporter is very good, and the way to go if you are planning to
 maintain a website using Org (as I do for
-http://www.indianstatistics.org). 
+http://www.indianstatistics.org).
 
 The built-in exporter can support BibTex citations using ox-BibTex.el,
 which is including in Org, and will be loaded if you have installed
@@ -1098,7 +1100,7 @@ work.
 
 However, ox-BibTex.el uses BibTex2html for converting citations and
 bibliography to html. BibTex2html provides limited support for
-citation and bibliography styles. 
+citation and bibliography styles.
 
 If you want full support for bibliography and citation styles, as well
 as for other LaTeX components like Table notes explained in this
@@ -1246,7 +1248,7 @@ that folder.
 of Org-mode. It uses Org-mode source blocks to systematically document
 all Emacs customisation.
 
-[fn:2] If you do not know, ~echo $USER~ in the terminal tells you your
+[fn:2] If you do not know, ~echo \$USER~ in the terminal tells you your
 username.
 
 [fn:3] Depending on the keyboard and the default configuration of the
@@ -1274,6 +1276,4 @@ primarily uses LaTeX, using Pandoc to create odt or docx files from
 LaTeX export works better.
 
 [fn:7] See http://lexfridman.com/blogs/research/2011/03/06/prevent-figures-from-floating-outside-sections-in-latex/
-
-
 
