@@ -198,9 +198,6 @@ To install the kit, go to
 http://eschulte.github.io/emacs24-starter-kit/#installation and follow
 the instructions.
 
-
-
-
 Org-mode should be pre-installed with Emacs. However, since Org-mode
 is under heavy development, and it is really a good idea to keep up
 with the latest version, it is better to clone it from the git
@@ -1051,7 +1048,13 @@ org-export-dispatch~.
 
 ** Creating LaTeX and/or PDF files
 
-Use ~C-c C-e~ to call the Org export dispatcher.
+The file [[file:default-packages.org]] lists a set of LaTeX packages that
+I normally use. Please modify this as you please, save it in a
+convenient location, and call it using a line of the following kind.
+
+#+INCLUDE: "path/to/default_packages.org"
+
+For producing LaTeX and/or PDF files, use ~C-c C-e~ to call the Org export dispatcher.
 
 + Press l to select LaTeX, and then chose one of the following options.
   + Press l again, if you just want to create a LaTeX file

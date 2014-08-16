@@ -7,7 +7,7 @@ These are additional customisations to be used with Eric Schulte's Starter Kit.
 ** Loading additional starter kit modules
 
 #+begin_src emacs-lisp
-(starter-kit-load "misc")
+(starter-kit-load "org")
 (starter-kit-load "misc-recommended")
 (starter-kit-load "yasnippet")
 #+end_src
@@ -35,6 +35,7 @@ These are additional customisations to be used with Eric Schulte's Starter Kit.
 (setq org-src-fontify-natively t)
 (setq org-src-tab-acts-natively t)
 (setq org-export-with-smart-quotes t)
+(require 'ess-site)
 '(org-cycle-include-plain-lists t)
 '(org-hide-leading-stars t)
 '(org-alphabetical-lists t)
@@ -149,24 +150,7 @@ This customises LaTeX export to run pdflatex, biber and then pdflatex. Needed fo
 This defines C-c ) to call reftex for citation.
 
 #+begin_src emacs-lisp
-;(require 'reftex) 
-;(defun org-mode-reftex-setup ()
-;  (load-library "reftex")
-;  (and (buffer-file-name)
-;       (file-exists-p (buffer-file-name))
-;       (reftex-parse-all))
-;  (reftex-set-cite-format
-;   "\\citep{%l}")
-;  (define-key org-mode-map (kbd "C-c )") 'reftex-citation))
-;(add-hook 'org-mode-hook 'org-mode-reftex-setup)
-#+end_src
-
-*** Default bibliography
-
-This defines default bibliographic database used by reftex. Please modify file name and path.
-
-#+begin_src emacs-lisp
-(setq reftex-default-bibliography '("/Users/vikas/Documents/bibtex/bibliobase.bib"))
+  (require 'reftex) 
 #+end_src
 
 *** Bibretrieve customisations
@@ -210,44 +194,8 @@ This defines default bibliographic database used by reftex. Please modify file n
 )
 #+end_src
 
-*** Default latex packages to be included into any latex export
-
-Default LaTeX packages I like to be included into any LaTeX export. Modify as necessary.
-
-#+begin_src emacs-lisp
-(setq org-latex-default-packages-alist
-     '(("AUTO" "inputenc" t)
-   ("" "lmodern" nil)
-   ("T1" "fontenc" nil)
-   ("" "fixltx2e" nil)
-   ("" "graphicx" t)
-   ("" "longtable" nil)
-   ("" "float" nil)
-   ("" "wrapfig" nil)
-   ("" "rotating"  nil)
-   ("normalem" "ulem" t)
-   ("" "amsmath" t)
-   ("" "textcomp" nil)
-   ("" "marvosym" t)
-   ("" "wasysym" t)
-   ("" "amssymb" t)
-   ("" "amsmath" t)
-   ("version=3" "mhchem" t)
-   ("" "url" t)
-   ("" "underscore" t)
-   ("" "threeparttable" t)
-   ("" "tabulary" t)
-   ("" "parnotes" t)
-   ("" "comment" t)
-   ("" "multirow" t)
-   ("" "booktabs" t)
-   ("T1" "fontenc" t)
-   ("innermargin=1.5in,outermargin=1.25in,vmargin=1.25in" "geometry" t)
-   ("dvipsnames,svgnames,table" "xcolor" t)
-   ("citestyle=authoryear-icomp,bibstyle=authoryear,hyperref=true,backref=true,maxcitenames=3,url=true,backend=biber,natbib=true" "biblatex" t)
-   ("linktocpage,pdfstartview=FitH,colorlinks,linkcolor=blue,anchorcolor=blue,citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue,citebordercolor={0 1 0}" "hyperref" nil)
-   ("" "attachfile" nil)))
-#+end_src
-
-
+*** Org-ref
+#+BEGIN_SRC emacs-lisp
+;(org-babel-load-file "org-ref.org")
+#+END_SRC
 
