@@ -85,7 +85,7 @@ in providing these.
 
 I would particularly like to thank
 
-+ Carsten Dominik, the author of Org-mode
++ Carsten Dominik, the author of Org-mode.
 + Bastien Guerry, who has been a great maintainer of Org-mode, after
   Carsten passed on the baton to him.
 + Nicolas Goaziou, who wrote the brilliant new exporter framework. The
@@ -503,7 +503,7 @@ table from the text anywhere in the document.
     | Madhya Pradesh |           669 |          13000 |
     | Haryana        |           300 |          25000 |
     | Punjab         |           260 |          35000 |
-  #+End_SRC
+#+End_SRC
 
 See Table [[table-yield-2]], for an illustration of how this table shows
 up in the final document.
@@ -557,30 +557,6 @@ functions of the table editor.
 
 One limitation of Org is lack of support for merging of cells in a
 Table.
-
-*** Captions and cross-references
-
-Please note the first two lines in the code for creating Table
-[[table-yield-2]].
-
-A line starting with ~#+CAPTION:~ placed just above a table adds a
-title to it. All Tables and Figures titles are automatically numbered.
-
-For referring to these Tables from the text, we name each table in a
-line starting with ~#+NAME:~. The table can then be referred to from
-anywhere in the text by using Table ~[[table-yield]]~. As an illustration,
-see the following sentence.
-
-#+BEGIN_SRC org
-  Tables [[table-yield]] and [[health-table]], and Figure
-  [[literacy-figure]], show the level of underdevelopment.
-#+end_src
-
-By default, all objects with captions are numbered, and names are used
-to anchor cross-references. When the formatted output is produced, all
-the references would be automatically converted to appropriate
-numbers. If new objects are inserted in the paper, numbering will be
-adjusted automatically when you create the formatted output.
 
 ** Images
 
@@ -787,7 +763,7 @@ This is how source blocks are created.
   ~#+END_SRC~.
 
 + Then with your cursor in between the ~BEGIN_SRC~ and the ~END_SRC~
-  lines, give the command C-c ' (that is, press Ctrl-C, release, and
+  lines, give the command C-c ' (that is, press Ctrl-C, don't release, and
   press ').
 
   - This would open a new buffer using ESS mode. If you type your code
