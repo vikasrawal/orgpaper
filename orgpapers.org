@@ -558,30 +558,6 @@ functions of the table editor.
 One limitation of Org is lack of support for merging of cells in a
 Table.
 
-*** Captions and cross-references
-
-Please note the first two lines in the code for creating Table
-[[table-yield-2]].
-
-A line starting with ~#+CAPTION:~ placed just above a table adds a
-title to it. All Tables and Figures titles are automatically numbered.
-
-For referring to these Tables from the text, we name each table in a
-line starting with ~#+NAME:~. The table can then be referred to from
-anywhere in the text by using Table ~[[table-yield]]~. As an illustration,
-see the following sentence.
-
-#+BEGIN_SRC org
-  Tables [[table-yield]] and [[health-table]], and Figure
-  [[literacy-figure]], show the level of underdevelopment.
-#+end_src
-
-By default, all objects with captions are numbered, and names are used
-to anchor cross-references. When the formatted output is produced, all
-the references would be automatically converted to appropriate
-numbers. If new objects are inserted in the paper, numbering will be
-adjusted automatically when you create the formatted output.
-
 ** Images
 
 You can insert images in documents as follows
