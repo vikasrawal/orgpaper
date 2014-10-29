@@ -85,7 +85,7 @@ in providing these.
 
 I would particularly like to thank
 
-+ Carsten Dominik, the author of Org-mode
++ Carsten Dominik, the author of Org-mode.
 + Bastien Guerry, who has been a great maintainer of Org-mode, after
   Carsten passed on the baton to him.
 + Nicolas Goaziou, who wrote the brilliant new exporter framework. The
@@ -503,7 +503,7 @@ table from the text anywhere in the document.
     | Madhya Pradesh |           669 |          13000 |
     | Haryana        |           300 |          25000 |
     | Punjab         |           260 |          35000 |
-  #+End_SRC
+#+End_SRC
 
 See Table [[table-yield-2]], for an illustration of how this table shows
 up in the final document.
