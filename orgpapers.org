@@ -1028,7 +1028,7 @@ The file [[file:default-packages.org]] lists a set of LaTeX packages that
 I normally use. Please modify this as you please, save it in a
 convenient location, and call it using a line of the following kind.
 
-#+INCLUDE: "path/to/default_packages.org"
+~#+INCLUDE: "path/to/default_packages.org"~
 
 For producing LaTeX and/or PDF files, use ~C-c C-e~ to call the Org export dispatcher.
 
