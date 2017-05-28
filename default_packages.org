@@ -1,5 +1,5 @@
 #+LaTeX_HEADER: \usepackage[dvipsnames,svgnames,table]{xcolor}
-#+LATEX_HEADER: \usepackage{comment,multirow,tabulary,booktabs,threeparttable,tabularx,xcolor,lmodern,graphicx,longtable,float,wrapfig,url,underscore}
+#+LATEX_HEADER: \usepackage{comment,multirow,tabulary,booktabs,threeparttable,tabularx,xcolor,lmodern,graphicx,longtable,float,wrapfig,url,underscore,siunitx}
 #+LaTeX_HEADER: \usepackage{parnotes,comment,multirow,amsmath,amssymb,marvosym,wasysym}
 #+LaTeX_HEADER: \usepackage[T1]{fontenc}
 #+LaTeX_HEADER: \usepackage[normalem]{ulem}

@@ -107,6 +107,7 @@ GNU/Linux and Mac OS-X, but it should work on Windows as well. For
 this setup, you need to install Emacs (Version 24 along with a few
 additional Emacs packages), Texlive, R (along with whatever
 additional R packages you want to use) and Pandoc.
+
 ** Emacs
 
 + GNU/Linux
@@ -177,42 +178,6 @@ use.
 We shall use pandoc to convert our file from latex to odt/docx/html
 formats.
 
-** Customising emacs
-:PROPERTIES:
-:CUSTOM_ID: customemacs
-:END:
-
-I recommend using Eric Schulte's Emacs Starter Kit to take care of
-most of the customisation.[fn:1]
-
-However, using the starter-kit requires you to first update org. Starting
-version 24, Emacs includes a package-manager. You can
-install/update add-on packages using the package manager. To use the
-package manager, press M-x in emacs, and then type
-package-list-packages and press return. This would bring up a list of
-packages. Find ess, and with the cursor on it, mark it by pressing i.
-Similarly, find bibretrieve and mark it. Then press x to install them.
-
-
-To install the kit, go to
-http://eschulte.github.io/emacs24-starter-kit/#installation and follow
-the instructions.
-
-Org-mode should be pre-installed with Emacs. However, since Org-mode
-is under heavy development, and it is really a good idea to keep up
-with the latest version, it is better to clone it from the git
-repository of Org-mode, and update it regularly. You can keep org-mode
-under ~/.emacs.d/src/org and compile it.
-
-I also recommend using, in addition, [[https://raw.githubusercontent.com/vikasrawal/orgpaper/master/research-toolkit.org][research-toolkit.org]], available
-from
-https://raw.githubusercontent.com/vikasrawal/orgpaper/master/research-toolkit.org. To
-use it, create a directory with your _username_ under ~/.emacs.d/, and
-save the file in this directory.[fn:2]
-
-For any other personal customisation that you may need to do, you can
-create more .org or .el files in this directory.
-
 * Emacs basics
 
 GNU Emacs is an extensible platform. Although its primary function is
@@ -223,8 +188,8 @@ do on your computer to emacs-based solutions. For each major task you
 do on your computer, ask if it can be done using emacs. For almost
 everything, the answer is yes, and in most cases, emacs does it better
 than other software you are used to. Many emacs users have learnt
-emacs by shifting, one-by-one, to emacs for all major tasks that they
-do on the computer.
+emacs by shifting, one-by-one, all major tasks that they
+do on the computer to emacs.
 
 I am not going to give a detailed guide to use of emacs. A few tasks
 for which I use Emacs include
@@ -303,6 +268,67 @@ shortcuts and starts using them instead of the verbose versions.
 | /*Canceling and undoing*/                                                                                     |                           |              |
 | /Abort the command in progress/                                                                               | =keyboard-quit=           | =C-g=        |
 | /Undo/                                                                                                        | =undo=                    | =C-_=        |
+
+* Customising emacs
+:PROPERTIES:
+:CUSTOM_ID: customemacs
+:END:
+
+Emacs is highly customisable. We need several emacs packages and
+customisations for our workflow.
+
+*** Install prelude
+
+While emacs may be customised for individual features, using a kit
+makes the task easier. [[https://github.com/bbatsov/prelude][Prelude]] is one such kit.
+
+To install Prelude, download it from [[https://github.com/bbatsov/prelude/archive/master.zip][here]] and unzip the files in
+~/.emacs.d directory. Better still, clone it using git.
+
+~$ git clone git clone git://github.com/bbatsov/prelude.git ~/.emacs.d~
+
+Windows users should check the location of ~ directory by running
+Emacs and typing C-x d ~/<RET>, and then specify the full path.
+
+*** Install additional packages.
+
+Starting version 24, Emacs includes a package-manager. You can
+install/update add-on packages using the package manager. To use the
+package manager, press M-x in emacs, and then type
+package-list-packages and press return. This would bring up a list of
+packages.
+
+To mark a package for installation, take the cursor to the item and
+press i. Once you have marked the packages you want to install, press
+x to execute the installation.
+
+The most critical packages for our use are org, ess (for running R
+code from inside emacs), auctex (for latex) and bibliography
+management packages (reftex, org-ref, bibretrieve and ebib). A number
+of other packages can be installed to improve the work environment.
+
+Following commands will install all the packages that we need.
+
+#+BEGIN_SRC emacs-lisp
+(setq package-list '(ace-window anzu autumn-light-theme avy beacon bibretrieve bibtex-utils browse-kill-ring cdlatex company-auctex auctex company crux diff-hl diminish discover-my-major easy-kill ebib editorconfig elfeed elisp-slime-nav ess-R-data-view ctable ess-R-object-popup ess-smart-equals ess-smart-underscore ess-view exec-path-from-shell expand-region flx-ido flycheck geben-helm-projectile geben geiser gist gh git-timemachine gitconfig-mode gitignore-mode god-mode grizzl guru-mode helm-R ess helm-ag helm-bibtexkey helm-descbinds helm-flx flx helm-flyspell helm-ls-git helm-projectile ido-ubiquitous imenu-anywhere js2-mode json-mode json-reformat json-snatcher julia-mode logito magit git-commit magit-popup makey marshal ht move-text operate-on-number org org-plus-contrib org-ref key-chord hydra helm-bibtex biblio biblio-core f ov parsebib pcache projectile pkg-info epl queue rainbow-delimiters rainbow-mode s seq smart-mode-line rich-minority smartparens smartrep smex solarized-theme spinner sr-speedbar sunny-day-theme swiper-helm helm helm-core popup swiper ivy undo-tree visual-fill-column vkill volatile-highlights which-key with-editor dash async yaml-mode yasnippet zenburn-theme zop-to-char))
+(package-initialize)
+(unless package-archive-contents
+  (package-refresh-contents))
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
+#+end_src
+
+You can copy the above lines, paste them in an empty (e.g.,
+\*scratch\*) buffer, select them, and do M-x eval-buffer.
+
+*** Further customisations
+
+Most of my remaining customisations are kept in the file
+[[https://github.com/vikasrawal/orgpaper/blob/master/vikas-preferences.el][vikas-preferences.el]]. You can download it and save it in
+~/.emacs.d/personal/ .
+
+These would be loaded automatically next time you start emacs.
 
 * Org-mode basics
 ** Preamble
@@ -1100,18 +1126,19 @@ including in [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolk
 remove ;; from the front of the relevant lines, and you will have
 Leuven.
 
+
 ** Evaluating code during export
 
 By default, Org evaluates source code at the time of exporting. If
 your code involves a lot of computation, this can slow down exporting.
 
-In such cases, I do not evaluate all source blocks at the time of
-exporting. I evaluate them manually, one by one, using ~C-c C-c~.
+You can block evaluation of a source code block at the time of export
+by using ~:eval never-export~ in the header arguments of the
+block. Such code blocks will have to be evaluated manually using ~C-c
+C-c~. To prevent all blocks from being evaluated, set it buffer-wide
+using:
 
-Insert following line right at the top. Note, this has to be the first
-line of the buffer.
-
-: # -*- mode: org; org-export-babel-evaluate: nil -*-
+: #+PROPERTY: header-args :eval never-export~
 
 If your buffer has this line, the source code is not evaluated at the
 time of export, and whatever already exists in ~#+RESULTS~ block is
@@ -1193,22 +1220,13 @@ want to restrict the Tables and Images within subsections.[fn:7]
 ** Customising Biblatex style
 
 I like to use authoryear bibliography style. However, I need some
+customisations. The file [[https://raw.githubusercontent.com/vikasrawal/orgpaper/master/vikas-bibstyle.org][vikas-bibstyle.org]] contains all my
 customisations.
 
-+ Use comma in place of period after Journal name.
-+ Remove "in: "
-+ For Journal articles, specify volume and issue number as
-  volume(number)
+Download the file, adjust the path to the file in the line below and
+add it to your org file.
 
-The file biblatex.cfg included in this repository
-(https://raw.githubusercontent.com/vikasrawal/orgpaper/master/biblatex.cfg)
-takes care of these.
-
-The following command tells you where is your texmf directory
-: kpsewhich -var-value=TEXMFHOME
-
-I created =$TEXMFHOME/tex/latex/biblatex= and put the biblatex.cfg in
-that folder.
+~#+INCLUDE: /path-to-the-file/vikas-bibstyle.org~
 
 * Important Resources
 + [[http://orgmode.org/manual/][Org-mode manual]]
@@ -1224,9 +1242,6 @@ that folder.
 + [[http://nakkaya.com/2010/09/07/writing-papers-using-org-mode/][Writing papers Using org-mode, http://nakkaya.com/2010/09/07/writing-papers-using-org-mode]]
 * Footnotes
 
-[fn:1] Eric's Emacs Starter Kit is a beautiful illustration of power
-of Org-mode. It uses Org-mode source blocks to systematically document
-all Emacs customisation.
 
 [fn:2] If you do not know, ~echo \$USER~ in the terminal tells you your
 username.
