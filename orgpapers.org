@@ -907,7 +907,7 @@ This is how source blocks are created.
   ~#+END_SRC~.
 
 + Then with your cursor in between the ~BEGIN_SRC~ and the ~END_SRC~
-  lines, give the command C-c ' (that is, press Ctrl-C, release, and
+  lines, give the command C-c ' (that is, press Ctrl-C, don't release, and
   press ').
 
   - This would open a new buffer using ESS mode. If you type your code
