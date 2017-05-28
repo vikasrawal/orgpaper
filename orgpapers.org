@@ -319,9 +319,9 @@ You can copy the above lines, paste them in an empty (e.g.,
 
 *** Further customisations
 
-Most of my remaining customisations are kept in the file
-[[https://github.com/vikasrawal/orgpaper/blob/master/vikas-preferences.el][vikas-preferences.el]]. You can download it and save it in
-~/.emacs.d/personal/ .
+Most of my remaining customisations are kept in files [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.el][research-toolkit.el]]
+and [[https://github.com/vikasrawal/orgpaper/blob/master/vikas-preferences.el][vikas-preferences.el]]. You can download them and save them in
+~/.emacs.d/personal/ directory.
 
 These would be loaded automatically next time you start emacs.
 
