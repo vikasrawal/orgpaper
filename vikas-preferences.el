@@ -1,8 +1,4 @@
-                                        ; Add to prelude-packages
-
-
-
-                                        ;(setq server-socket-dir (format "/tmp/emacs%d" (user-uid)))
+;(setq server-socket-dir (format "/tmp/emacs%d" (user-uid)))
 (server-start)
 (add-to-list 'auto-mode-alist '("/mutt" . mail-mode))
 
@@ -14,11 +10,8 @@
 (setq-default indicate-empty-lines t)
 (setq-default show-trailing-whitespace t)
 (setq ns-function-modifier 'hyper)  ; make Fn key do Hyper
-(setq mac-option-modifier 'super) ; make opt key do Super
+(setq mac-option-modifier 'super) ; make opt key do Super;
 (fset 'yes-or-no-p 'y-or-n-p)
-;(require 'epa-file)
-;(epa-file-enable)
-
 
 (define-key global-map "\C-cr" 'org-remember)
 (define-key global-map "\C-cc" 'org-capture)
@@ -297,5 +290,5 @@ entries in articles."
 (setq org-latex-caption-above '(image table special-block))
 
 '(org-koma-letter-prefer-subject t)
-'(org-latex-default-table-environment "tabu")
+'(org-latex-default-table-environment "tabularx")
 '(ebib-bibtex-dialect (quote biblatex))

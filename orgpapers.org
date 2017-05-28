@@ -1111,16 +1111,6 @@ document, you can use Pandoc for converting LaTeX  to html.
 This section points some additional solutions that you may like to
 use. Some of these may come handy when you start using Org for
 documenting your research.
-** Emacs color-theme
-
-It is good to use a color-theme that highlights text in Org well. This
-makes it easier to work in Org.
-
-I use color theme caled leuven. The code for loading leuven is
-including in [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]] but is commented out. If you wish to use it,
-remove ;; from the front of the relevant lines, and you will have
-Leuven.
-
 
 ** Evaluating code during export
 
@@ -1139,12 +1129,14 @@ If your buffer has this line, the source code is not evaluated at the
 time of export, and whatever already exists in ~#+RESULTS~ block is
 exported.
 
-** Garamond font
+** Fonts
 
-I like to use garamond font. If you do too, add this special like at
+I like to use the Garamond font. If you do too, add this special line at
 the top:
 
 : #+LaTeX_CLASS_OPTIONS: [garamond]
+
+
 
 ** Margins
 
