@@ -310,13 +310,8 @@ of other packages can be installed to improve the work environment.
 Following commands will install all the packages that we need.
 
 #+BEGIN_SRC emacs-lisp
-(setq package-list '(ace-window anzu autumn-light-theme avy beacon bibretrieve bibtex-utils browse-kill-ring cdlatex company-auctex auctex company crux diff-hl diminish discover-my-major easy-kill ebib editorconfig elfeed elisp-slime-nav ess-R-data-view ctable ess-R-object-popup ess-smart-equals ess-smart-underscore ess-view exec-path-from-shell expand-region flx-ido flycheck geben-helm-projectile geben geiser gist gh git-timemachine gitconfig-mode gitignore-mode god-mode grizzl guru-mode helm-R ess helm-ag helm-bibtexkey helm-descbinds helm-flx flx helm-flyspell helm-ls-git helm-projectile ido-ubiquitous imenu-anywhere js2-mode json-mode json-reformat json-snatcher julia-mode logito magit git-commit magit-popup makey marshal ht move-text operate-on-number org org-plus-contrib org-ref key-chord hydra helm-bibtex biblio biblio-core f ov parsebib pcache projectile pkg-info epl queue rainbow-delimiters rainbow-mode s seq smart-mode-line rich-minority smartparens smartrep smex solarized-theme spinner sr-speedbar sunny-day-theme swiper-helm helm helm-core popup swiper ivy undo-tree visual-fill-column vkill volatile-highlights which-key with-editor dash async yaml-mode yasnippet zenburn-theme zop-to-char))
-(package-initialize)
-(unless package-archive-contents
-  (package-refresh-contents))
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
+(setq package-selected-packages '(ace-window anzu autumn-light-theme avy beacon bibretrieve bibtex-utils browse-kill-ring cdlatex company-auctex auctex company crux diff-hl diminish discover-my-major easy-kill ebib editorconfig elfeed elisp-slime-nav ess-R-data-view ctable ess-R-object-popup ess-smart-equals ess-smart-underscore ess-view exec-path-from-shell expand-region flx-ido flycheck geben-helm-projectile geben geiser gist gh git-timemachine gitconfig-mode gitignore-mode god-mode grizzl guru-mode helm-R ess helm-ag helm-bibtexkey helm-descbinds helm-flx flx helm-flyspell helm-ls-git helm-projectile ido-ubiquitous imenu-anywhere js2-mode json-mode json-reformat json-snatcher julia-mode logito magit git-commit magit-popup makey marshal ht move-text operate-on-number org org-plus-contrib org-ref key-chord hydra helm-bibtex biblio biblio-core f ov parsebib pcache projectile pkg-info epl queue rainbow-delimiters rainbow-mode s seq smart-mode-line rich-minority smartparens smartrep smex solarized-theme spinner sr-speedbar sunny-day-theme swiper-helm helm helm-core popup swiper ivy undo-tree visual-fill-column vkill volatile-highlights which-key with-editor dash async yaml-mode yasnippet zenburn-theme zop-to-char))
+(package-install-selected-packages)
 #+end_src
 
 You can copy the above lines, paste them in an empty (e.g.,
