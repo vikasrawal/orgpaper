@@ -1,6 +1,7 @@
 # -*- mode: org; org-export-babel-evaluate: nil -*-
 #+STARTUP: hidestars
-#+TITLE: Using Emacs, Org-mode and R for Research Writing in Social Sciences: A Toolkit for Writing Reproducible Research Papers and Monographs
+#+TITLE: Using Emacs, Org-mode and R for Research Writing in Social Sciences
+#+SUBTITLE: A Toolkit for Writing Reproducible Research Papers and Monographs
 #+AUTHOR: Vikas Rawal
 #+COLUMNS: %25ITEM %TAGS %PRIORITY %T
 #+OPTIONS: H:4 toc:2 num:2
@@ -335,7 +336,8 @@ environment. Following lines are an example of the minimal set of
 lines that we shall use.
 
 #+BEGIN_SRC org
-  ,#+TITLE: Reproducible Research Papers using Org-mode and R: A Guide
+  ,#+TITLE: Using Emacs, Org-mode and R for Research Writing in Social Sciences
+  ,#+SUBTITLE: A Toolkit for Writing Reproducible Research Papers and Monographs
   ,#+AUTHOR: Vikas Rawal
   ,#+DATE: May 4, 2014
   ,#+OPTIONS: toc:2 H:3 num:2
@@ -573,6 +575,7 @@ idea of how the table would look eventually.
 
 #+NAME: org-table-commands
 #+CAPTION: Commands to manipulate tables in Org
+#+attr_latex: :environment tabulary :width \textwidth :align lL
 | Command       | Description                                            |
 |---------------+--------------------------------------------------------|
 | =M-<left>=    | Move the column left                                   |
@@ -595,7 +598,11 @@ Table.
 
 You can insert images in documents as follows
 
-: [[a.jpg]]
+#+begin_src org
+  ,#+NAME: label-to-refer
+  ,#+CAPTION: This is the caption of a table
+  [[file:path-to-file/a.jpg]]
+#+end_Src
 
 You should do this for images that you already have, and you just want
 to insert them in the document. For graphs produced by R, we shall
