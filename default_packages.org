@@ -6,9 +6,8 @@
 #+LATEX_HEADER: \usepackage[citestyle=authoryear-icomp,bibstyle=authoryear,hyperref=true,maxcitenames=3,url=true,backend=biber,natbib=true]{biblatex}
 #+LaTeX_HEADER: \usepackage[version=3]{mhchem}
 #+LaTeX_HEADER: \usepackage[innermargin=1.5in,outermargin=1.25in,vmargin=1.25in]{geometry}
-#+LaTeX_HEADER: \usepackage[below]{placeins}
-#+LATEX_HEADER: \hypersetup{colorlinks=true,citecolor=blue,linkcolor=blue,citebordercolor={0 1 0},linktocpage,pdfstartview=FitH,anchorcolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue}
-#+LATEX_HEADER: \linespread{1.3}
+#+LaTeX_HEADER: \usepackage[section]{placeins}
+#+LATEX_HEADER: \hypersetup{colorlinks=true,citecolor=blue,linkcolor=blue,citebordercolor={0 0},linktocpage,pdfstartview=FitH,anchorcolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue}
 
 
 

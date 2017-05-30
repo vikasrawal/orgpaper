@@ -28,7 +28,6 @@
 '(org-hide-leading-stars t)
 '(org-alphabetical-lists t)
 '(org-koma-letter-prefer-subject t)
-'(org-latex-default-table-environment "tabularx")
 '(ebib-bibtex-dialect (quote biblatex))
 
 ;; for getting toprule and bottomrule

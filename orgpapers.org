@@ -7,11 +7,9 @@
 #+OPTIONS: H:4 toc:2 num:2
 #+LaTeX_CLASS: article
 #+LaTeX_CLASS_OPTIONS: [garamond]
-#+LATEX_HEADER: \usepackage{threeparttable}
-#+LATEX_HEADER: \usepackage{tabulary,longtable,tabularx,siunitx,booktabs,setspace}
+#+INCLUDE: default_packages.org
 #+LATEX_HEADER: \linespread{1.3}
 #+LATEX_HEADER: \renewcommand{\TPTminimum}{\linewidth}
-#+LATEX_HEADER: \usepackage[section]{placeins}
 #+LATEX_HEADER: \newcommand\mcx[1]{\multicolumn{1}{>{\centering\arraybackslash}X}{#1}}
 #+MACRO: MCL @@latex:\mcx{$1}@@
 
@@ -178,7 +176,7 @@ automatic tables of contents, embedded LaTeX math, citations, and
 markdown inside HTML block elements." That is pretty much everything I
 use.
 
-We shall use pandoc to convert our file from latex to odt/docx/html
+We shall use pandoc to convert our file from LaTeX to odt/docx/html
 formats.
 
 * Emacs basics
@@ -306,7 +304,7 @@ press i. Once you have marked the packages you want to install, press
 x to execute the installation.
 
 The most critical packages for our use are org, ess (for running R
-code from inside emacs), auctex (for latex) and bibliography
+code from inside emacs), auctex (for LaTeX) and bibliography
 management packages (reftex, org-ref, bibretrieve and ebib). A number
 of other packages can be installed to improve the work environment.
 
@@ -375,8 +373,6 @@ lines in a set of separate org files, and include them in your main
 document using line such as this:
 
 ~#+INCLUDE: path-to-file/papersetup.org~
-
-
 
 ** Sections and headlines
 
@@ -526,31 +522,36 @@ created through statistical analysis, we shall embed R programs rather
 than the tables themselves. This is discussed in Section [[#orgmodeandr]]
 of this guide.
 
-The following sample code produces a fully formated table, with a
-numbered title above the table and a name for cross-referencing the
+The following sample code produces a reasonably formatted table, with
+a numbered title above the table and a name for cross-referencing the
 table from the text anywhere in the document.
 
-#+BEGIN_SRC org :results output export both
-#+NAME: table-yield
-#+CAPTION: Average yields and average income, by State, India
+See Table [[table-yield]] for an illustration of how this table shows
+up in the final document.
+
+#+NAME: one
+#+BEGIN_SRC org :results replace drawer
+,#+NAME: table-yield
+,#+CAPTION: Simple table created using LaTeX tabular environment
+,#+attr_latex: :environment tabular :width \textwidth :align lrr
     | State          | Average yield | Average income |
     |----------------+---------------+----------------|
-    | Madhya Pradesh |           669 |          13000 |
+    | Madhya Pradesh |           672 |          13000 |
     | Haryana        |           300 |          25000 |
     | Punjab         |           260 |          35000 |
 #+End_SRC
 
-See Table [[table-yield-2]], for an illustration of how this table shows
-up in the final document.
-
-#+NAME: table-yield-2
-#+CAPTION: Average yields and average income, by State, India
-#+attr_latex: :environment tabulary :width \textwidth :align Lrr
-| State          | Average yield | Average income |
-|----------------+---------------+----------------|
-| Madhya Pradesh |           669 |          13000 |
-| Haryana        |           300 |          25000 |
-| Punjab         |           260 |          35000 |
+#+RESULTS: one
+:RESULTS:
+#+NAME: table-yield
+#+CAPTION: Simple table created using LaTeX tabular environment
+#+attr_latex: :environment tabular :width \textwidth :align lrr
+    | State          | Average yield | Average income |
+    |----------------+---------------+----------------|
+    | Madhya Pradesh |           672 |          13000 |
+    | Haryana        |           300 |          25000 |
+    | Punjab         |           260 |          35000 |
+:END:
 
 *** Table editor
 
@@ -566,16 +567,16 @@ Org-mode has an in-built table editor, which is very simple to use.
 + For creating a horizontal line anywhere, type |- at the starting of
   the line, and press tab.
 + Contents of each cell are aligned automatically by Org.
-+ To delete a row, use =C-k= (=M-x kill-line=).
++ To delete a row, use =C-k=.
 
-Org provides various commands for manipulating design of tables. Table
-[[org-table-commands]] provides the most important ones. Note that Table
-[[org-table-commands]] is created using Org mode. It also gives you an
-idea of how the table would look eventually.
+Org provides various commands for manipulating the design of
+tables. Table [[org-table-commands]] provides the most important
+ones. Note that Table [[org-table-commands]] is created using Org mode. It
+also gives you an idea of how the table would look eventually.
 
 #+NAME: org-table-commands
 #+CAPTION: Commands to manipulate tables in Org
-#+attr_latex: :environment tabulary :width \textwidth :align lL
+#+attr_latex: :environment tabular :width \textwidth :align ll :booktabs t :float t
 | Command       | Description                                            |
 |---------------+--------------------------------------------------------|
 | =M-<left>=    | Move the column left                                   |
@@ -598,11 +599,7 @@ Table.
 
 You can insert images in documents as follows
 
-#+begin_src org
-  ,#+NAME: label-to-refer
-  ,#+CAPTION: This is the caption of a table
-  [[file:path-to-file/a.jpg]]
-#+end_Src
+:  [[file:path-to-file/a.jpg]]
 
 You should do this for images that you already have, and you just want
 to insert them in the document. For graphs produced by R, we shall
@@ -628,7 +625,7 @@ is what we shall do.
 #+BEGIN_SRC org
   ,#+NAME: literacy-rate
   ,#+CAPTION: Percentage of literate men and women, by country (per cent)
-  [[a.jpg]]
+  [[file:a.jpg]]
 #+end_src
 
 Similarly, a table will be inserted as follows.
@@ -657,20 +654,26 @@ the references would be automatically converted to appropriate
 numbers. If new objects are inserted in the paper, numbering will be
 adjusted automatically when you create the formatted output.
 
-** Formatting tables for LaTeX/PDF export
-*** Using LaTeX tabulary package
+** Formatting tables and images for LaTeX/PDF export
+
+There are many LaTeX packages that can be used to format tables and
+images. We shall use org [[http://orgmode.org/manual/Special-blocks.html][special blocks]] for some of this. Lines
+starting with [[http://orgmode.org/manual/LaTeX-specific-attributes.html][~#+attr_latex~]] will be used to pass various arguments to
+underlying LaTeX commands.
+
+*** Formatting tables using LaTeX tabulary package
 The default LaTeX ~tabular~ environment allows only a few column
 types. In particular, there is limited support in tabular environment
 for wrapping text in different types of columns. However, there are
-many other LaTeX environments for making tables, each with different
-advantages. I find ~tabulary~ the most useful for my needs.
+many other LaTeX environments for making tables, each with its own
+advantages. Of the lot, I find ~tabulary~ one of the most useful.
 
 Table [[tabulary-column-types]] shows different types of columns available
 in tabulary package.
 
 #+NAME: tabulary-column-types
 #+CAPTION: Types of columns in LaTeX/tabulary package
-#+attr_latex: :environment tabulary :width \textwidth :align lL
+#+attr_latex: :environment tabulary :width \textwidth :align lL :booktabs t
 | Type | Description                  |
 |------+------------------------------|
 | l    | Left aligned, no wrapping    |
@@ -685,11 +688,15 @@ Load tabulary and booktabs using the following line in the preamble.
 
 ~#+LATEX_HEADER: \usepackage{tabulary,booktabs}~
 
-A line of the following type needs to be inserted above an Org table to make it use
-~tabulary~ environment instead of ~tabular~.
+The following lines inserted just above the table specify that the
+table should use the ~tabulary~ environment.
 
-: #+attr_latex: :environment tabulary :width 0.8\textwidth 
-:               :align @{}L|llR@{} :center :booktabs t :float nil
+: #+attr_latex: :environment tabulary :width 0.8\textwidth :align @{}L|llR@{}
+: #+attr_latex: :center :booktabs t :float nil
+
+Note that each attr_latex line affects only the object (table, image
+or a special block like begin_table or begin_tablenotes) that follows
+immediately after.
 
 :width is used to specify the /maximum/ total width of the table that
 the table can take [it may be specified as ~\textwidth~, implying full
@@ -710,26 +717,31 @@ last columns.
 
 The following code uses tabulary to create a table. The output of the code is shown in Table [[tabulary-yield-out]].
 
-#+BEGIN_SRC org
-  ,#+NAME: table-yield
-  ,#+CAPTION: Average yields and average income, by State, India
-  ,#+ATTR_LATEX: :environment tabulary :width \textwidth :align @{}lRR@{} :center :booktabs t :float t
-     | State          | {{{MCL(Average yield)}}} | {{{MCL(Average income)}}} |
-     |----------------+--------------------------+---------------------------|
-     | Madhya Pradesh |                      669 |                  13121.25 |
-     | Haryana        |                      300 |                   2532.30 |
-     | Punjab         |                      260 |                  35232.45 |
+#+NAME: tabuolary-in
+#+BEGIN_SRC org :results replace drawer
+  ,#+NAME: tabulary-yield-out
+  ,#+CAPTION: Table formatted using tabulary package
+  ,#+ATTR_LATEX: :environment tabulary :width \textwidth :align @{}lRR@{}
+  ,#+ATTR_LATEX: :center t :booktabs t :float t
+     | State          | Average yield | Average income |
+     |----------------+---------------+----------------|
+     | Madhya Pradesh |           669 |       13121.25 |
+     | Haryana        |           300 |        2532.30 |
+     | Punjab         |           260 |       35232.45 |
 #+End_SRC
 
+#+RESULTS: tabuolary-in
+:RESULTS:
 #+NAME: tabulary-yield-out
 #+CAPTION: Table formatted using tabulary package
-#+ATTR_LATEX: :environment tabulary :width \textwidth :align @{}lRR@{} :booktabs t :float t
-| State          | Average yield | Average income |
-|----------------+---------------+----------------|
-| Madhya Pradesh |           669 |       13121.25 |
-| Haryana        |           300 |        2532.30 |
-| Punjab         |           260 |       35232.45 |
-
+#+ATTR_LATEX: :environment tabulary :width \textwidth :align @{}lRR@{}
+#+ATTR_LATEX: :center t :booktabs t :float t
+   | State          | Average yield | Average income |
+   |----------------+---------------+----------------|
+   | Madhya Pradesh |           669 |       13121.25 |
+   | Haryana        |           300 |        2532.30 |
+   | Punjab         |           260 |       35232.45 |
+:END:
 
 *** Using LaTeX tabularx and siunitx packages
 
@@ -741,15 +753,25 @@ These two packages and booktabs should be called in the preamble using
 
 ~#+LATEX_HEADER: \usepackage{tabularx,siunitx,booktabs}~
 
-The following code uses tabularx and siunitx to create a table. The output of the code is shown in Table [[tabularx-yield-out]].
+The following code uses tabularx and siunitx to create a table. The
+first two lines define a LaTeX command and an org Macro for dealing
+with column headers. The output of the code is shown in Table
+[[tabularx-yield-out]]. Note the difference in alignment of numbers in
+Tables [[tabulary-yield-out]] and [[tabularx-yield-out]]. You are advised to
+look at the tabularx and siunitx manuals for the many options that
+they provide.[fn:1]
 
-#+BEGIN_SRC org
-  ,#+LATEX_HEADER: \newcommand\mcx[1]{\multicolumn{1}{>{\centering\arraybackslash}X}{#1}}
-  ,#+MACRO: MCL @@latex:\mcx{$1}@@
+ : #+LATEX_HEADER: \newcommand\mcx[1]{\multicolumn{1}{>{\centering\arraybackslash}X}{#1}}
+ : #+MACRO: MCL @@latex:\mcx{$1}@@
 
-  ,#+NAME: table-yield
+
+#+NAME: tabularx-yield-in
+#+BEGIN_SRC org :results replace drawer
+  ,#+NAME: tabularx-yield-out
   ,#+CAPTION: Table formatted using tabularx and siunitx packages
-  ,#+ATTR_LATEX: :environment tabularx :width 0.8\textwidth :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{} :center :booktabs t :float t
+  ,#+ATTR_LATEX: :environment tabularx :width 0.8\textwidth
+  ,#+ATTR_LATEX: :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{}
+  ,#+ATTR_LATEX: :center t :booktabs t :float t
      | State          | {{{MCL(Average yield)}}} | {{{MCL(Average income)}}} |
      |----------------+--------------------------+---------------------------|
      | Madhya Pradesh |                      669 |                  13121.25 |
@@ -757,24 +779,23 @@ The following code uses tabularx and siunitx to create a table. The output of th
      | Punjab         |                      260 |                  35232.45 |
 #+End_SRC
 
-
+#+RESULTS: tabularx-yield-in
+:RESULTS:
 #+NAME: tabularx-yield-out
-#+CAPTION: Average yields and average income, by State, India
-#+ATTR_LATEX: :environment tabularx :width 0.8\textwidth :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{} :booktabs t :float t
-| State          | {{{MCL(Average yield)}}} | {{{MCL(Average income)}}} |
-|----------------+--------------------------+---------------------------|
-| Madhya Pradesh |                      669 |                  13121.25 |
-| Haryana        |                      300 |                   2532.30 |
-| Punjab         |                      260 |                  35232.45 |
+#+CAPTION: Table formatted using tabularx and siunitx packages
+#+ATTR_LATEX: :environment tabularx :width 0.8\textwidth
+#+ATTR_LATEX: :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{}
+#+ATTR_LATEX: :center t :booktabs t :float t
+   | State          | {{{MCL(Average yield)}}} | {{{MCL(Average income)}}} |
+   |----------------+--------------------------+---------------------------|
+   | Madhya Pradesh |                      669 |                  13121.25 |
+   | Haryana        |                      300 |                   2532.30 |
+   | Punjab         |                      260 |                  35232.45 |
+:END:
 
 
-The first two lines define a LaTeX command and an org Macro for
-dealing with column headers.
 
-Note the difference in alignment of numbers in Tables
-[[tabulary-yield-out]] and [[tabularx-yield-out]]. You are advised to look at
-the tabularx and siunitx manuals for the many options that they
-provide.[fn:1]
+
 
 *** Using tabu if your document uses colour
 *** Notes below tables
@@ -790,27 +811,26 @@ The following code produces a table with notes below.
 
 #+NAME: org-threeparttable-in
 #+BEGIN_SRC org
-  ,#+NAME: table-yield
-  ,#+CAPTION: Average yields and average income, by State, India
-  ,#+ATTR_LATEX: :float t
+  ,#+NAME: threeparttable-table-yield
+  ,#+CAPTION: Table created using tabularx, siunitx, with table notes added below using threeparttable
+  ,#+ATTR_LATEX: :float t :options [hb] :center t
   ,#+begin_table
   ,#+begin_threeparttable
   ,#+ATTR_LATEX: :environment tabularx :width 0.8\textwidth
-                 :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{}
-                 :booktabs t :float nil
-     | State          | {{{MCL(Average yield)}}} | {{{MCL(Average income)}}} |
-     |----------------+--------------------------+---------------------------|
-     | Madhya Pradesh |                      669 |                  13121.25 |
-     | Haryana        |                      300 |                   2532.30 |
-     | Punjab         |                      260 |                  35232.45 |
+  ,#+ATTR_LATEX: :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{}
+  ,#+ATTR_LATEX: :booktabs t
+  | State          | {{{MCL(Average yield)}}} | {{{MCL(Average income)}}} |
+  |----------------+--------------------------+---------------------------|
+  | Madhya Pradesh |                      669 |                  13121.25 |
+  | Haryana        |                      300 |                   2532.30 |
+  | Punjab         |                      260 |                  35232.45 |
   ,#+attr_latex: :options [flushleft]
   ,#+begin_tablenotes
   ,#+begin_footnotesize
-     \item[] \textit{Notes}:
-       1. This table is very nice. This note is very long. But the long
-          note wraps nicely under the table.
-       2. This is the second note. But this is not very wide.
-     \item[] \textit{Source}: http://www.indianstatistics.org}
+    \item[] \textit{Notes}:
+      1. This table is very nice. This note is very long. But the long note wraps nicely under the table.
+      2. This is the second note. But this is not very wide.
+    \item[] \textit{Source}: http://www.indianstatistics.org}
   ,#+end_footnotesize
   ,#+end_tablenotes
   ,#+end_threeparttable
@@ -819,11 +839,13 @@ The following code produces a table with notes below.
 
 
 #+NAME: threeparttable-table-yield
-#+CAPTION: Table created using tabularx, siunitx
-#+ATTR_LATEX: :float t :options [hb]
+#+CAPTION: Table created using tabularx, siunitx, with table notes added below using threeparttable
+#+ATTR_LATEX: :float t :options [hb] :center t
 #+begin_table
 #+begin_threeparttable
-#+ATTR_LATEX: :environment tabularx :width 0.8\textwidth :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{} :booktabs t
+#+ATTR_LATEX: :environment tabularx :width 0.8\textwidth
+#+ATTR_LATEX: :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{}
+#+ATTR_LATEX: :booktabs t
 | State          | {{{MCL(Average yield)}}} | {{{MCL(Average income)}}} |
 |----------------+--------------------------+---------------------------|
 | Madhya Pradesh |                      669 |                  13121.25 |
@@ -1176,7 +1198,7 @@ org-export-dispatch~.
 
 ** Creating LaTeX and/or PDF files
 
-The file [[file:default-packages.org]] lists a set of LaTeX packages that
+The file [[file:default_packages.org]] lists a set of LaTeX packages that
 I normally use. Please modify this as you please, save it in a
 convenient location, and call it using a line of the following kind.
 
@@ -1358,12 +1380,7 @@ add it to your org file.
 + [[http://draketo.de/english/emacs/writing-papers-in-org-mode-acpd][Tutorial: Writing scientific papers for ACPD using emacs org-mode, http://draketo.de/english/emacs/writing-papers-in-org-mode-acpd]]
 + [[http://nakkaya.com/2010/09/07/writing-papers-using-org-mode/][Writing papers Using org-mode, http://nakkaya.com/2010/09/07/writing-papers-using-org-mode]]
 * Footnotes
-
 [fn:1] These are available at http://mirrors.ctan.org/macros/latex/required/tools/tabularx.pdf and http://mirrors.ctan.org/macros/latex/contrib/siunitx/siunitx.pdf.
-
-
-[fn:2] If you do not know, ~echo \$USER~ in the terminal tells you your
-username.
 
 [fn:3] Depending on the keyboard and the default configuration of the
 flavour of emacs you have installed, Meta may instead be mapped to a
