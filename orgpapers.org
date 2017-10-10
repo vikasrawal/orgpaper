@@ -168,7 +168,7 @@ http://www.r-project.org
 ** Pandoc
 
 Pandoc (http://johnmacfarlane.net/pandoc/) is an extremely powerful
-converter, which can translate one markup to another. It supports
+converter, which can translate one markup into another. It supports
 conversion between many file formats, and supports "syntax for
 footnotes, tables, flexible ordered lists, definition lists, fenced
 code blocks, superscript, subscript, strikeout, title blocks,
@@ -303,7 +303,8 @@ To mark a package for installation, take the cursor to the item and
 press i. Once you have marked the packages you want to install, press
 x to execute the installation.
 
-The most critical packages for our use are org, ess (for running R
+The most critical packages for our use are org-plus-contrib (which
+includes org and additional contributed utilities), ess (for running R
 code from inside emacs), auctex (for LaTeX) and bibliography
 management packages (reftex, org-ref, bibretrieve and ebib). A number
 of other packages can be installed to improve the work environment.
@@ -311,12 +312,12 @@ of other packages can be installed to improve the work environment.
 Following commands will install all the packages that we need.
 
 #+BEGIN_SRC emacs-lisp
-(setq package-selected-packages '(ace-window anzu autumn-light-theme avy beacon bibretrieve bibtex-utils browse-kill-ring cdlatex company-auctex auctex company crux diff-hl diminish discover-my-major easy-kill ebib editorconfig elfeed elisp-slime-nav ess-R-data-view ctable ess-R-object-popup ess-smart-equals ess-smart-underscore ess-view exec-path-from-shell expand-region flx-ido flycheck geben-helm-projectile geben geiser gist gh git-timemachine gitconfig-mode gitignore-mode god-mode grizzl guru-mode helm-R ess helm-ag helm-bibtexkey helm-descbinds helm-flx flx helm-flyspell helm-ls-git helm-projectile ido-ubiquitous imenu-anywhere js2-mode json-mode json-reformat json-snatcher julia-mode logito magit git-commit magit-popup makey marshal ht move-text operate-on-number org org-plus-contrib org-ref key-chord hydra helm-bibtex biblio biblio-core f ov parsebib pcache projectile pkg-info epl queue rainbow-delimiters rainbow-mode s seq smart-mode-line rich-minority smartparens smartrep smex solarized-theme spinner sr-speedbar sunny-day-theme swiper-helm helm helm-core popup swiper ivy undo-tree visual-fill-column vkill volatile-highlights which-key with-editor dash async yaml-mode yasnippet zenburn-theme zop-to-char))
+(setq package-selected-packages '(ace-window anzu autumn-light-theme avy beacon bibretrieve bibtex-utils browse-kill-ring cdlatex company-auctex auctex company crux diff-hl diminish discover-my-major easy-kill ebib editorconfig elfeed elisp-slime-nav ess-R-data-view ctable ess-R-object-popup ess-smart-equals ess-smart-underscore ess-view exec-path-from-shell expand-region flx-ido flycheck geben-helm-projectile geben geiser gist gh git-timemachine gitconfig-mode gitignore-mode god-mode grizzl guru-mode helm-R ess helm-ag helm-bibtexkey helm-descbinds helm-flx flx helm-flyspell helm-ls-git helm-projectile ido-ubiquitous imenu-anywhere js2-mode json-mode json-reformat json-snatcher julia-mode logito magit git-commit magit-popup makey marshal ht move-text operate-on-number org-plus-contrib org-ref key-chord hydra helm-bibtex biblio biblio-core f ov parsebib pcache projectile pkg-info epl queue rainbow-delimiters rainbow-mode s seq smart-mode-line rich-minority smartparens smartrep smex solarized-theme spinner sr-speedbar sunny-day-theme swiper-helm helm helm-core popup swiper ivy undo-tree visual-fill-column vkill volatile-highlights which-key with-editor dash async yaml-mode yasnippet zenburn-theme zop-to-char))
 (package-install-selected-packages)
 #+end_src
 
 You can copy the above lines, paste them in an empty (e.g.,
-\*scratch\*) buffer, select them, and do M-x eval-buffer.
+\*scratch\*) buffer, select them, and do M-x eval-region.
 
 *** Further customisations
 
@@ -779,6 +780,12 @@ they provide.[fn:1]
      | Punjab         |                      260 |                  35232.45 |
 #+End_SRC
 
+
+#+NAME: tabularx-yield-out
+#+CAPTION: Table formatted using tabularx and siunitx packages
+#+ATTR_LATEX: :environment tabularx :width 0.8\textwidth
+#+ATTR_LATEX: :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{}
+#+ATTR_LATEX: :center t :booktabs t :float t
 #+RESULTS: tabularx-yield-in
 :RESULTS:
 #+NAME: tabularx-yield-out
@@ -792,9 +799,6 @@ they provide.[fn:1]
    | Haryana        |                      300 |                   2532.30 |
    | Punjab         |                      260 |                  35232.45 |
 :END:
-
-
-
 
 
 *** Using tabu if your document uses colour
