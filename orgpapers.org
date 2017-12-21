@@ -1,4 +1,3 @@
-# -*- mode: org; org-export-babel-evaluate: nil -*-
 #+STARTUP: hidestars
 #+TITLE: Using Emacs, Org-mode and R for Research Writing in Social Sciences
 #+SUBTITLE: A Toolkit for Writing Reproducible Research Papers and Monographs
@@ -10,8 +9,11 @@
 #+INCLUDE: default_packages.org
 #+LATEX_HEADER: \linespread{1.3}
 #+LATEX_HEADER: \renewcommand{\TPTminimum}{\linewidth}
-#+LATEX_HEADER: \newcommand\mcx[1]{\multicolumn{1}{>{\centering\arraybackslash}X}{#1}}
-#+MACRO: MCL @@latex:\mcx{$1}@@
+#+LATEX_HEADER: \usepackage{tabularx,siunitx,booktabs}
+#+LATEX_HEADER: \newcolumntype{C}{>{\centering\arraybackslash}X}
+#+LATEX_HEADER: \newcommand{\mcone}[1]{\multicolumn{1}{C}{#1}}
+#+LATEX_HEADER: \newcommand{\mcx}[2]{\multicolumn{#1}{>{\hsize=\dimexpr #1\hsize +\numexpr2*#1-2\relax\tabcolsep \relax}C}{#2}}
+#+MACRO:  MCONE @@latex:\mcone{$1}@@
 
 * Introduction
 
@@ -349,7 +351,7 @@ Table [[special-lines]] gives details of a few major special lines that we shall
 
 #+NAME: special-lines
 #+CAPTION: Main special lines to be used at the top of an Org buffer
-#+attr_latex: :environment tabulary :width \textwidth :align lL
+#+attr_latex: :environment tabularx :width \textwidth :align lX
 | Keyword     | Purpose                                                                                                                                                    |
 |-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ~#+TITLE~   | To declare title of the paper                                                                                                                              |
@@ -662,7 +664,7 @@ images. We shall use org [[http://orgmode.org/manual/Special-blocks.html][specia
 starting with [[http://orgmode.org/manual/LaTeX-specific-attributes.html][~#+attr_latex~]] will be used to pass various arguments to
 underlying LaTeX commands.
 
-*** Formatting tables using LaTeX tabulary package
+*** Formatting tables using LaTeX tabulary package               :noexport:
 The default LaTeX ~tabular~ environment allows only a few column
 types. In particular, there is limited support in tabular environment
 for wrapping text in different types of columns. However, there are
@@ -758,12 +760,14 @@ The following code uses tabularx and siunitx to create a table. The
 first two lines define a LaTeX command and an org Macro for dealing
 with column headers. The output of the code is shown in Table
 [[tabularx-yield-out]]. Note the difference in alignment of numbers in
-Tables [[tabulary-yield-out]] and [[tabularx-yield-out]]. You are advised to
+Tables tabulary-yield-out and [[tabularx-yield-out]]. You are advised to
 look at the tabularx and siunitx manuals for the many options that
 they provide.[fn:1]
 
- : #+LATEX_HEADER: \newcommand\mcx[1]{\multicolumn{1}{>{\centering\arraybackslash}X}{#1}}
- : #+MACRO: MCL @@latex:\mcx{$1}@@
+ : #+LATEX_HEADER: \newcolumntype{C}{>{\centering\arraybackslash}X}
+ : #+LATEX_HEADER: \newcommand{\mcone}[1]{\multicolumn{1}{C}{#1}}
+ : #+LATEX_HEADER: \newcommand{\mcx}[2]{\multicolumn{#1}{>{\hsize=\dimexpr #1\hsize +\numexpr2*#1-2\relax\tabcolsep \relax}C}{#2}}
+ : #+MACRO:  MCONE @@latex:\mcone{$1}@@
 
 
 #+NAME: tabularx-yield-in
@@ -773,11 +777,11 @@ they provide.[fn:1]
   ,#+ATTR_LATEX: :environment tabularx :width 0.8\textwidth
   ,#+ATTR_LATEX: :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{}
   ,#+ATTR_LATEX: :center t :booktabs t :float t
-     | State          | {{{MCL(Average yield)}}} | {{{MCL(Average income)}}} |
-     |----------------+--------------------------+---------------------------|
-     | Madhya Pradesh |                      669 |                  13121.25 |
-     | Haryana        |                      300 |                   2532.30 |
-     | Punjab         |                      260 |                  35232.45 |
+     | State          | {{{MCONE(Average yield)}}} | {{{MCONE(Average income)}}} |
+     |----------------+----------------------------+-----------------------------|
+     | Madhya Pradesh |                        669 |                    13121.25 |
+     | Haryana        |                        300 |                     2532.30 |
+     | Punjab         |                        260 |                    35232.45 |
 #+End_SRC
 
 
@@ -786,22 +790,12 @@ they provide.[fn:1]
 #+ATTR_LATEX: :environment tabularx :width 0.8\textwidth
 #+ATTR_LATEX: :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{}
 #+ATTR_LATEX: :center t :booktabs t :float t
-#+RESULTS: tabularx-yield-in
-:RESULTS:
-#+NAME: tabularx-yield-out
-#+CAPTION: Table formatted using tabularx and siunitx packages
-#+ATTR_LATEX: :environment tabularx :width 0.8\textwidth
-#+ATTR_LATEX: :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{}
-#+ATTR_LATEX: :center t :booktabs t :float t
-   | State          | {{{MCL(Average yield)}}} | {{{MCL(Average income)}}} |
-   |----------------+--------------------------+---------------------------|
-   | Madhya Pradesh |                      669 |                  13121.25 |
-   | Haryana        |                      300 |                   2532.30 |
-   | Punjab         |                      260 |                  35232.45 |
-:END:
+| State          | {{{MCONE(Average yield)}}} | {{{MCONE(Average income)}}} |
+|----------------+----------------------------+-----------------------------|
+| Madhya Pradesh |                        669 |                    13121.25 |
+| Haryana        |                        300 |                     2532.30 |
+| Punjab         |                        260 |                    35232.45 |
 
-
-*** Using tabu if your document uses colour
 *** Notes below tables
 
 LaTeX package =threeparttable= is used for including notes below the
@@ -816,18 +810,18 @@ The following code produces a table with notes below.
 #+NAME: org-threeparttable-in
 #+BEGIN_SRC org
   ,#+NAME: threeparttable-table-yield
-  ,#+CAPTION: Table created using tabularx, siunitx, with table notes added below using threeparttable
+  ,#+CAPTION: Table created using tabularx, siunitx and threeparttable
   ,#+ATTR_LATEX: :float t :options [hb] :center t
   ,#+begin_table
   ,#+begin_threeparttable
   ,#+ATTR_LATEX: :environment tabularx :width 0.8\textwidth
   ,#+ATTR_LATEX: :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{}
   ,#+ATTR_LATEX: :booktabs t
-  | State          | {{{MCL(Average yield)}}} | {{{MCL(Average income)}}} |
-  |----------------+--------------------------+---------------------------|
-  | Madhya Pradesh |                      669 |                  13121.25 |
-  | Haryana        |                      300 |                   2532.30 |
-  | Punjab         |                      260 |                  35232.45 |
+  | State          | {{{MCONE(Average yield)}}} | {{{MCONE(Average income)}}} |
+  |----------------+----------------------------+-----------------------------|
+  | Madhya Pradesh |                        669 |                    13121.25 |
+  | Haryana        |                        300 |                     2532.30 |
+  | Punjab         |                        260 |                    35232.45 |
   ,#+attr_latex: :options [flushleft]
   ,#+begin_tablenotes
   ,#+begin_footnotesize
@@ -850,11 +844,11 @@ The following code produces a table with notes below.
 #+ATTR_LATEX: :environment tabularx :width 0.8\textwidth
 #+ATTR_LATEX: :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{}
 #+ATTR_LATEX: :booktabs t
-| State          | {{{MCL(Average yield)}}} | {{{MCL(Average income)}}} |
-|----------------+--------------------------+---------------------------|
-| Madhya Pradesh |                      669 |                  13121.25 |
-| Haryana        |                      300 |                   2532.30 |
-| Punjab         |                      260 |                  35232.45 |
+| State          | {{{MCONE(Average yield)}}} | {{{MCONE(Average income)}}} |
+|----------------+----------------------------+-----------------------------|
+| Madhya Pradesh |                        669 |                    13121.25 |
+| Haryana        |                        300 |                     2532.30 |
+| Punjab         |                        260 |                    35232.45 |
 #+attr_latex: :options [flushleft]
 #+begin_tablenotes
 #+begin_footnotesize
