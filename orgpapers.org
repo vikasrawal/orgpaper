@@ -15,6 +15,7 @@
 #+LATEX_HEADER: \newcommand{\mcx}[2]{\multicolumn{#1}{>{\hsize=\dimexpr #1\hsize +\numexpr2*#1-2\relax\tabcolsep \relax}C}{#2}}
 #+MACRO:  MCONE @@latex:\mcone{$1}@@
 
+
 * Introduction
 
 This guide introduces an open-source toolkit for writing research
