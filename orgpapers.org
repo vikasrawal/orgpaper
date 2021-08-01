@@ -758,9 +758,8 @@ adjusted automatically when you create the formatted output.
 :END:
 ** Configuration
 
-Following code in research-toolkit.org enables Org to run different types
-of code. If you have installed research-toolkit.org as specified in
-[[#customemacs]], these are already enabled.
+Following code in .emacs.d/_configs/use-org.el enables Org to run different types
+of code. If you are using my emacs configuration, these are already enabled.
 
 I have included here the languages that I commonly use. See Org
 manual, if you would like to add any more.
@@ -979,9 +978,8 @@ BibTex format, is stored in a text file with .bib extension.
 
 A native syntax for handling citations and bibliographies has been
 introduced in the latest version of org-mode. This provides ability to
-use bibtex, biblatex or csl-based
-
-John Kitchin's org-ref (https://github.com/jkitchin/org-ref) package provides the best toolkit for adding citation support to org mode.
+use bibliographic databases in bibtex, biblatex or citeproc/json
+formats.
 
 ** Building your database
 
@@ -994,12 +992,12 @@ etc). BibLaTeX extends the BibTeX specification to cover a wider
 variety of publication types and fields. Given that, it is more
 versatile than BibTeX.
 
-Bibliographic information in BibTex/BibLaTeX format is available from
+Bibliographic information in BibTeX/BibLaTeX format is available from
 many online sources, including journal/publisher websites, and Google
 Scholar. Many applications/tools allow you to search download
 bibliographic records from these sources directly. Please note that
-you may often need to clean/correct the downloaded entries. And, when
-the bibliographic information in BibTex/Biber format is not available
+you would often need to clean/correct the downloaded entries. And, when
+the bibliographic information in BibTeX/BibLaTeX format is not available
 from any existing database, you may have to enter the information
 yourself.
 
@@ -1095,13 +1093,19 @@ org-export-dispatch~.
 
 ** Defining LaTeX classes
 
-If you have loaded [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]], you will automatically have access to three custom classes: vreport, vmemoir and varticle. Of these, vmemoir and varticle are based on the [[https://ctan.org/pkg/memoir?lang=en][Memoir]] class, an extremely versatile LaTeX package that allows for many customisations.
+If are using my emacs configuration, you will have access to three custom classes: vreport, vmemoir and varticle. Of these, vmemoir and varticle are based on the [[https://ctan.org/pkg/memoir?lang=en][Memoir]] class, an extremely versatile LaTeX package that allows for many customisations.
 
-While vmemoir and varticle classes should work for books and articles, feel free to look at [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]] and customise them for your need.
+While vmemoir and varticle classes should work for books and articles, you will benefit by looking at [[https://github.com/ep624/emacs.d.2021/blob/main/_configs/use-org-contrib.el][~/.emacs.d/_configs/use-org-contrib.el]] and customising them for your need.
 
 LaTeX class is specified in the org header using a line as follows
 
 ~#+LATEX_CLASS: vmemoir#~
+
+Additional options can be provided by using the keyword ~latex_class_options~:
+
+~#+latex_class_options: [11pt,twoside,openany,strict,extrafontsizes,article]~
+
+Those using my emacs configuration can call the snippet latex-class, taken from Scimax, using keyword ~lc~ to insert this line. The snippet shows LaTeX classes that are defined in your installation of org. Additional options for any latex class can be specified by calling another snippet using ~lco~.
 
 ** Formatting tables and images for LaTeX/PDF export
 
