@@ -812,10 +812,12 @@ embedded into Org as a source block. The basic syntax is
   ,#+END_SRC
 #+END_SRC
 
+
 This is how source blocks are created.
 
 + First write the lines starting with ~#+NAME~, ~#+BEGIN_SRC~ and
-  ~#+END_SRC~.
+  ~#+END_SRC~. You can use snippets ~<src~, ~<srct~ and ~<srcg~ in my
+  emacs configuration to quickly insert these lines.
 
 + Then with your cursor in between the ~BEGIN_SRC~ and the ~END_SRC~
   lines, give the command C-c ' (that is, press Ctrl-C, release, and
@@ -825,9 +827,11 @@ This is how source blocks are created.
     in this buffer, you will see that ESS is syntax-aware and nicely
     highlights R code.
   - ESS also allows you to run (evaluate) the code that you write, to
-    test what your code is doing. Use ~C-j~ for evaluating a single
-    line of code, ~C-b~ for evaluating the whole ess buffer, or ~C-r~
-    for a marked region within the ess buffer.
+    test what your code is doing. ~C-return~ or ~C-c C-n~ can be used
+    to evaluate a line/region of code and move to the next line. Or
+    you can use ~C-c C-j~ for evaluating a single line of code, ~C-c
+    C-b~ for evaluating the entire ess buffer, or ~C-c C-r~ for a
+    marked region within the ess buffer.
 
 + Once you have finished writing a code block and tested it, press
   C-c ' again to come back to your Org buffer.
@@ -923,14 +927,13 @@ graph.
 
 #+BEGIN_SRC org
  ,#+NAME: mygraph-code
- ,#+BEGIN_SRC R :results output graphics :file bmi2.png :width 825 :height 1050 :fonts serif
+ ,#+BEGIN_SRC R :results file graphics :file bmi2.png :width 825 :height 1050 :fonts serif :res 300
 
  ,#+END_SRC
 #+END_SRC
 
-As before, for creating your graph, you first write the ~#+NAME~,
-~BEGIN_SRC~ and the ~END_SRC~ lines, and then go into a temporary ESS
-buffer by using C-c '.
+You can use snippet ~<srcg~ and press tab to insert an empty code
+block, and then go into a temporary ESS buffer by using C-c '.
 
 + Once in this temporary ESS buffer, you can write the R commands for
   making your graph.
