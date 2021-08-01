@@ -394,8 +394,8 @@ You can considerably speed up your work in emacs by using
 yasnippets. Yasnippets are essentially chunks of text -- forms,
 templates, lines of code -- that can be inserted in a buffer using a
 keyword. It essentially allows you to insert text that needs to be
-used repeatedly by using a short keyword preceded by ~<~. If you have
-cloned my emacs configuration, a whole bunch of snippets would be in
+used repeatedly by using a short keyword. If you have cloned my emacs
+configuration, a whole bunch of snippets would be in
 $~/.emacs.d/snippets$ directory. I will illustrate their use in the
 sections on org-mode.
 
@@ -440,7 +440,7 @@ In addition to these, we can use LaTeX specific options for formatting
 the pdf output, odt specific options for formatting the odt/docx
 output, and R specific options for setting up the R environment. These
 would also be specified using special lines at the top of the file. I
-shall provide details of some of these in the Sections where these
+shall provide details of some of these in the sections where these
 topics are discussed.
 
 In research monographs prepared using org, you may need quite a few
@@ -685,7 +685,12 @@ manual]]. In particular, you may want to look at spreadsheet-like
 functions of the table editor.
 
 One limitation of Org is lack of support for merging of cells in a
-Table.
+Table. However, Eric Schulte has created useful hacks that can be used
+to overcome this limitation while exporting to LaTeX or HTML.
+
+If you have snippets included with my emacs configuration, you can
+type ~nct1~, ~nct2~, ~nct3~ or ~nct4~ and press the tab key to create
+blank tables with 1-4 columns.
 
 ** Images
 
@@ -694,9 +699,10 @@ You can insert images in documents as follows
 :  [[file:path-to-file/a.jpg]]
 
 You should do this for images that you already have, and you just want
-to insert them in the document. For graphs produced by R, we shall
-embed the code instead, so that the graph is generated and inserted
-automatically.
+to insert them in the document. If you have snippets included in my
+emacs configuration, you can use yasnippet ~ncf~ to help in inserting
+a named figure. For graphs produced by R, we shall embed the code instead,
+so that the graph is generated and inserted automatically.
 
 ** Captions and cross-references
 
