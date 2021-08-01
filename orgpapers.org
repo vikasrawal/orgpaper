@@ -834,10 +834,10 @@ This is how source blocks are created.
     marked region within the ess buffer.
 
 + Once you have finished writing a code block and tested it, press
-  C-c ' again to come back to your Org buffer.
+  ~C-c '~ again to come back to your Org buffer.
 
-+ In your Org buffer, with your cursor in a source-block,
-  press ~C-c C-c~ to evaluate the whole code block and have the results included
++ In your Org buffer, with your cursor in a source-block, press ~C-c
+  C-c~ to evaluate the whole code block and have the results included
   in your document.
 
 + You can always edit your source code by opening a temporary ESS
@@ -892,7 +892,11 @@ create a table that shows average BMI by country.
   ,#+END_SRC
 #+END_SRC
 
-You can evaluate this code using C-c C-c. When you do that, it
+If you are using my emacs configuration, you can use the snippet
+~srct~ to insert a blank code block of this kind. You can then use
+~C-c '~ to go into a temporary ess buffer and write the code.
+
+You can evaluate the code block using ~C-c C-c~. When you do that, it
 produces the output, and places it immediately below the code block.
 The results display the output of the code under a line that looks
 like below
