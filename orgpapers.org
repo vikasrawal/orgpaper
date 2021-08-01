@@ -80,14 +80,14 @@ you will set up using this guide?
     our local database.
 
 ** Acknowledgements
-In my adaptation of Org, I have benefitted immensely from the great
-community of Orgers. The [[http://orgmode.org/manual/][Org-mode manual]], [[http://orgmode.org/worg/][Worg]], and archives of the
-[[http://orgmode.org/community.html][Org-mode mailing list]] have been the most important resources. In
-addition, I have greatly benefited from solutions provided by various
-people to my specific queries on the Org-mode mailing list. What I
-present in this document is essentially a synthesis of solutions
-provided by various people. The community has been extremely generous
-in providing these.
+In my adaptation of org, I have benefited immensely from the great
+community of org-mode developers and users. The [[http://orgmode.org/manual/][Org-mode manual]], [[http://orgmode.org/worg/][Worg]],
+and archives of the [[http://orgmode.org/community.html][Org-mode mailing list]] have been the most important
+resources. In addition, I have greatly benefited from solutions
+provided by various people to my specific queries on the Org-mode
+mailing list. What I present in this document is essentially a
+synthesis of solutions provided by various people. The community has
+been extremely generous in providing these.
 
 I would particularly like to thank
 
@@ -104,6 +104,9 @@ I would particularly like to thank
   when I was doing fieldwork in villages in eastern India. This
   discovery completely changed my work flow, and Org-mode became
   central to all my academic work.
++ John Kitchin, the author of scimax, org-ref and org-ref-cite, with
+  whose use of org-mode I have the greatest overlap. His documentation
+  and videos are a great resource.
 + In addition to the above, Suvayu Ali, for responses to several of my
   queries on the mailing list.
 
@@ -385,6 +388,17 @@ that you need.
 You can copy the above lines, paste them in an empty buffer (e.g.,
 \*scratch\*), select them, and do M-x eval-region.
 
+* Speed up with Yasnippet templates
+
+You can considerably speed up your work in emacs by using
+yasnippets. Yasnippets are essentially chunks of text -- forms,
+templates, lines of code -- that can be inserted in a buffer using a
+keyword. It essentially allows you to insert text that needs to be
+used repeatedly by using a short keyword preceded by ~<~. If you have
+cloned my emacs configuration, a whole bunch of snippets would be in
+$~/.emacs.d/snippets$ directory. I will illustrate their use in the
+sections on org-mode.
+
 * Org-mode basics
 :PROPERTIES:
 :CUSTOM_ID: orgmodebasics
@@ -397,30 +411,30 @@ environment. Following lines are an example of the minimal set of
 lines that we shall use.
 
 #+BEGIN_SRC org
-  ,#+TITLE: Using Emacs, Org-mode and R for Research Writing in Social Sciences
-  ,#+SUBTITLE: A Toolkit for Writing Reproducible Research Papers and Monographs
-  ,#+AUTHOR: Vikas Rawal
-  ,#+DATE: May 4, 2014
-  ,#+OPTIONS: toc:2 H:3 num:2
+  ,#+title: Using Emacs, Org-mode and R for Research Writing in Social Sciences
+  ,#+subtitle: A Toolkit for Writing Reproducible Research Papers and Monographs
+  ,#+author: Vikas Rawal
+  ,#+date: May 4, 2014
+  ,#+options: toc:2 H:3 num:2
 #+end_src
 
 As you can see, each line starts with a keyword, and the values for
 this keyword are specified after the colon.
 
-Table [[special-lines]] gives details of a few major special lines that we shall use.
+Table [[special-lines]] gives details of a few major special lines that we shall use. The table also gives snippet keywords that can used to create the keyword if you have got the yasnippets from my emacs configuration.
 
 #+NAME: special-lines
 #+CAPTION: Main special lines to be used at the top of an Org buffer
 #+attr_latex: :environment tabularx :width \textwidth :align lX
-| Keyword     | Purpose                                                                                                                                                    |
-|-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ~#+TITLE~   | To declare title of the paper                                                                                                                              |
-| ~#+AUTHOR~  | To declare author/s of the paper                                                                                                                           |
-| ~#+DATE~    | Sets the date. If blank, no date is used. If this keyword is omitted, current date is used.                                                                |
-| ~#+OPTIONS~ | There are many options you can give. These are what I find the most important Multiple options can be separated by a space and specified on the same line. |
-|             | toc:nil (Do not include a Table of contents), toc:n (Include n levels of sections and sub-sections in Table of contents)                                   |
-|             | H:2  (Treat top two levels of headlines as section levels, and anything below that as item list. Modify the number as appropriate)                         |
-|             | num:2 (Number top two levels of headlines. Modify the number as appropriate.)                                                                              |
+| Keyword     | Snippet | Purpose                                                                                                                                                    |
+|-------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ~#+title~   | $<ti$   | To declare title of the paper                                                                                                                              |
+| ~#+author~  | $<au$   | To declare author/s of the paper                                                                                                                           |
+| ~#+date~    | $<da$   | Sets the date. If blank, no date is used. If this keyword is omitted, current date is used.                                                                |
+| ~#+options~ | $<op$   | There are many options you can give. These are what I find the most important Multiple options can be separated by a space and specified on the same line. |
+|             |         | toc:nil (Do not include a Table of contents), toc:n (Include n levels of sections and sub-sections in Table of contents)                                   |
+|             |         | H:2  (Treat top two levels of headlines as section levels, and anything below that as item list. Modify the number as appropriate)                         |
+|             |         | num:2 (Number top two levels of headlines. Modify the number as appropriate.)                                                                              |
 
 In addition to these, we can use LaTeX specific options for formatting
 the pdf output, odt specific options for formatting the odt/docx
@@ -513,7 +527,7 @@ headline/section structure, and then start filling in the content
 under each headline, and modify the section structure, if needed, as
 the paper develops.
 
-(Further reading, [[http://orgmode.org/manual/Headlines.html#Headlines][Headlines]] in Org manual)
+(For further reading, see [[http://orgmode.org/manual/Headlines.html#Headlines][Headlines]] in the Org-mode manual)
 
 ** Itemised lists
 
@@ -577,7 +591,7 @@ This is how this list shows up in the final document
 
 Note that:
 + In unordered/description lists, ~+~ and ~-~ signs are interchangeable.
-+ Similarly, in ordered lists 1. and 1) are interchangeable.
++ Similarly, in ordered lisorts 1. and 1) are interchangeable.
 + Levels of bullets and numbering are determined by indentation.
 + Different types of lists can be mixed using numbers and bullets for different levels.
 + If the cursor is on a line that is part of an itemised list, M-return inserts a new line with a bullet/number below the present
@@ -957,8 +971,9 @@ We shall use a master bibliographic database to contain bibliographic
 records for the literature that we cite. The database, in Biblatex or
 BibTex format, is stored in a text file with .bib extension.
 
-Org-mode has a new
-
+A native syntax for handling citations and bibliographies has been
+introduced in the latest version of org-mode. This provides ability to
+use bibtex, biblatex or csl-based
 
 John Kitchin's org-ref (https://github.com/jkitchin/org-ref) package provides the best toolkit for adding citation support to org mode.
 
