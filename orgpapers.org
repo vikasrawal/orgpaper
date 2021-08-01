@@ -300,7 +300,9 @@ available.
 My configuration directory can be cloned from github using the following commands:
 
 ~$ mv .emacs.d .emacs.d.old~
+
 ~$ git clone --recurse-submodules -j8 https://github.com/ep624/emacs.d.2021.git ~/.emacs.d~
+
 ~$ cd ~/.emacs.d/org-mode && make~
 
 The first command will move any existing emacs configuration to
