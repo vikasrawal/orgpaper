@@ -329,28 +329,56 @@ that you need.
 
 #+begin_src emacs-lisp
   (setq package-selected-packages '(ag anzu async auto-complete avy
-  bibretrieve auctex cdlatex citeproc coffee-mode consult
-  counsel-projectile counsel-tramp counsel dired-subtree
-  dired-hacks-utils dirtree ebib edit-server elfeed-goodies
-  ace-jump-mode elfeed-score elfeed emacsql embark erc-hl-nicks
-  erc-image eshell-git-prompt ess-R-data-view ctable
-  ess-r-insert-obj ess-smart-equals ess-smart-underscore ess-view
-  ess-view-data csv-mode ess flx-ido flx flycheck git-gutter+
-  git-gutter highlight-indentation htmlize ido-completing-read+
-  ido-vertical-mode iedit ivy-bibtex bibtex-completion biblio
-  biblio-core ivy-prescient key-chord keycast kurecolor
-  magit git-commit magit-section memoize move-text multi-web-mode
-  multiple-cursors nameless noflet notmuch-labeler notmuch org-gcal
-  alert log4e gntp org-sidebar org-ql f dash-functional
-  org-sticky-header org-super-agenda ht ov parsebib pdf-tools peg
-  persist persistent-scratch pinentry popup popwin powerline
-  prescient pretty-hydra hydra lv projectile pkg-info epl
-  quelpa-use-package quelpa queue rainbow-delimiters rainbow-mode
-  remember-last-theme request-deferred request deferred
-  simple-httpd smartparens string-inflection super-save swiper ivy
-  tblui tablist magit-popup transient tree-mode ts s dash
-  use-package bind-key visual-fill-column which-key windata
-  with-editor yasnippet-snippets yasnippet zenburn-theme))
+                                    bibretrieve auctex cdlatex
+                                    citeproc coffee-mode consult
+                                    counsel-projectile
+                                    counsel-tramp counsel
+                                    dired-subtree dired-hacks-utils
+                                    dirtree ebib edit-server
+                                    elfeed-goodies ace-jump-mode
+                                    elfeed-score elfeed emacsql
+                                    embark erc-hl-nicks erc-image
+                                    eshell-git-prompt
+                                    ess-R-data-view ctable
+                                    ess-r-insert-obj
+                                    ess-smart-equals
+                                    ess-smart-underscore ess-view
+                                    ess-view-data csv-mode ess
+                                    flx-ido flx flycheck
+                                    git-gutter+ git-gutter
+                                    highlight-indentation htmlize
+                                    ido-completing-read+
+                                    ido-vertical-mode iedit
+                                    ivy-bibtex bibtex-completion
+                                    biblio biblio-core
+                                    ivy-prescient key-chord keycast
+                                    kurecolor magit git-commit
+                                    magit-section memoize move-text
+                                    multi-web-mode multiple-cursors
+                                    nameless noflet notmuch-labeler
+                                    notmuch org-gcal alert log4e
+                                    gntp org-sidebar org-ql f
+                                    dash-functional
+                                    org-sticky-header
+                                    org-super-agenda ht ov parsebib
+                                    pdf-tools peg persist
+                                    persistent-scratch pinentry
+                                    popup popwin powerline
+                                    prescient pretty-hydra hydra lv
+                                    projectile pkg-info epl
+                                    quelpa-use-package quelpa queue
+                                    rainbow-delimiters rainbow-mode
+                                    remember-last-theme
+                                    request-deferred request
+                                    deferred simple-httpd
+                                    smartparens string-inflection
+                                    super-save swiper ivy tblui
+                                    tablist magit-popup transient
+                                    tree-mode ts s dash use-package
+                                    bind-key visual-fill-column
+                                    which-key windata with-editor
+                                    yasnippet-snippets yasnippet
+                                    zenburn-theme))
   (package-install-selected-packages)
 #+end_src
 
