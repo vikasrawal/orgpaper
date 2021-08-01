@@ -858,7 +858,7 @@ Code block [[readdata-code]] is an example of such a code block. Note
 #+NAME: readdata-code
 #+BEGIN_SRC org
   ,#+NAME: readdata-code
-  ,#+BEGIN_SRC R :results value silent
+  ,#+BEGIN_SRC R :results silent :exports none
 
   read.data("datafile1.csv",sep=",",header=T)->mydata1
 
