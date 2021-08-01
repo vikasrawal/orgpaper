@@ -428,10 +428,10 @@ Table [[special-lines]] gives details of a few major special lines that we shall
 #+attr_latex: :environment tabularx :width \textwidth :align lX
 | Keyword     | Snippet | Purpose                                                                                                                                                    |
 |-------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ~#+title~   | $<ti$   | To declare title of the paper                                                                                                                              |
-| ~#+author~  | $<au$   | To declare author/s of the paper                                                                                                                           |
-| ~#+date~    | $<da$   | Sets the date. If blank, no date is used. If this keyword is omitted, current date is used.                                                                |
-| ~#+options~ | $<op$   | There are many options you can give. These are what I find the most important Multiple options can be separated by a space and specified on the same line. |
+| ~#+title~   | ~<ti~   | To declare title of the paper                                                                                                                              |
+| ~#+author~  | ~<au~   | To declare author/s of the paper                                                                                                                           |
+| ~#+date~    | ~<da~    | Sets the date. If blank, no date is used. If this keyword is omitted, current date is used.                                                                |
+| ~#+options~ | ~<op$~  | There are many options you can give. These are what I find the most important Multiple options can be separated by a space and specified on the same line. |
 |             |         | toc:nil (Do not include a Table of contents), toc:n (Include n levels of sections and sub-sections in Table of contents)                                   |
 |             |         | H:2  (Treat top two levels of headlines as section levels, and anything below that as item list. Modify the number as appropriate)                         |
 |             |         | num:2 (Number top two levels of headlines. Modify the number as appropriate.)                                                                              |
