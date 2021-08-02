@@ -780,23 +780,6 @@ manual, if you would like to add any more.
      (sqlite . t)))
 #+END_SRC
 
-** Special lines for R
-
-Org allows you to run multiple R sessions simultaneously, if you are
-working on two documents side by side, and would like to keep
-statistical work for the two separately.
-
-This is done by naming the R session which a particular Org file is
-linked to. All R code in this file would be run in the specified R
-session. You could have, at the same time, another R session, with a
-different name, being called by another Org buffer.
-
-We can give a name to the R session (let us say, my-r-session) that
-our Org buffer should be linked to by adding the following line at the
-top (in the preamble, that is).
-
-: #+property: session my-r-session
-
 ** Embedding R code in an Org document
 
 Org uses ESS (emacs-speaks-statistics) to provide a fully functional,
@@ -976,6 +959,38 @@ As with the tables, we shall add a caption and a name to it as follows
 #+END_SRC
 
 You can now refer to this graph in the text using ~[[my-bmi-graph]]~.
+
+** Named R Sessions
+
+You can run R code blocks in two ways.
+
+One possibility is to send the block as a batch of commands sent to R
+and receive the results in the org-mode file. In this case, R runs
+each block independent of the others. This is the default behaviour.
+
+Another possibility is to create a named R session, which is
+persistent, and multiple code blocks are executed in the same R
+session. In this case, output of one code block (say, some data
+objects that have been created or some libraries that have been
+called) is available to the next code block that is implemented in the
+same session.
+
+In fact, org allows you to run multiple R sessions simultaneously, if
+you are working on two documents side by side, and would like to keep
+statistical work for the two separately.
+
+If you want to have one R session for a particular org file, you can
+specify a named session for the whole file in the preamble as follows:
+
+: #+property: :session my-r-session
+
+You could also use `:session my-r-session` as a header argument for a
+particular code block to evaluate that code block in
+`my-r-session`. This means that you could also evaluate different code
+blocks from the the same document in separate but persistent R
+sessions. Say, if your paper draws upon two different sets of data and
+analyses, you could process them in two separate R sessions (with
+different working directories, etc).
 
 * Citations and Bibliographies using Org-mode
 
