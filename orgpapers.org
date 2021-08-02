@@ -964,23 +964,27 @@ You can now refer to this graph in the text using ~[[my-bmi-graph]]~.
 
 You can run R code blocks in two ways.
 
-One possibility is to send the block as a batch of commands sent to R
-and receive the results in the org-mode file. In this case, R runs
-each block independent of the others. This is the default behaviour.
+One possibility is to send the block as a batch of commands to R and
+receive the results in the org-mode file. In this case, R runs each
+block independent of the others. The code is sent to R, evaluated
+independently, and results inserted in the org file. This is the
+default behaviour.
 
-Another possibility is to create a named R session, which is
-persistent, and multiple code blocks are executed in the same R
+Another possibility is to start a named R session within emacs, which
+is persistent, and execute multiple code blocks in the same R
 session. In this case, output of one code block (say, some data
 objects that have been created or some libraries that have been
-called) is available to the next code block that is implemented in the
+called) is available to the next code block that is executed in the
 same session.
 
-In fact, org allows you to run multiple R sessions simultaneously, if
+In fact, org allows you to run multiple R sessions simultaneously. If
 you are working on two documents side by side, and would like to keep
-statistical work for the two separately.
+statistical work for the two separately, you can run them in two
+separate sessions.
 
 If you want to have one R session for a particular org file, you can
-specify a named session for the whole file in the preamble as follows:
+specify a named session (in this case, with the name `my-r-session`)
+for the whole file in the preamble as follows:
 
 : #+property: :session my-r-session
 
