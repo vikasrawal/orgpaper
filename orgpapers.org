@@ -80,14 +80,14 @@ you will set up using this guide?
     our local database.
 
 ** Acknowledgements
-In my adaptation of Org, I have benefitted immensely from the great
-community of Orgers. The [[http://orgmode.org/manual/][Org-mode manual]], [[http://orgmode.org/worg/][Worg]], and archives of the
-[[http://orgmode.org/community.html][Org-mode mailing list]] have been the most important resources. In
-addition, I have greatly benefited from solutions provided by various
-people to my specific queries on the Org-mode mailing list. What I
-present in this document is essentially a synthesis of solutions
-provided by various people. The community has been extremely generous
-in providing these.
+In my adaptation of org, I have benefited immensely from the great
+community of org-mode developers and users. The [[http://orgmode.org/manual/][Org-mode manual]], [[http://orgmode.org/worg/][Worg]],
+and archives of the [[http://orgmode.org/community.html][Org-mode mailing list]] have been the most important
+resources. In addition, I have greatly benefited from solutions
+provided by various people to my specific queries on the Org-mode
+mailing list. What I present in this document is essentially a
+synthesis of solutions provided by various people. The community has
+been extremely generous in providing these.
 
 I would particularly like to thank
 
@@ -104,6 +104,9 @@ I would particularly like to thank
   when I was doing fieldwork in villages in eastern India. This
   discovery completely changed my work flow, and Org-mode became
   central to all my academic work.
++ John Kitchin, the author of scimax, org-ref and org-ref-cite, with
+  whose use of org-mode I have the greatest overlap. His documentation
+  and videos are a great resource.
 + In addition to the above, Suvayu Ali, for responses to several of my
   queries on the mailing list.
 
@@ -280,23 +283,36 @@ shortcuts and starts using them instead of the verbose versions.
 :CUSTOM_ID: customemacs
 :END:
 
-Emacs is highly customisable. We need several emacs packages and
-customisations for our workflow.
+Emacs is highly customisable. We will need a well customised emacs
+installation with a number of additional emacs packages. There are
+many configuration frameworks available for emacs (including
+[[https://www.spacemacs.org/][spacemacs]], [[https://github.com/hlissner/doom-emacs][doom]], [[https://github.com/bbatsov/prelude][prelude]], and [[https://github.com/jkitchin/scimax][scimax]]). You may try these and choose
+whichever you like. In most cases, you would need to do some
+additional customisation to suit your needs.
 
-*** Install prelude
+My current emacs configuration does not use any of these
+frameworks. Instead, I have a rather modular setup primarily based on
+use-package for loading the additional packages I need. Packages are
+installed mainly using package.el, the most popular package manager
+for emacs. A few packages, including org-mode, are directly installed
+from their git repositories to take advantage of latest features
+available.
 
-While emacs may be customised for individual features, using a kit
-makes the task easier. [[https://github.com/bbatsov/prelude][Prelude]] is one such kit.
+*** Clone the git repository
 
-To install Prelude, download it from [[https://github.com/bbatsov/prelude/archive/master.zip][here]] and unzip the files in
-~/.emacs.d directory. Better still, clone it using git.
+My configuration directory can be cloned from github using the following commands:
 
-~$ git clone git clone git://github.com/bbatsov/prelude.git ~/.emacs.d~
+~$ mv .emacs.d .emacs.d.old~
 
-Windows users should check the location of ~ directory by running
-Emacs and typing C-x d ~/<RET>, and then specify the full path.
+~$ git clone --recurse-submodules -j8 https://github.com/ep624/emacs.d.2021.git ~/.emacs.d~
 
-*** Install additional packages.
+~$ cd ~/.emacs.d/org-mode && make~
+
+The first command will move any existing emacs configuration to
+.emacs.d.old, and the second command will install my configuration
+instead. The third command compiles org-mode.
+
+*** Install additional packages
 
 Starting version 24, Emacs includes a package-manager. You can
 install/update add-on packages using the package manager. To use the
@@ -308,29 +324,80 @@ To mark a package for installation, take the cursor to the item and
 press i. Once you have marked the packages you want to install, press
 x to execute the installation.
 
-The most critical packages for our use are org-plus-contrib (which
-includes org and additional contributed utilities), ess (for running R
-code from inside emacs), auctex (for LaTeX) and bibliography
-management packages (reftex, org-ref, bibretrieve and ebib). A number
-of other packages can be installed to improve the work environment.
+The following emacs commands will install all the packages that I
+currently have in my emacs installation. You many not need some of
+them. You may also want some others depending upon your use. You can
+always delete the ones you do not need, and add any other packages
+that you need.
 
-Following commands will install all the packages that we need.
-
-#+BEGIN_SRC emacs-lisp
-(setq package-selected-packages '(ace-window anzu autumn-light-theme avy beacon bibretrieve bibtex-utils browse-kill-ring cdlatex company-auctex auctex company crux diff-hl diminish discover-my-major easy-kill ebib editorconfig elfeed elisp-slime-nav ess-R-data-view ctable ess-R-object-popup ess-smart-equals ess-smart-underscore ess-view exec-path-from-shell expand-region flx-ido flycheck geben-helm-projectile geben geiser gist gh git-timemachine gitconfig-mode gitignore-mode god-mode grizzl guru-mode helm-R ess helm-ag helm-bibtexkey helm-descbinds helm-flx flx helm-flyspell helm-ls-git helm-projectile ido-ubiquitous imenu-anywhere js2-mode json-mode json-reformat json-snatcher julia-mode logito magit git-commit magit-popup makey marshal ht move-text operate-on-number org-plus-contrib org-ref key-chord hydra helm-bibtex biblio biblio-core f ov parsebib pcache projectile pkg-info epl queue rainbow-delimiters rainbow-mode s seq smart-mode-line rich-minority smartparens smartrep smex solarized-theme spinner sr-speedbar sunny-day-theme swiper-helm helm helm-core popup swiper ivy undo-tree visual-fill-column vkill volatile-highlights which-key with-editor dash async yaml-mode yasnippet zenburn-theme zop-to-char))
-(package-install-selected-packages)
+#+begin_src emacs-lisp
+  (setq package-selected-packages '(ag anzu async auto-complete avy
+                                    bibretrieve auctex cdlatex
+                                    citeproc coffee-mode consult
+                                    counsel-projectile
+                                    counsel-tramp counsel
+                                    dired-subtree dired-hacks-utils
+                                    dirtree ebib edit-server
+                                    elfeed-goodies ace-jump-mode
+                                    elfeed-score elfeed emacsql
+                                    embark erc-hl-nicks erc-image
+                                    eshell-git-prompt
+                                    ess-R-data-view ctable
+                                    ess-r-insert-obj
+                                    ess-smart-equals
+                                    ess-smart-underscore ess-view
+                                    ess-view-data csv-mode ess
+                                    flx-ido flx flycheck
+                                    git-gutter+ git-gutter
+                                    highlight-indentation htmlize
+                                    ido-completing-read+
+                                    ido-vertical-mode iedit
+                                    ivy-bibtex bibtex-completion
+                                    biblio biblio-core
+                                    ivy-prescient key-chord keycast
+                                    kurecolor magit git-commit
+                                    magit-section memoize move-text
+                                    multi-web-mode multiple-cursors
+                                    nameless noflet notmuch-labeler
+                                    notmuch org-gcal alert log4e
+                                    gntp org-sidebar org-ql f
+                                    dash-functional
+                                    org-sticky-header
+                                    org-super-agenda ht ov parsebib
+                                    pdf-tools peg persist
+                                    persistent-scratch pinentry
+                                    popup popwin powerline
+                                    prescient pretty-hydra hydra lv
+                                    projectile pkg-info epl
+                                    quelpa-use-package quelpa queue
+                                    rainbow-delimiters rainbow-mode
+                                    remember-last-theme
+                                    request-deferred request
+                                    deferred simple-httpd
+                                    smartparens string-inflection
+                                    super-save swiper ivy tblui
+                                    tablist magit-popup transient
+                                    tree-mode ts s dash use-package
+                                    bind-key visual-fill-column
+                                    which-key windata with-editor
+                                    yasnippet-snippets yasnippet
+                                    zenburn-theme))
+  (package-install-selected-packages)
 #+end_src
 
-You can copy the above lines, paste them in an empty (e.g.,
-\*scratch\*) buffer, select them, and do M-x eval-region.
+You can copy the above lines, paste them in an empty buffer (e.g.,
+\*scratch\*), select them, and do M-x eval-region.
 
-*** Further customisations
+* Speed up with Yasnippet templates
 
-Most of my remaining customisations are kept in files [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.el][research-toolkit.el]]
-and [[https://github.com/vikasrawal/orgpaper/blob/master/vikas-preferences.el][vikas-preferences.el]]. You can download them and save them in
-~/.emacs.d/personal/ directory.
-
-These would be loaded automatically next time you start emacs.
+You can considerably speed up your work in emacs by using
+yasnippets. Yasnippets are essentially chunks of text -- forms,
+templates, lines of code -- that can be inserted in a buffer using a
+keyword. It essentially allows you to insert text that needs to be
+used repeatedly by using a short keyword. If you have cloned my emacs
+configuration, a whole bunch of snippets would be in
+$~/.emacs.d/snippets$ directory. I will illustrate their use in the
+sections on org-mode.
 
 * Org-mode basics
 :PROPERTIES:
@@ -344,36 +411,36 @@ environment. Following lines are an example of the minimal set of
 lines that we shall use.
 
 #+BEGIN_SRC org
-  ,#+TITLE: Using Emacs, Org-mode and R for Research Writing in Social Sciences
-  ,#+SUBTITLE: A Toolkit for Writing Reproducible Research Papers and Monographs
-  ,#+AUTHOR: Vikas Rawal
-  ,#+DATE: May 4, 2014
-  ,#+OPTIONS: toc:2 H:3 num:2
+  ,#+title: Using Emacs, Org-mode and R for Research Writing in Social Sciences
+  ,#+subtitle: A Toolkit for Writing Reproducible Research Papers and Monographs
+  ,#+author: Vikas Rawal
+  ,#+date: May 4, 2014
+  ,#+options: toc:2 H:3 num:2
 #+end_src
 
 As you can see, each line starts with a keyword, and the values for
 this keyword are specified after the colon.
 
-Table [[special-lines]] gives details of a few major special lines that we shall use.
+Table [[special-lines]] gives details of a few major special lines that we shall use. The table also gives snippet keywords that can used to create the keyword if you have got the yasnippets from my emacs configuration.
 
 #+NAME: special-lines
 #+CAPTION: Main special lines to be used at the top of an Org buffer
 #+attr_latex: :environment tabularx :width \textwidth :align lX
-| Keyword     | Purpose                                                                                                                                                    |
-|-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ~#+TITLE~   | To declare title of the paper                                                                                                                              |
-| ~#+AUTHOR~  | To declare author/s of the paper                                                                                                                           |
-| ~#+DATE~    | Sets the date. If blank, no date is used. If this keyword is omitted, current date is used.                                                                |
-| ~#+OPTIONS~ | There are many options you can give. These are what I find the most important Multiple options can be separated by a space and specified on the same line. |
-|             | toc:nil (Do not include a Table of contents), toc:n (Include n levels of sections and sub-sections in Table of contents)                                   |
-|             | H:2  (Treat top two levels of headlines as section levels, and anything below that as item list. Modify the number as appropriate)                         |
-|             | num:2 (Number top two levels of headlines. Modify the number as appropriate.)                                                                              |
+| Keyword     | Snippet | Purpose                                                                                                                                                    |
+|-------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ~#+title~   | ~<ti~   | To declare title of the paper                                                                                                                              |
+| ~#+author~  | ~<au~   | To declare author/s of the paper                                                                                                                           |
+| ~#+date~    | ~<da~    | Sets the date. If blank, no date is used. If this keyword is omitted, current date is used.                                                                |
+| ~#+options~ | ~<op~   | There are many options you can give. These are what I find the most important Multiple options can be separated by a space and specified on the same line. |
+|             |         | toc:nil (Do not include a Table of contents), toc:n (Include n levels of sections and sub-sections in Table of contents)                                   |
+|             |         | H:2  (Treat top two levels of headlines as section levels, and anything below that as item list. Modify the number as appropriate)                         |
+|             |         | num:2 (Number top two levels of headlines. Modify the number as appropriate.)                                                                              |
 
 In addition to these, we can use LaTeX specific options for formatting
 the pdf output, odt specific options for formatting the odt/docx
 output, and R specific options for setting up the R environment. These
 would also be specified using special lines at the top of the file. I
-shall provide details of some of these in the Sections where these
+shall provide details of some of these in the sections where these
 topics are discussed.
 
 In research monographs prepared using org, you may need quite a few
@@ -460,7 +527,7 @@ headline/section structure, and then start filling in the content
 under each headline, and modify the section structure, if needed, as
 the paper develops.
 
-(Further reading, [[http://orgmode.org/manual/Headlines.html#Headlines][Headlines]] in Org manual)
+(For further reading, see [[http://orgmode.org/manual/Headlines.html#Headlines][Headlines]] in the Org-mode manual)
 
 ** Itemised lists
 
@@ -618,7 +685,12 @@ manual]]. In particular, you may want to look at spreadsheet-like
 functions of the table editor.
 
 One limitation of Org is lack of support for merging of cells in a
-Table.
+Table. However, Eric Schulte has created useful hacks that can be used
+to overcome this limitation while exporting to LaTeX or HTML.
+
+If you have snippets included with my emacs configuration, you can
+type ~nct1~, ~nct2~, ~nct3~ or ~nct4~ and press the tab key to create
+blank tables with 1-4 columns.
 
 ** Images
 
@@ -627,9 +699,10 @@ You can insert images in documents as follows
 :  [[file:path-to-file/a.jpg]]
 
 You should do this for images that you already have, and you just want
-to insert them in the document. For graphs produced by R, we shall
-embed the code instead, so that the graph is generated and inserted
-automatically.
+to insert them in the document. If you have snippets included in my
+emacs configuration, you can use yasnippet ~ncf~ to help in inserting
+a named figure. For graphs produced by R, we shall embed the code instead,
+so that the graph is generated and inserted automatically.
 
 ** Captions and cross-references
 
@@ -685,9 +758,8 @@ adjusted automatically when you create the formatted output.
 :END:
 ** Configuration
 
-Following code in research-toolkit.org enables Org to run different types
-of code. If you have installed research-toolkit.org as specified in
-[[#customemacs]], these are already enabled.
+Following code in .emacs.d/_configs/use-org.el enables Org to run different types
+of code. If you are using my emacs configuration, these are already enabled.
 
 I have included here the languages that I commonly use. See Org
 manual, if you would like to add any more.
@@ -708,23 +780,6 @@ manual, if you would like to add any more.
      (sqlite . t)))
 #+END_SRC
 
-** Special lines for R
-
-Org allows you to run multiple R sessions simultaneously, if you are
-working on two documents side by side, and would like to keep
-statistical work for the two separately.
-
-This is done by naming the R session which a particular Org file is
-linked to. All R code in this file would be run in the specified R
-session. You could have, at the same time, another R session, with a
-different name, being called by another Org buffer.
-
-We can give a name to the R session (let us say, my-r-session) that
-our Org buffer should be linked to by adding the following line at the
-top (in the preamble, that is).
-
-: #+property: session my-r-session
-
 ** Embedding R code in an Org document
 
 Org uses ESS (emacs-speaks-statistics) to provide a fully functional,
@@ -740,10 +795,12 @@ embedded into Org as a source block. The basic syntax is
   ,#+END_SRC
 #+END_SRC
 
+
 This is how source blocks are created.
 
 + First write the lines starting with ~#+NAME~, ~#+BEGIN_SRC~ and
-  ~#+END_SRC~.
+  ~#+END_SRC~. You can use snippets ~<src~, ~<srct~ and ~<srcg~ in my
+  emacs configuration to quickly insert these lines.
 
 + Then with your cursor in between the ~BEGIN_SRC~ and the ~END_SRC~
   lines, give the command C-c ' (that is, press Ctrl-C, release, and
@@ -753,15 +810,17 @@ This is how source blocks are created.
     in this buffer, you will see that ESS is syntax-aware and nicely
     highlights R code.
   - ESS also allows you to run (evaluate) the code that you write, to
-    test what your code is doing. Use ~C-j~ for evaluating a single
-    line of code, ~C-b~ for evaluating the whole ess buffer, or ~C-r~
-    for a marked region within the ess buffer.
+    test what your code is doing. ~C-return~ or ~C-c C-n~ can be used
+    to evaluate a line/region of code and move to the next line. Or
+    you can use ~C-c C-j~ for evaluating a single line of code, ~C-c
+    C-b~ for evaluating the entire ess buffer, or ~C-c C-r~ for a
+    marked region within the ess buffer.
 
 + Once you have finished writing a code block and tested it, press
-  C-c ' again to come back to your Org buffer.
+  ~C-c '~ again to come back to your Org buffer.
 
-+ In your Org buffer, with your cursor in a source-block,
-  press ~C-c C-c~ to evaluate the whole code block and have the results included
++ In your Org buffer, with your cursor in a source-block, press ~C-c
+  C-c~ to evaluate the whole code block and have the results included
   in your document.
 
 + You can always edit your source code by opening a temporary ESS
@@ -782,7 +841,7 @@ Code block [[readdata-code]] is an example of such a code block. Note
 #+NAME: readdata-code
 #+BEGIN_SRC org
   ,#+NAME: readdata-code
-  ,#+BEGIN_SRC R :results value silent
+  ,#+BEGIN_SRC R :results silent :exports none
 
   read.data("datafile1.csv",sep=",",header=T)->mydata1
 
@@ -816,7 +875,11 @@ create a table that shows average BMI by country.
   ,#+END_SRC
 #+END_SRC
 
-You can evaluate this code using C-c C-c. When you do that, it
+If you are using my emacs configuration, you can use the snippet
+~srct~ to insert a blank code block of this kind. You can then use
+~C-c '~ to go into a temporary ess buffer and write the code.
+
+You can evaluate the code block using ~C-c C-c~. When you do that, it
 produces the output, and places it immediately below the code block.
 The results display the output of the code under a line that looks
 like below
@@ -851,14 +914,13 @@ graph.
 
 #+BEGIN_SRC org
  ,#+NAME: mygraph-code
- ,#+BEGIN_SRC R :results output graphics :file bmi2.png :width 825 :height 1050 :fonts serif
+ ,#+BEGIN_SRC R :results file graphics :file bmi2.png :width 825 :height 1050 :fonts serif :res 300
 
  ,#+END_SRC
 #+END_SRC
 
-As before, for creating your graph, you first write the ~#+NAME~,
-~BEGIN_SRC~ and the ~END_SRC~ lines, and then go into a temporary ESS
-buffer by using C-c '.
+You can use snippet ~<srcg~ and press tab to insert an empty code
+block, and then go into a temporary ESS buffer by using C-c '.
 
 + Once in this temporary ESS buffer, you can write the R commands for
   making your graph.
@@ -898,25 +960,73 @@ As with the tables, we shall add a caption and a name to it as follows
 
 You can now refer to this graph in the text using ~[[my-bmi-graph]]~.
 
+** Named R Sessions
+
+You can run R code blocks in two ways.
+
+One possibility is to send the block as a batch of commands to R and
+receive the results in the org-mode file. In this case, R runs each
+block independent of the others. The code is sent to R, evaluated
+independently, and results inserted in the org file. This is the
+default behaviour.
+
+Another possibility is to start a named R session within emacs, which
+is persistent, and execute multiple code blocks in the same R
+session. In this case, output of one code block (say, some data
+objects that have been created or some libraries that have been
+called) is available to the next code block that is executed in the
+same session.
+
+In fact, org allows you to run multiple R sessions simultaneously. If
+you are working on two documents side by side, and would like to keep
+statistical work for the two separately, you can run them in two
+separate sessions.
+
+If you want to have one R session for a particular org file, you can
+specify a named session (in this case, with the name `my-r-session`)
+for the whole file in the preamble as follows:
+
+: #+property: :session my-r-session
+
+You could also use `:session my-r-session` as a header argument for a
+particular code block to evaluate that code block in
+`my-r-session`. This means that you could also evaluate different code
+blocks from the the same document in separate but persistent R
+sessions. Say, if your paper draws upon two different sets of data and
+analyses, you could process them in two separate R sessions (with
+different working directories, etc).
+
 * Citations and Bibliographies using Org-mode
 
 We shall use a master bibliographic database to contain bibliographic
-records for the literature that we cite. The database, in Biber or
+records for the literature that we cite. The database, in Biblatex or
 BibTex format, is stored in a text file with .bib extension.
 
-John Kitchin's org-ref (https://github.com/jkitchin/org-ref) package provides the best toolkit for adding citation support to org mode.
+A native syntax for handling citations and bibliographies has been
+introduced in the latest version of org-mode. This provides ability to
+use bibliographic databases in bibtex, biblatex or citeproc/json
+formats.
 
 ** Building your database
 
 In a BibTeX/BibLaTeX database, each bibliographic record is given a
 unique key, which is used to cite it. Each record is classified as one
-among various categories of publications (journal article, book, chapter,
-etc.), and for the given publication type, the record specifies values
-for various fields (author, title, volume, publisher, etc). BibLaTeX
-extends the BibTeX specification to cover a wider variety of publication types and fields. Given that, it is more versatile than BibTeX.
 
-Bibliographic information in BibTex/BibLaTeX format is available from
-many online sources, including journal/publisher websites, and Google Scholar. Many applications/tools allow you to search download bibliographic records from these sources directly. Please note that you may often need to clean/correct the downloaded entries. And, when the bibliographic information in BibTex/Biber format is not available from any existing database, you may have to enter the information yourself.
+among various categories of publications (journal article, book,
+chapter, etc.), and for the given publication type, the record
+specifies values for various fields (author, title, volume, publisher,
+etc). BibLaTeX extends the BibTeX specification to cover a wider
+variety of publication types and fields. Given that, it is more
+versatile than BibTeX.
+
+Bibliographic information in BibTeX/BibLaTeX format is available from
+many online sources, including journal/publisher websites, and Google
+Scholar. Many applications/tools allow you to search download
+bibliographic records from these sources directly. Please note that
+you would often need to clean/correct the downloaded entries. And, when
+the bibliographic information in BibTeX/BibLaTeX format is not available
+from any existing database, you may have to enter the information
+yourself.
 
 To start with, you may wish to use a GUI application like JabRef
 (cross-platform, http://jabref.sourceforge.net/) or BibDesk (OS-X
@@ -1010,13 +1120,19 @@ org-export-dispatch~.
 
 ** Defining LaTeX classes
 
-If you have loaded [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]], you will automatically have access to three custom classes: vreport, vmemoir and varticle. Of these, vmemoir and varticle are based on the [[https://ctan.org/pkg/memoir?lang=en][Memoir]] class, an extremely versatile LaTeX package that allows for many customisations.
+If are using my emacs configuration, you will have access to three custom classes: vreport, vmemoir and varticle. Of these, vmemoir and varticle are based on the [[https://ctan.org/pkg/memoir?lang=en][Memoir]] class, an extremely versatile LaTeX package that allows for many customisations.
 
-While vmemoir and varticle classes should work for books and articles, feel free to look at [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]] and customise them for your need.
+While vmemoir and varticle classes should work for books and articles, you will benefit by looking at [[https://github.com/ep624/emacs.d.2021/blob/main/_configs/use-org-contrib.el][~/.emacs.d/_configs/use-org-contrib.el]] and customising them for your need.
 
 LaTeX class is specified in the org header using a line as follows
 
 ~#+LATEX_CLASS: vmemoir#~
+
+Additional options can be provided by using the keyword ~latex_class_options~:
+
+~#+latex_class_options: [11pt,twoside,openany,strict,extrafontsizes,article]~
+
+Those using my emacs configuration can call the snippet latex-class, taken from Scimax, using keyword ~lc~ to insert this line. The snippet shows LaTeX classes that are defined in your installation of org. Additional options for any latex class can be specified by calling another snippet using ~lco~.
 
 ** Formatting tables and images for LaTeX/PDF export
 
@@ -1079,6 +1195,7 @@ I suggest adding the following lines to the preamble too.
 | Punjab         |                                   260 |                35232.45 |                 15235.0 |
 
 *** Formatting tables using LaTeX tabulary package
+
 The default LaTeX ~tabular~ environment allows only a few column
 types. In particular, there is limited support in tabular environment
 for wrapping text in different types of columns. However, there are
@@ -1134,7 +1251,7 @@ last columns.
 
 The following code uses tabulary to create a table. The output of the code is shown in Table [[tabulary-yield-out]].
 
-#+NAME: tabuolary-in
+#+NAME: tabulary-in
 #+BEGIN_SRC org :results replace drawer
   ,#+NAME: tabulary-yield-out
   ,#+CAPTION: Table formatted using tabulary package
@@ -1147,7 +1264,7 @@ The following code uses tabulary to create a table. The output of the code is sh
      | Punjab         |           260 |       35232.45 |
 #+End_SRC
 
-#+RESULTS: tabuolary-in
+#+RESULTS: tabulary-in
 :RESULTS:
 #+NAME: tabulary-yield-out
 #+CAPTION: Table formatted using tabulary package
@@ -1159,6 +1276,7 @@ The following code uses tabulary to create a table. The output of the code is sh
    | Haryana        |           300 |        2532.30 |
    | Punjab         |           260 |       35232.45 |
 :END:
+
 
 *** Using LaTeX tabularx and siunitx packages
 
