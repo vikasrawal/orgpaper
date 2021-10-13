@@ -1165,23 +1165,52 @@ therefore, be placed immediately before the object they are supposed
 to be applied on. Note that there should not be even a blank line
 between ~#+attr_latex~ lines and the object.
 
-In all the packages, we need to specify the alignment of each
-column. This is done using the option ~:align~. Each column type is
-represented by a character. For example, in most packages, c stands
-for center aligned columns, l for left aligned columns and r for right
-aligned columns. ~:align~ is followed by a string comprising as many
-such characters as the number of columns in the table. So, for a four
-column table, you would specify something like ~:align lccr~, which
-means that the first column is left aligned, next two columns are
-center aligned and the last column is right aligned. In this string,
-~|~ can be inserted to indicate where a vertical line is to be
-placed. So in a table formatted with ~:align l|ccr~, there would be a
-vertical line after the first column. When you have many columns, you
-can use expressions like ~*{3}{c}~ in place of ~ccc~. This says, use
-column ~c~ three times. Normally, tables are slightly indented on the
-left and right. To remove this indentation, you can add ~@{}~ before
-and after the alignment expression (for example, ~:align
-@{}l*{3}{c}r@{}~).
+Some key attributes that need to be specified using ~#+attr_latex~
+lines are as follows:
+
++ ~:align~ :: ~:align~ specifies how to render each columns by using
+  one letter (l,L,r,R,c,C or J) for each column. Each column type is
+  represented by a character. For example, in most packages, c stands
+  for center aligned columns, l for left aligned columns and r for
+  right aligned columns. The number of letters should exactly match
+  the number of columns in your table. For example, for a four column
+  table, you would specify something like ~:align lccr~, which means
+  that the first column is left aligned, next two columns are center
+  aligned and the last column is right aligned. A ~|~ anywhere in this
+  string implies a vertical line. So in a table formatted with ~:align
+  l|ccr~, there would be a vertical line after the first column. When
+  you have many columns, you can use expressions like ~*{3}{c}~ in
+  place of ~ccc~. This says, use column ~c~ three times. Normally,
+  tables are slightly indented on the left and the right. To remove
+  this indentation, you can add ~@{}~ before and after the alignment
+  expression (for example, ~:align @{}l*{3}{c}r@{}~).
+
++ ~:width~ :: ~:width~ is used to specify the width of the table that
+  the table can take [it may be specified as ~\textwidth~, implying
+  full text width, as ~0.8\textwidth~, implying a fraction (0.8 here)
+  of the text width, in centimeters (like, 10cm) or in inches (like,
+  5in)].  Note that, different environments use the information on
+  width differently. In particular, if the contents of your table
+  columns do not require the width specified by you, some packages
+  would only use the minimum width required while others would widen
+  the table to the total width specified by you. The total width is
+  also divided between different columns differently by various
+  packages.
+
++ ~:center~ :: This option followed by ~t~ or ~nil~ would center align
+  or left align the table horizontally.
+
++ ~:float~ :: This option followed by ~t~ or ~nil~ specifies whether
+  this object (table, figure or any other special block) is a floating
+  object which can be optimally placed by LaTeX or do you want it
+  exactly where you have placed it in the document. In most cases, you
+  would want these objects to float so that LaTeX can optimally place
+  them.
+
++ ~:booktabs~ :: This option followed by ~t~ gives us nice horizontal
+  lines. In most cases, when using ~booktabs~, one should not use
+  vertical lines in the table (that is, ~:align~ should not have any
+  ~|~).
 
 
 *** Using tabular environment with dcolumn
@@ -1271,22 +1300,6 @@ options to it:
 : #+attr_latex: :environment tabulary :width 0.8\textwidth :align @{}L|llR@{}
 : #+attr_latex: :center :booktabs t
 
-:width is used to specify the /maximum/ total width of the table that
-the table can take [it may be specified as ~\textwidth~, implying full
-text width, as ~0.8\textwidth~, implying a fraction (0.8 here) of the
-text width, in centimeters (like, 10cm) or in inches (like, 5in)].
-Note that, in =tabulary=, the width is the maximum width of the whole
-table. If your columns do not need the entire width that you specify,
-the table turns out narrower than the width.
-
-~:align~ specifies how to render each columns by using one letter
-(l,L,r,R,c,C or J) for each column. The number of letters should
-exactly match the number of columns in your table. A ~|~ anywhere
-implies a vertical line. ~@{}~ before and after the columns removes a
-slight default indentation that LaTeX tabulars insert in the first and
-last columns.
-
-~:booktabs t~ gives us nice horizontal lines.
 
 The following code uses tabulary to create a table. The output of the code is shown in Table [[tabulary-yield-out]].
 
