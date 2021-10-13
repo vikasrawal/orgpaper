@@ -1212,7 +1212,6 @@ lines are as follows:
   vertical lines in the table (that is, ~:align~ should not have any
   ~|~).
 
-
 *** Using tabular environment with dcolumn
 
 The default LaTeX ~tabular~ environment is the simplest of all but
@@ -1265,9 +1264,7 @@ need to specify ~:environment tabular~.
 | Punjab         |                                   260 |                35232.45 |                 15235.0 |
 
 
-
-*** Horizontal rules
-*** Formatting tables using LaTeX tabulary package
+*** Formatting tables using tabulary package
 
 Package ~tabulary~ extends the ~tabular~ environment by providing
 three additional column types. It is relatively easy to integrate this
@@ -1329,10 +1326,16 @@ The following code uses tabulary to create a table. The output of the code is sh
    | Punjab         |           260 |       35232.45 |
 :END:
 
-*** Using LaTeX tabularx and siunitx packages
+*** Using tabularx and siunitx packages
 
-Package tabularx provides a flexible tabular environment. In addition, siunitx provides an additional column type S which can be
-used to align numbers currently on the decimal. Package booktabs adds nice horizontal lines. All the three packages are included in Memoir class, and do not need to be called if you use vmemoir or varticle LaTeX classes defined in [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]]. If you are using article (may be the default) or any other class, you may need to add the following line in the preamble of your org file.
+Package tabularx provides a flexible tabular environment. In addition,
+siunitx provides an additional column type S which can be used to
+align numbers currently on the decimal. Packages tabularx, siunitx and
+booktabs are included in the Memoir class, and do not need to be
+called if you use vmemoir or varticle LaTeX classes defined in my
+emacs configuration. If you are using article (may be the default) or
+any other class, you may need to add the following line in the
+preamble of your org file.
 
 ~#+LATEX_HEADER: \usepackage{tabularx,booktabs}~
 
@@ -1340,26 +1343,32 @@ Following lines need to be added to the header of the org file to set the alignm
 
  : #+LATEX_HEADER: \usepackage[add-decimal-zero = true,add-integer-zero = true,round-integer-to-decimal,round-mode = places,round-precision=1]{siunitx}
  : #+LATEX_HEADER: \newcolumntype{C}{>{\centering\arraybackslash}X}
- : #+MACRO: MCONE @@latex:\multicolumn{1}{C}{$1}@@
+ : #+MACRO: M @@latex:\multicolumn{1}{C}{$1}@@
 
 With this, you are set to create nicely formatted tables in LaTeX/PDF files.
 
 The following code uses tabularx and siunitx to create a table.  The output of the code is shown in Table
 [[tabularx-yield-out]].
 
-The most important line is to set the alignment of column using ~:align~. The string that follows ~:align~ specifies the alignment of each column of the table.
+In the ~:align~ specification for ~tabularx~ tables (with ~siunitx~), you can use following types of columns:
 
-+ ~@{}~ on either side of table columns ensures that LaTeX does not add extra spaces on either side of the table.
 + ~l~ specifies a left aligned column with no wrapping.
 + ~r~ specifies a right aligned column with no wrapping.
 + ~X~ specifies a left aligned column with wrapping.
 + ~S~ specifies a numeric column aligned to the decimal point.
-  + Use option table-format=n.m to specify the maximum n digits and m decimals allowed in the column. Numbers will be rounded off to m decimals.
-  + Use option round-mode=off to turn the rounding-mode off (since we turned it on while loading siunitx). This is needed in columns that consist only integers.
+  + Use option table-format=n.m to specify the maximum n digits and m
+    decimals allowed in the column. Numbers will be rounded off to m
+    decimals.
+  + Use option round-mode=off to turn the rounding-mode off (since we
+    turned it on while loading siunitx). This is needed in columns
+    that consist only integers.
 
-You are advised to look at the tabularx and siunitx manuals for the many options that
-they provide.[fn:1]
+You are advised to look at the tabularx and siunitx manuals for the
+many options that they provide.[fn:1]
 
+For ~S~ columns, the column headings should be wrapped in macro M as
+shown in the example below to ensure that these are properly aligned
+in the center of the columns.
 
 #+NAME: tabularx-yield-in
 #+BEGIN_SRC org :results replace drawer
@@ -1368,11 +1377,11 @@ they provide.[fn:1]
   ,#+ATTR_LATEX: :environment tabularx :width 0.8\textwidth
   ,#+ATTR_LATEX: :align @{}l{S[table-format=3.0, round-mode=off]}{S[table-format=5.2]}@{}
   ,#+ATTR_LATEX: :center t :booktabs t :float t
-     | State          | {{{MCONE(Average yield)}}} | {{{MCONE(Average income)}}} ||
-     |----------------+----------------------------+-----------------------------|
-     | Madhya Pradesh |                        669 |                    13121.25 |
-     | Haryana        |                        300 |                     2532.30 |
-     | Punjab         |                        260 |                    35232.45 |
+     | State          | {{{M(Average yield)}}} | {{{M(Average income)}}} |
+     |----------------+------------------------+-------------------------+
+     | Madhya Pradesh |                    669 |                13121.25 |
+     | Haryana        |                    300 |                 2532.30 |
+     | Punjab         |                    260 |                35232.45 |
 #+End_SRC
 
 
@@ -1381,11 +1390,11 @@ they provide.[fn:1]
 #+ATTR_LATEX: :environment tabularx :width 0.8\textwidth
 #+ATTR_LATEX: :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{}
 #+ATTR_LATEX: :center t :booktabs t :float t
-| State          | {{{MCONE(Average yield)}}} | {{{MCONE(Average income)}}} |
-|----------------+----------------------------+-----------------------------|
-| Madhya Pradesh |                        669 |                    13121.25 |
-| Haryana        |                        300 |                     2532.30 |
-| Punjab         |                        260 |                    35232.45 |
+| State          | {{{M(Average yield)}}} | {{{M(Average income)}}} |
+|----------------+------------------------+-------------------------|
+| Madhya Pradesh |                    669 |                13121.25 |
+| Haryana        |                    300 |                 2532.30 |
+| Punjab         |                    260 |                35232.45 |
 
 *** Using threeparttable to write notes below tables
 
@@ -1457,6 +1466,8 @@ ensures that /Note/ and /Source/ start from a separate paragraph.
 
 I have used footnotesize to render the notes in a slightly smaller
 font. Option [flushleft] is used to align the notes to the left.
+
+*** Using tabularray package for making tables
 
 
 ** Creating LaTeX and/or PDF files
