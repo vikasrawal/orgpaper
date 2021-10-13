@@ -1032,12 +1032,16 @@ To start with, you may wish to use a GUI application like JabRef
 (cross-platform, http://jabref.sourceforge.net/) or BibDesk (OS-X
 only, http://bibdesk.sourceforge.net/) to build and maintain your database.
 
-Emacs also has excellent tools that can be used to build your database. Once you are comfortable using emacs, you will find that the Emacs tools are actually the most efficient and cleanest. Ebib gives a nice interface to manually enter the records. Bibretrieve and org-ref give you commands that can download BibTeX records directly from online databases.
+Emacs also has excellent tools that can be used to build your
+database. Once you are comfortable using emacs, you will find that the
+Emacs tools are actually the most efficient and cleanest. Ebib gives a
+nice interface to manually enter the records. Bibretrieve and org-ref
+give you commands that can download BibTeX records directly from
+online databases.
 
-Eventually, you should use bibretrieve and RefTeX
-(http://www.gnu.org/software/auctex/reftex.html) from within Emacs to
+Eventually, you should use bibretrieve from within Emacs to
 add entries to your database. org-ref.el provided by John Kitchin
-(https://github.com/jkitchin/jmax) has some useful functions.
+(https://github.com/jkitchin/jmax) also has some useful functions.
 
 As a sample, my own bibliographic database is available from
 https://github.com/indianstatistics/bibliobase/blob/master/bibliobase.bib.
@@ -1120,9 +1124,14 @@ org-export-dispatch~.
 
 ** Defining LaTeX classes
 
-If are using my emacs configuration, you will have access to three custom classes: vreport, vmemoir and varticle. Of these, vmemoir and varticle are based on the [[https://ctan.org/pkg/memoir?lang=en][Memoir]] class, an extremely versatile LaTeX package that allows for many customisations.
+If are using my emacs configuration, you will have access to three
+custom classes: vreport, vmemoir and varticle. Of these, vmemoir and
+varticle are based on the [[https://ctan.org/pkg/memoir?lang=en][Memoir]] class, a very versatile LaTeX package
+that allows for many customisations.
 
-While vmemoir and varticle classes should work for books and articles, you will benefit by looking at [[https://github.com/ep624/emacs.d.2021/blob/main/_configs/use-org-contrib.el][~/.emacs.d/_configs/use-org-contrib.el]] and customising them for your need.
+While vmemoir and varticle classes should work for books and articles,
+you will benefit by looking at [[https://github.com/ep624/emacs.d.2021/blob/main/_configs/use-org-contrib.el][~/.emacs.d/_configs/use-org-contrib.el]]
+and customising them for your need.
 
 LaTeX class is specified in the org header using a line as follows
 
@@ -1132,7 +1141,11 @@ Additional options can be provided by using the keyword ~latex_class_options~:
 
 ~#+latex_class_options: [11pt,twoside,openany,strict,extrafontsizes,article]~
 
-Those using my emacs configuration can call the snippet latex-class, taken from Scimax, using keyword ~lc~ to insert this line. The snippet shows LaTeX classes that are defined in your installation of org. Additional options for any latex class can be specified by calling another snippet using ~lco~.
+Those using my emacs configuration can call the snippet latex-class,
+taken from Scimax, using keyword ~lc~ to insert this line. The snippet
+shows LaTeX classes that are defined in your installation of
+org. Additional options for any latex class can be specified by
+calling another snippet using ~lco~.
 
 ** Formatting tables and images for LaTeX/PDF export
 
@@ -1145,7 +1158,31 @@ different libraries for creating tables.
 The choice of LaTeX environment and other associated options are
 specified in orgmode using lines starting with [[http://orgmode.org/manual/LaTeX-specific-attributes.html][~#+attr_latex~]]. These
 lines generate required LaTeX commands on export. We will also use org
-[[http://orgmode.org/manual/Special-blocks.html][special blocks]] for advanced table layouts.
+[[http://orgmode.org/manual/Special-blocks.html][special blocks]] for advanced table layouts. ~#+attr_latex~ lines affect
+only the object (table, image or a special block like begin_table or
+begin_tablenotes) that follows immediately after. These must,
+therefore, be placed immediately before the object they are supposed
+to be applied on. Note that there should not be even a blank line
+between ~#+attr_latex~ lines and the object.
+
+In all the packages, we need to specify the alignment of each
+column. This is done using the option ~:align~. Each column type is
+represented by a character. For example, in most packages, c stands
+for center aligned columns, l for left aligned columns and r for right
+aligned columns. ~:align~ is followed by a string comprising as many
+such characters as the number of columns in the table. So, for a four
+column table, you would specify something like ~:align lccr~, which
+means that the first column is left aligned, next two columns are
+center aligned and the last column is right aligned. In this string,
+~|~ can be inserted to indicate where a vertical line is to be
+placed. So in a table formatted with ~:align l|ccr~, there would be a
+vertical line after the first column. When you have many columns, you
+can use expressions like ~*{3}{c}~ in place of ~ccc~. This says, use
+column ~c~ three times. Normally, tables are slightly indented on the
+left and right. To remove this indentation, you can add ~@{}~ before
+and after the alignment expression (for example, ~:align
+@{}l*{3}{c}r@{}~).
+
 
 *** Using tabular environment with dcolumn
 
@@ -1168,13 +1205,17 @@ I suggest adding the following lines to the preamble too.
 : #+LATEX_HEADER: \newcolumntype{d}[1]{D{.}{\cdot}{#1}}
 : #+MACRO: M @@latex:\multicolumn{1}{c}{$1}@@
 
+Following tables illustrate the use of tabular environment for laying
+out the tables. Since tabular is the default environment, there is no
+need to specify ~:environment tabular~.
+
 #+begin_footnotesize
-#+NAME: tabular-yield-in
+#+name: tabular-yield-in
 #+BEGIN_SRC org :results replace drawer
-  ,#+NAME: tabular-yield-out
-  ,#+CAPTION: Table formatted using tabular, dcolumn and booktabs packages
-  ,#+ATTR_LATEX: :align @{}ld{0}*{2}{d{5.2}}@{}
-  ,#+ATTR_LATEX: :center t :booktabs t :float t
+  ,#+name: tabular-yield-out
+  ,#+caption: Table formatted using tabular, dcolumn and booktabs packages
+  ,#+attr_latex: :align @{}ld{0}*{2}{d{5.2}}@{}
+  ,#+attr_latex: :center t :booktabs t :float t
      | State          | {{{M(Average yield)}}} | {{{M(Average output)}}} | {{{M(Average income)}}} |
      |----------------+------------------------+-------------------------+-------------------------|
      | Madhya Pradesh |                    669 |                13121.25 |                 7234.25 |
@@ -1183,10 +1224,10 @@ I suggest adding the following lines to the preamble too.
 #+End_SRC
 #+end_footnotesize
 
-#+NAME: tabular-yield-out
-#+CAPTION: Table formatted using tabular, dcolumn and booktabs packages
-#+ATTR_LATEX: :align @{}l*{3}{d{5.2}}@{}
-#+ATTR_LATEX: :center t :booktabs t :float t
+#+name: tabular-yield-out
+#+caption: Table formatted using tabular, dcolumn and booktabs packages
+#+attr_latex: :align @{}l*{3}{d{5.2}}@{}
+#+attr_latex: :center t :booktabs t :float t
 | State          | <3colc>This long header does not wrap |                         |                         |
 |                |                {{{M(Average yield)}}} | {{{M(Average output)}}} | {{{M(Average income)}}} |
 |----------------+---------------------------------------+-------------------------+-------------------------|
@@ -1194,19 +1235,20 @@ I suggest adding the following lines to the preamble too.
 | Haryana        |                                   300 |                 2532.30 |                   234.3 |
 | Punjab         |                                   260 |                35232.45 |                 15235.0 |
 
+
+
+*** Horizontal rules
 *** Formatting tables using LaTeX tabulary package
 
-The default LaTeX ~tabular~ environment allows only a few column
-types. In particular, there is limited support in tabular environment
-for wrapping text in different types of columns. However, there are
-many other LaTeX environments for making tables, each with its own
-advantages. Of the lot, I find ~tabulary~ one of the most useful.
+Package ~tabulary~ extends the ~tabular~ environment by providing
+three additional column types. It is relatively easy to integrate this
+package into orgmode.
 
 Table [[tabulary-column-types]] shows different types of columns available
-in tabulary package.
+in ~tabulary~ package.
 
 #+NAME: tabulary-column-types
-#+CAPTION: Types of columns in LaTeX/tabulary package
+#+CAPTION: Types of columns in LaTeX tabulary package
 #+attr_latex: :environment tabulary :width \textwidth :align lL :booktabs t
 | Type | Description                  |
 |------+------------------------------|
@@ -1222,15 +1264,12 @@ Load tabulary and booktabs using the following line in the preamble.
 
 ~#+LATEX_HEADER: \usepackage{tabulary,booktabs}~
 
-The following lines inserted just above the table specify that the
-table should use the ~tabulary~ environment.
+Following ~#+attr_latex~ lines illustrate the way of declaring that
+the table should be constructed using ~tabulary~ and passing various
+options to it:
 
 : #+attr_latex: :environment tabulary :width 0.8\textwidth :align @{}L|llR@{}
-: #+attr_latex: :center :booktabs t :float nil
-
-Note that each attr_latex line affects only the object (table, image
-or a special block like begin_table or begin_tablenotes) that follows
-immediately after.
+: #+attr_latex: :center :booktabs t
 
 :width is used to specify the /maximum/ total width of the table that
 the table can take [it may be specified as ~\textwidth~, implying full
@@ -1276,7 +1315,6 @@ The following code uses tabulary to create a table. The output of the code is sh
    | Haryana        |           300 |        2532.30 |
    | Punjab         |           260 |       35232.45 |
 :END:
-
 
 *** Using LaTeX tabularx and siunitx packages
 
@@ -1407,7 +1445,6 @@ ensures that /Note/ and /Source/ start from a separate paragraph.
 I have used footnotesize to render the notes in a slightly smaller
 font. Option [flushleft] is used to align the notes to the left.
 
-*** Creating horizontal rules
 
 ** Creating LaTeX and/or PDF files
 
