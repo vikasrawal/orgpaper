@@ -3,7 +3,7 @@
 #+SUBTITLE: A Toolkit for Writing Reproducible Research Papers and Monographs
 #+AUTHOR: Vikas Rawal
 #+COLUMNS: %25ITEM %TAGS %PRIORITY %T
-#+OPTIONS: H:4 toc:2 num:2
+#+OPTIONS: H:4 toc:2 num:2 broken-links:mark
 #+LaTeX_CLASS: vmemoir
 #+LATEX_CLASS_OPTIONS: [oneside,openany,strict,extrafontsizes,article,garamond]
 #+INCLUDE: default_packages.org
@@ -16,6 +16,7 @@
 #+LATEX_HEADER: \newcolumntype{d}[1]{D{.}{\cdot}{#1}}
 #+LATEX_HEADER: \newcommand{\mcone}[1]{\multicolumn{1}{C}{#1}}
 #+MACRO: MCONE @@latex:\mcone{$1}@@
+#+MACRO: M @@latex:\mcone{$1}@@
 #+MACRO: MCD @@latex:\multicolumn{1}{c}{$1}@@
 
 * Introduction
@@ -245,9 +246,9 @@ remember shortcuts for commands that I use most frequently. For
 others, I use the verbose versions. Over time, one learns more
 shortcuts and starts using them instead of the verbose versions.
 
-#+CAPTION: Essential emacs commands
-#+NAME: essential-emacs-commands
-#+attr_latex: :environment longtable :align p{5cm}ll
+#+caption: Essential emacs commands
+#+name: essential-emacs-commands
+#+attr_latex: :environment longtable :align @{}p{7cm}ll@{} :booktabs t
 | Description                                                                                                   | Verbose command           | Shortcut     |
 |                                                                                                               | =M-x= followed by         |              |
 |---------------------------------------------------------------------------------------------------------------+---------------------------+--------------|
@@ -295,7 +296,7 @@ frameworks. Instead, I have a rather modular setup primarily based on
 use-package for loading the additional packages I need. Packages are
 installed mainly using package.el, the most popular package manager
 for emacs. A few packages, including org-mode, are directly installed
-from their git repositories to take advantage of latest features
+from their git repositories to take advantage of the latest features
 available.
 
 *** Clone the git repository
@@ -330,6 +331,7 @@ them. You may also want some others depending upon your use. You can
 always delete the ones you do not need, and add any other packages
 that you need.
 
+#+begin_footnotesize
 #+begin_src emacs-lisp
   (setq package-selected-packages '(ag anzu async auto-complete avy
                                     bibretrieve auctex cdlatex
@@ -382,8 +384,9 @@ that you need.
                                     which-key windata with-editor
                                     yasnippet-snippets yasnippet
                                     zenburn-theme))
-  (package-install-selected-packages)
+(package-install-selected-packages)
 #+end_src
+#+end_footnotesize
 
 You can copy the above lines, paste them in an empty buffer (e.g.,
 \*scratch\*), select them, and do M-x eval-region.
@@ -391,13 +394,12 @@ You can copy the above lines, paste them in an empty buffer (e.g.,
 * Speed up with Yasnippet templates
 
 You can considerably speed up your work in emacs by using
-yasnippets. Yasnippets are essentially chunks of text -- forms,
-templates, lines of code -- that can be inserted in a buffer using a
-keyword. It essentially allows you to insert text that needs to be
-used repeatedly by using a short keyword. If you have cloned my emacs
-configuration, a whole bunch of snippets would be in
-$~/.emacs.d/snippets$ directory. I will illustrate their use in the
-sections on org-mode.
+yasnippets. Yasnippets are chunks of text -- forms, templates, lines
+of code -- that can be inserted in a buffer using a keyword. It allows
+you to insert text that needs to be used repeatedly by using a short
+keyword. If you have cloned my emacs configuration, a whole bunch of
+snippets would be in $~/.emacs.d/snippets$ directory. I will
+illustrate their use in the sections on org-mode.
 
 * Org-mode basics
 :PROPERTIES:
@@ -423,9 +425,9 @@ this keyword are specified after the colon.
 
 Table [[special-lines]] gives details of a few major special lines that we shall use. The table also gives snippet keywords that can used to create the keyword if you have got the yasnippets from my emacs configuration.
 
-#+NAME: special-lines
-#+CAPTION: Main special lines to be used at the top of an Org buffer
-#+attr_latex: :environment tabularx :width \textwidth :align lX
+#+name: special-lines
+#+caption: Main special lines to be used at the top of an Org buffer
+#+attr_latex: :environment tabularx :width \textwidth :align llX
 | Keyword     | Snippet | Purpose                                                                                                                                                    |
 |-------------+---------+------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | ~#+title~   | ~<ti~   | To declare title of the paper                                                                                                                              |
@@ -468,47 +470,77 @@ create as many levels of sections as you need.
 See the following example. Note that headlines are not numbered. We
 leave section numbering for org-mode to handle automatically.
 
+#+begin_footnotesize
 #+BEGIN_SRC org
   ,#+TITLE: Reproducible Research Papers using Org-mode and R: A Guide
   ,#+AUTHOR: Vikas Rawal
   ,#+DATE: May 4, 2014
   ,* Introduction
+
   This is the first section. Add your content here.
+
+  Aliquam erat volutpat.  Nunc eleifend leo vitae magna.  In id erat non
+  orci commodo lobortis.  Proin neque massa, cursus ut, gravida ut,
+  lobortis eget, lacus.  Sed diam.
+
   ,* Literature review
+
   ,** Is this an important issue
-  This is a sub-section under top-level section "Literature review" Now
-  indulgence dissimilar for his thoroughly has terminated. Agreement
+
+  This is a sub-section under top-level section "Literature review".
+
+  Now indulgence dissimilar for his thoroughly has terminated. Agreement
   offending commanded my an. Change wholly say why eldest period. Are
   projection put celebrated particular unreserved joy unsatiable its. In
   then dare good am rose bred or. On am in nearer square wanted.
+
   ,** What are the major disputes in the literature
+
   ,*** adulterated text
+
   Instrument cultivated alteration any favourable expression law far
   nor. Both new like tore but year. An from mean on with when sing pain.
   Oh to as principles devonshire companions unsatiable an delightful.
   The ourselves suffering the sincerity. Inhabit her manners adapted age
   certain. Debating offended at branched striking be subjects.
+
   ,*** Unadulterated prose
+
   Announcing of invitation principles in. Cold in late or deal.
   Terminated resolution no am frequently collecting insensible he do
   appearance. Projection invitation affronting admiration if no on or.
   It as instrument boisterous frequently apartments an in. Mr excellence
-  inquietude conviction is in unreserved particular. You fully seems
-  stand nay own point walls. Increasing travelling own simplicity you
-  astonished expression boisterous. Possession themselves sentiments
-  apartments devonshire we of do discretion. Enjoyment discourse ye
-  continued pronounce we necessary abilities.
+  inquietude conviction is in unreserved particular.
+
+  You fully seems stand nay own point walls. Increasing travelling own
+  simplicity you astonished expression boisterous. Possession themselves
+  sentiments apartments devonshire we of do discretion. Enjoyment
+  discourse ye continued pronounce we necessary abilities.
+
   ,* Methodology
-  This is the next top-level section. There are no sub-sections under this.
+
+  This is the next top-level section. There are no sub-sections under
+  this.
+
   ,* Results
-  This is the third top-level section. There are sub-sections under this.
+
+  This is the third top-level section. There are sub-sections under
+  this.
+
   ,** Result 1
+
   This is a sub-section under section Results.
+
   ,** Result 2
+
   This is another sub-section under section Results
+
   ,* Conclusions
-  This is the next and final top-level section. There are  no sub-sections under it.
+
+  This is the next and final top-level section. There are no
+  sub-sections under it.
 #+END_SRC
+#+end_footnotesize
 
 Org handles these headlines beautifully. With your cursor on the
 headline, pressing tab folds-in the contents of a headline. If you
@@ -530,6 +562,7 @@ the paper develops.
 (For further reading, see [[http://orgmode.org/manual/Headlines.html#Headlines][Headlines]] in the Org-mode manual)
 
 ** Itemised lists
+*** Unordered (bulleted) lists
 
 Following syntax produces unordered (bulleted) lists:
 
@@ -551,6 +584,9 @@ This is how this list shows up in the final document
 + bullet
 + bullet
 
+Note that, in unordered lists, ~+~ and ~-~ signs are interchangeable.
+
+*** Ordered (numbered) lists
 
 Following syntax produces ordered/numbered lists:
 
@@ -572,8 +608,13 @@ This is how the ordered list shows up in the final document.
      1) Item 2.2.1
 3) Item 3
 
+Note that, in ordered lists 1. and 1) are interchangeable.
 
-Following syntax produces a description list:
+*** Description lists
+
+Description lists are used for providing definitions/explanations for
+words/phrases like in a dictionary. Following syntax produces a
+description list:
 
 #+BEGIN_SRC org
 + item1 :: description of item1
@@ -590,9 +631,7 @@ This is how this list shows up in the final document
   - bullet2 under item2
 
 Note that:
-+ In unordered/description lists, ~+~ and ~-~ signs are interchangeable.
-+ Similarly, in ordered lists 1. and 1) are interchangeable.
-+ Levels of bullets and numbering are determined by indentation.
++ In lists, levels of bullets and numbering are determined by indentation.
 + Different types of lists can be mixed using numbers and bullets for different levels.
 + If the cursor is on a line that is part of an itemised list, M-return inserts a new line with a bullet/number below the present
   line with the same level of indentation.
@@ -621,10 +660,10 @@ table from the text anywhere in the document.
 See Table [[table-yield]] for an illustration of how this table shows
 up in the final document.
 
-#+NAME: one
-#+BEGIN_SRC org :results replace drawer
-,#+NAME: table-yield
-,#+CAPTION: Simple table created using LaTeX tabular environment
+#+name: one
+#+BEGIN_SRC org :results replace
+,#+name: table-yield
+,#+caption: Simple table created using LaTeX tabular environment
 ,#+attr_latex: :environment tabular :width \textwidth :align lrr
     | State          | Average yield | Average income |
     |----------------+---------------+----------------|
@@ -633,17 +672,15 @@ up in the final document.
     | Punjab         |           260 |          35000 |
 #+End_SRC
 
-#+RESULTS: one
-:RESULTS:
-#+NAME: table-yield
-#+CAPTION: Simple table created using LaTeX tabular environment
+#+name: table-yield
+#+caption: Simple table created using LaTeX tabular environment
 #+attr_latex: :environment tabular :width \textwidth :align lrr
     | State          | Average yield | Average income |
     |----------------+---------------+----------------|
     | Madhya Pradesh |           672 |          13000 |
     | Haryana        |           300 |          25000 |
     | Punjab         |           260 |          35000 |
-:END:
+
 
 *** Table editor
 
@@ -666,9 +703,10 @@ tables. Table [[org-table-commands]] provides the most important
 ones. Note that Table [[org-table-commands]] is created using Org mode. It
 also gives you an idea of how the table would look eventually.
 
-#+NAME: org-table-commands
-#+CAPTION: Commands to manipulate tables in Org
-#+attr_latex: :environment tabular :width \textwidth :align ll :booktabs t :float t
+#+name: org-table-commands
+#+caption: Commands to manipulate tables in Org
+#+attr_latex: :environment tabular :width \textwidth :align @{}ll@{}
+#+attr_latex: :booktabs t
 | Command       | Description                                            |
 |---------------+--------------------------------------------------------|
 | =M-<left>=    | Move the column left                                   |
@@ -701,8 +739,8 @@ You can insert images in documents as follows
 You should do this for images that you already have, and you just want
 to insert them in the document. If you have snippets included in my
 emacs configuration, you can use yasnippet ~ncf~ to help in inserting
-a named figure. For graphs produced by R, we shall embed the code instead,
-so that the graph is generated and inserted automatically.
+a named figure. For graphs produced by R, we will embed the code
+instead, so that the graph is generated and inserted automatically.
 
 ** Captions and cross-references
 
@@ -710,27 +748,27 @@ We would like to give a title to our tables and images. And we would
 like to be able to refer to them from the text. These are achieved by
 adding two lines above every table and image.
 
-+ A line starting with ~#+CAPTION:~ placed just above a table or a
++ A line starting with ~#+caption:~ placed just above a table or a
   figure adds a title to it. All Tables and Figures titles are
   automatically numbered.
 
 + For referring to these Tables and Figures in the text, we shall name
-  each table and figure in a line starting with ~#+NAME:~ as below.
+  each table and figure in a line starting with ~#+name:~ as below.
 
 To illustrate, for inserting an image, with a caption and a name, this
 is what we shall do.
 
 #+BEGIN_SRC org
-  ,#+NAME: literacy-rate
-  ,#+CAPTION: Percentage of literate men and women, by country (per cent)
+  ,#+name: literacy-rate
+  ,#+caption: Percentage of literate men and women, by country (per cent)
   [[file:a.jpg]]
 #+end_src
 
 Similarly, a table will be inserted as follows.
 
 #+BEGIN_SRC org
-  ,#+NAME: literacy-rate-table
-  ,#+CAPTION: Percentage of literate men and women, by country (per cent)
+  ,#+name: literacy-rate-table
+  ,#+caption: Percentage of literate men and women, by country (per cent)
   | Country    | Men | Women |
   |------------+-----+-------|
   | India      |  75 |    43 |
@@ -787,7 +825,7 @@ syntax-aware, development environment to write R code. R code is
 embedded into Org as a source block. The basic syntax is
 
 #+BEGIN_SRC org
-  ,#+NAME: name_of_code_block
+  ,#+name: name_of_code_block
   ,#+BEGIN_SRC R <switches> <header-arguments>
 
     <Your R code goes here.>
@@ -838,9 +876,9 @@ included into the document.[fn:4]
 Code block [[readdata-code]] is an example of such a code block. Note
 ~:results value silent~ switch used in the  ~#+begin_src~ line.
 
-#+NAME: readdata-code
+#+name: readdata-code
 #+BEGIN_SRC org
-  ,#+NAME: readdata-code
+  ,#+name: readdata-code
   ,#+BEGIN_SRC R :results silent :exports none
 
   read.data("datafile1.csv",sep=",",header=T)->mydata1
@@ -862,9 +900,9 @@ For example, the code block [[r-code-table]] below uses mydata1 read in
 the previous code block, reads a new dataset, and processes them to
 create a table that shows average BMI by country.
 
-#+NAME: r-code-table
+#+name: r-code-table
 #+BEGIN_SRC org
-  ,#+NAME: bmi-table-code
+  ,#+name: bmi-table-code
   ,#+BEGIN_SRC R :results value :colnames yes :hline yes
   aggregate(height~Country,data=mydata1,mean)->a1
   read.data("datafile2.csv",sep=",",header=T)->mydata2
@@ -896,8 +934,8 @@ lines, to give the table a title and a name. Note that both the code
 block and the result of the code block have separate names.
 
 #+BEGIN_SRC org
-  ,#+NAME: bmi-table-output
-  ,#+CAPTION: Average BMI, by country
+  ,#+name: bmi-table-output
+  ,#+caption: Average BMI, by country
   ,#+RESULTS: bmi-table-code
 #+END_SRC
 
@@ -913,7 +951,7 @@ The following code shows an example of a code block that produces a
 graph.
 
 #+BEGIN_SRC org
- ,#+NAME: mygraph-code
+ ,#+name: mygraph-code
  ,#+BEGIN_SRC R :results file graphics :file bmi2.png :width 825 :height 1050 :fonts serif :res 300
 
  ,#+END_SRC
@@ -952,8 +990,8 @@ file.
 As with the tables, we shall add a caption and a name to it as follows
 
 #+BEGIN_SRC org
-  ,#+NAME: my-bmi-graph
-  ,#+CAPTION: Average BMI, by Country
+  ,#+name: my-bmi-graph
+  ,#+caption: Average BMI, by Country
   ,#+RESULTS: mygraph-code
   [[gini.png]]
 #+END_SRC
@@ -1092,8 +1130,8 @@ you want after citation (for example, "Chapter 2").
 The two most useful citation commands are ~\parencite~ (or ~\citep~) and
 ~\citet~. Their usage is illustrated in Table [[citation-commands]].
 
-#+NAME: citation-commands
-#+CAPTION: Important citation commands in biblatex
+#+name: citation-commands
+#+caption: Important citation commands in biblatex
 #+attr_latex: :environment tabularx :width \textwidth :align lX
 | Citation command                  | Output                             |
 |-----------------------------------+------------------------------------|
@@ -1273,8 +1311,8 @@ package into orgmode.
 Table [[tabulary-column-types]] shows different types of columns available
 in ~tabulary~ package.
 
-#+NAME: tabulary-column-types
-#+CAPTION: Types of columns in LaTeX tabulary package
+#+name: tabulary-column-types
+#+caption: Types of columns in LaTeX tabulary package
 #+attr_latex: :environment tabulary :width \textwidth :align lL :booktabs t
 | Type | Description                  |
 |------+------------------------------|
@@ -1300,10 +1338,10 @@ options to it:
 
 The following code uses tabulary to create a table. The output of the code is shown in Table [[tabulary-yield-out]].
 
-#+NAME: tabulary-in
+#+name: tabulary-in
 #+BEGIN_SRC org :results replace drawer
-  ,#+NAME: tabulary-yield-out
-  ,#+CAPTION: Table formatted using tabulary package
+  ,#+name: tabulary-yield-out
+  ,#+caption: Table formatted using tabulary package
   ,#+ATTR_LATEX: :environment tabulary :width \textwidth :align @{}lRR@{}
   ,#+ATTR_LATEX: :center t :booktabs t :float t
      | State          | Average yield | Average income |
@@ -1315,8 +1353,8 @@ The following code uses tabulary to create a table. The output of the code is sh
 
 #+RESULTS: tabulary-in
 :RESULTS:
-#+NAME: tabulary-yield-out
-#+CAPTION: Table formatted using tabulary package
+#+name: tabulary-yield-out
+#+caption: Table formatted using tabulary package
 #+ATTR_LATEX: :environment tabulary :width \textwidth :align @{}lRR@{}
 #+ATTR_LATEX: :center t :booktabs t :float t
    | State          | Average yield | Average income |
@@ -1366,14 +1404,14 @@ In the ~:align~ specification for ~tabularx~ tables (with ~siunitx~), you can us
 You are advised to look at the tabularx and siunitx manuals for the
 many options that they provide.[fn:1]
 
-For ~S~ columns, the column headings should be wrapped in macro M as
-shown in the example below to ensure that these are properly aligned
-in the center of the columns.
+For the ~S~ columns, the column headings should be wrapped in macro M
+as shown in the example below to ensure that these are properly
+aligned in the center of the columns.
 
-#+NAME: tabularx-yield-in
+#+name: tabularx-yield-in
 #+BEGIN_SRC org :results replace drawer
-  ,#+NAME: tabularx-yield-out
-  ,#+CAPTION: Table formatted using tabularx and siunitx packages
+  ,#+name: tabularx-yield-out
+  ,#+caption: Table formatted using tabularx and siunitx packages
   ,#+ATTR_LATEX: :environment tabularx :width 0.8\textwidth
   ,#+ATTR_LATEX: :align @{}l{S[table-format=3.0, round-mode=off]}{S[table-format=5.2]}@{}
   ,#+ATTR_LATEX: :center t :booktabs t :float t
@@ -1385,8 +1423,8 @@ in the center of the columns.
 #+End_SRC
 
 
-#+NAME: tabularx-yield-out
-#+CAPTION: Table formatted using tabularx and siunitx packages
+#+name: tabularx-yield-out
+#+caption: Table formatted using tabularx and siunitx packages
 #+ATTR_LATEX: :environment tabularx :width 0.8\textwidth
 #+ATTR_LATEX: :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{}
 #+ATTR_LATEX: :center t :booktabs t :float t
@@ -1407,10 +1445,10 @@ better formatting of notes below the table
 
 The following code produces a table with notes below.
 
-#+NAME: org-threeparttable-in
+#+name: org-threeparttable-in
 #+BEGIN_SRC org
-  ,#+NAME: threeparttable-table-yield
-  ,#+CAPTION: Table created using tabularx, siunitx and threeparttable
+  ,#+name: threeparttable-table-yield
+  ,#+caption: Table created using tabularx, siunitx and threeparttable
   ,#+ATTR_LATEX: :float t :options [hb] :center t
   ,#+begin_table
   ,#+begin_threeparttable
@@ -1436,8 +1474,8 @@ The following code produces a table with notes below.
 #+End_SRC
 
 
-#+NAME: threeparttable-table-yield
-#+CAPTION: Table created using tabularx, siunitx, with table notes added below using threeparttable
+#+name: threeparttable-table-yield
+#+caption: Table created using tabularx, siunitx, with table notes added below using threeparttable
 #+ATTR_LATEX: :float t :options [hb] :center t
 #+begin_table
 #+begin_threeparttable
@@ -1638,8 +1676,6 @@ Download the file, adjust the path to the file in the line below and
 add it to your org file.
 
 ~#+INCLUDE: /path-to-the-file/vikas-bibstyle.org~
-
-** Using yasnippets
 
 * Important Resources
 + [[http://orgmode.org/manual/][Org-mode manual]]
