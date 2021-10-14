@@ -647,12 +647,6 @@ Note that:
 ** Tables
 *** Sample code
 
-We shall directly create only those tables in Org that present content
-not being produced through statistical analysis. For tables that are
-created through statistical analysis, we shall embed R programs rather
-than the tables themselves. This is discussed in Section [[#orgmodeandr]]
-of this guide.
-
 The following sample code produces a reasonably formatted table, with
 a numbered title above the table and a name for cross-referencing the
 table from the text anywhere in the document.
@@ -680,7 +674,6 @@ up in the final document.
     | Madhya Pradesh |           672 |          13000 |
     | Haryana        |           300 |          25000 |
     | Punjab         |           260 |          35000 |
-
 
 *** Table editor
 
@@ -729,6 +722,13 @@ to overcome this limitation while exporting to LaTeX or HTML.
 If you have snippets included with my emacs configuration, you can
 type ~nct1~, ~nct2~, ~nct3~ or ~nct4~ and press the tab key to create
 blank tables with 1-4 columns.
+
+Note that we will directly create only those tables in org that are
+not produced as a result of some statistical analysis. For tables that
+are a result of some statistical analysis, we will embed R programs
+rather than the tables themselves. This is discussed in Section
+[[#orgmodeandr]] of this guide.
+
 
 ** Images
 
