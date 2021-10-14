@@ -15,7 +15,6 @@
 #+LATEX_HEADER: \newcommand{\mcx}[2]{\multicolumn{#1}{>{\hsize=\dimexpr #1\hsize +\numexpr2*#1-2\relax\tabcolsep \relax}C}{#2}}
 #+LATEX_HEADER: \newcolumntype{d}[1]{D{.}{\cdot}{#1}}
 #+LATEX_HEADER: \newcommand{\mcone}[1]{\multicolumn{1}{C}{#1}}
-#+MACRO: MCONE @@latex:\mcone{$1}@@
 #+MACRO: M @@latex:\mcone{$1}@@
 #+MACRO: MCD @@latex:\multicolumn{1}{c}{$1}@@
 
@@ -1184,7 +1183,10 @@ lines are as follows:
 + ~:environment:~ :: ~:environment~ specifies the LaTeX package to be
   used for a particular table. This is the simplest of all but allows
   limited possibilities for formatting columns. We will use tabulary,
-  tabularx and tabularray packages for most of our tables.
+  tabularx and tabularray packages for most of our tables. Other
+  packages that you might want to look at are tabu, longtable and
+  sidewaystable. However, the packages used in this guide will suffice
+  for most needs.
 
 + ~:align~ :: ~:align~ specifies how to render each columns by using
   one letter (l,L,r,R,c,C or J) for each column. Each column type is
@@ -1311,18 +1313,23 @@ preamble of your org file.
 
 ~#+LATEX_HEADER: \usepackage{tabularx,booktabs}~
 
-Following lines need to be added to the header of the org file to set the alignment of numeric columns correctly (using siunitx LaTeX package) and to properly align headings of table columns.
+Following lines need to be added to the header of the org file to set
+the alignment of numeric columns correctly (using siunitx LaTeX
+package) and to properly align headings of table columns.
 
- : #+LATEX_HEADER: \usepackage[add-decimal-zero = true,add-integer-zero = true,round-integer-to-decimal,round-mode = places,round-precision=1]{siunitx}
+ : #+LATEX_HEADER: \usepackage[add-decimal-zero = true,add-integer-zero = true,
+ :                             round-integer-to-decimal,round-mode = places,
+ :                             round-precision=1]{siunitx}
  : #+LATEX_HEADER: \newcolumntype{C}{>{\centering\arraybackslash}X}
  : #+MACRO: M @@latex:\multicolumn{1}{C}{$1}@@
 
 With this, you are set to create nicely formatted tables in LaTeX/PDF files.
 
-The following code uses tabularx and siunitx to create a table.  The output of the code is shown in Table
-[[tabularx-yield-out]].
+The following code uses tabularx and siunitx to create a table.  The
+output of the code is shown in Table [[tabularx-yield-out]].
 
-In the ~:align~ specification for ~tabularx~ tables (with ~siunitx~), you can use following types of columns:
+In the ~:align~ specification for ~tabularx~ tables (with ~siunitx~),
+you can use following types of columns:
 
 + ~l~ specifies a left aligned column with no wrapping.
 + ~r~ specifies a right aligned column with no wrapping.
@@ -1361,7 +1368,7 @@ aligned in the center of the columns.
 #+caption: Table formatted using tabularx and siunitx packages
 #+ATTR_LATEX: :environment tabularx :width 0.8\textwidth
 #+ATTR_LATEX: :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{}
-#+ATTR_LATEX: :center t :booktabs t :float t
+#+ATTR_LATEX: :center t :booktabs t :float
 | State          | {{{M(Average yield)}}} | {{{M(Average income)}}} |
 |----------------+------------------------+-------------------------|
 | Madhya Pradesh |                    669 |                13121.25 |
@@ -1383,63 +1390,74 @@ The following code produces a table with notes below.
 #+BEGIN_SRC org
   ,#+name: threeparttable-table-yield
   ,#+caption: Table created using tabularx, siunitx and threeparttable
-  ,#+ATTR_LATEX: :float t :options [hb] :center t
   ,#+begin_table
+  ,#+ATTR_LATEX: :float t :options [hb]
   ,#+begin_threeparttable
   ,#+ATTR_LATEX: :environment tabularx :width 0.8\textwidth
   ,#+ATTR_LATEX: :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{}
   ,#+ATTR_LATEX: :booktabs t
-  | State          | {{{MCONE(Average yield)}}} | {{{MCONE(Average income)}}} |
-  |----------------+----------------------------+-----------------------------|
-  | Madhya Pradesh |                        669 |                    13121.25 |
-  | Haryana        |                        300 |                     2532.30 |
-  | Punjab         |                        260 |                    35232.45 |
+  | State          | {{{M(Average yield)}}} | {{{M(Average income)}}} |
+  |----------------+------------------------+-------------------------|
+  | Madhya Pradesh |                    669 |                13121.25 |
+  | Haryana^{a}    |                    300 |                 2532.30 |
+  | Punjab         |                    260 |                35232.45 |
   ,#+attr_latex: :options [flushleft]
   ,#+begin_tablenotes
   ,#+begin_footnotesize
-    \item[] \textit{Notes}:
+    + Notes: :: \mbox{}
       1. This table is very nice. This note is very long. But the long note wraps nicely under the table.
       2. This is the second note. But this is not very wide.
-    \item[] \textit{Source}: http://www.indianstatistics.org}
+      +  We can use bullets.
+      + a :: Or use description lists to refer to footnote markets in the table
+    + Source: :: https://www.indianstatistics.org
   ,#+end_footnotesize
   ,#+end_tablenotes
   ,#+end_threeparttable
   ,#+end_table
 #+End_SRC
 
-
-#+name: threeparttable-table-yield
-#+caption: Table created using tabularx, siunitx, with table notes added below using threeparttable
-#+ATTR_LATEX: :float t :options [hb] :center t
-#+begin_table
-#+begin_threeparttable
-#+ATTR_LATEX: :environment tabularx :width 0.8\textwidth
-#+ATTR_LATEX: :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{}
-#+ATTR_LATEX: :booktabs t
-| State          | {{{MCONE(Average yield)}}} | {{{MCONE(Average income)}}} |
-|----------------+----------------------------+-----------------------------|
-| Madhya Pradesh |                        669 |                    13121.25 |
-| Haryana        |                        300 |                     2532.30 |
-| Punjab         |                        260 |                    35232.45 |
-#+attr_latex: :options [flushleft]
-#+begin_tablenotes
-#+begin_footnotesize
-  \item[] \textit{Notes}:
-    1. This table is very nice. This note is very long. But the long note wraps nicely under the table.
-    2. This is the second note. But this is not very wide.
-  \item[] \textit{Source}: http://www.indianstatistics.org}
-#+end_footnotesize
-#+end_tablenotes
-#+end_threeparttable
-#+end_table
-
-The notes use just a little bit of direct LaTeX coding. ~\item[]~
-ensures that /Note/ and /Source/ start from a separate paragraph.
+Org lists can be used to format the notes properly. ~\mbox{}~ is used
+to leave white space in the given example since the description list
+items ~+Notes:~ and ~Source:~ do not have any description in the same
+line.
 
 I have used footnotesize to render the notes in a slightly smaller
 font. Option [flushleft] is used to align the notes to the left.
 
 *** Using tabularray package for making tables
+
+~tabularray~ is a new package that is very versatile and provides
+flexible ways of creating multi-row and multi-column cells, adding
+table notes and using colours in the tables. You can also create
+multi-page tables with tabularray.
+
+#+name: threeparttable-table-yield
+#+caption: Table created using tabularx, siunitx, with table notes added below using threeparttable
+#+begin_table
+#+ATTR_LATEX: :float :options [b]
+#+begin_threeparttable
+#+ATTR_LATEX: :environment tabularx :width 0.8\textwidth
+#+ATTR_LATEX: :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{}
+#+ATTR_LATEX: :booktabs t
+| State          | {{{M(Average yield)}}} | {{{M(Average income)}}} |
+|----------------+------------------------+-------------------------|
+| Madhya Pradesh |                    669 |                13121.25 |
+| Haryana^{a}    |                    300 |                 2532.30 |
+| Punjab         |                    260 |                35232.45 |
+#+attr_latex: :options [flushleft]
+#+begin_tablenotes
+#+begin_footnotesize
+   + Notes: :: \mbox{}
+     1. This table is very nice. This note is very long. But the long note wraps nicely under the table.
+     2. This is the second note. But this is not very wide.
+     +  We can use bullets instead using + or -.
+     + a :: We can also use description lists to refer to note markers in the table
+   + Source: :: https://www.indianstatistics.org
+#+end_footnotesize
+#+end_tablenotes
+#+end_threeparttable
+#+end_table
+
 
 ** Creating LaTeX and/or PDF files
 

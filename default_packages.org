@@ -1,5 +1,5 @@
 #+LaTeX_HEADER: \usepackage[dvipsnames,svgnames,table]{xcolor}
-#+LATEX_HEADER: \usepackage{comment,multirow,threeparttable,xcolor,lmodern,graphicx,longtable,float,wrapfig,url,underscore,siunitx}
+#+LATEX_HEADER: \usepackage{comment,multirow,threeparttable,xcolor,lmodern,graphicx,longtable,float,wrapfig,url,underscore,siunitx,tabulary}
 #+LaTeX_HEADER: \usepackage{parnotes,comment,multirow,amsmath,amssymb,marvosym,wasysym}
 #+LaTeX_HEADER: \usepackage[T1]{fontenc}
 #+LaTeX_HEADER: \usepackage[normalem]{ulem}
@@ -8,7 +8,3 @@
 #+LaTeX_HEADER: \usepackage[innermargin=1.5in,outermargin=1.25in,vmargin=1.25in]{geometry}
 #+LaTeX_HEADER: \usepackage[section]{placeins}
 #+LATEX_HEADER: \hypersetup{colorlinks=true,citecolor=blue,linkcolor=blue,citebordercolor={0 0}, linktocpage,pdfstartview=FitH,anchorcolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue}
-
-
-
-
