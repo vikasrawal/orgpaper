@@ -656,24 +656,24 @@ up in the final document.
 
 #+name: one
 #+BEGIN_SRC org :results replace
-,#+name: table-yield
-,#+caption: Simple table created using LaTeX tabular environment
-,#+attr_latex: :environment tabular :width \textwidth :align lrr
-    | State          | Average yield | Average income |
-    |----------------+---------------+----------------|
-    | Madhya Pradesh |           672 |          13000 |
-    | Haryana        |           300 |          25000 |
-    | Punjab         |           260 |          35000 |
+  ,#+name: table-yield
+  ,#+caption: Simple table created using LaTeX tabular environment
+  ,#+attr_latex: :environment tabular :width \textwidth :align lrr
+   | State          | Average yield | Average income |
+   |----------------+---------------+----------------|
+   | Madhya Pradesh |           672 |          13000 |
+   | Haryana        |           300 |          25000 |
+   | Punjab         |           260 |          35000 |
 #+End_SRC
 
 #+name: table-yield
 #+caption: Simple table created using LaTeX tabular environment
 #+attr_latex: :environment tabular :width \textwidth :align lrr
-    | State          | Average yield | Average income |
-    |----------------+---------------+----------------|
-    | Madhya Pradesh |           672 |          13000 |
-    | Haryana        |           300 |          25000 |
-    | Punjab         |           260 |          35000 |
+| State          | Average yield | Average income |
+|----------------+---------------+----------------|
+| Madhya Pradesh |           672 |          13000 |
+| Haryana        |           300 |          25000 |
+| Punjab         |           260 |          35000 |
 
 *** Table editor
 
@@ -714,10 +714,6 @@ also gives you an idea of how the table would look eventually.
 For more commands for manipulating tables, see [[http://www.orgmode.org/manual/Tables.html][this section of the Org
 manual]]. In particular, you may want to look at spreadsheet-like
 functions of the table editor.
-
-One limitation of Org is lack of support for merging of cells in a
-Table. However, Eric Schulte has created useful hacks that can be used
-to overcome this limitation while exporting to LaTeX or HTML.
 
 If you have snippets included with my emacs configuration, you can
 type ~nct1~, ~nct2~, ~nct3~ or ~nct4~ and press the tab key to create
@@ -837,8 +833,8 @@ embedded into Org as a source block. The basic syntax is
 This is how source blocks are created.
 
 + First write the lines starting with ~#+NAME~, ~#+BEGIN_SRC~ and
-  ~#+END_SRC~. You can use snippets ~<src~, ~<srct~ and ~<srcg~ in my
-  emacs configuration to quickly insert these lines.
+  ~#+END_SRC~. We will use different snippets to quickly insert these
+  lines for different types of code blocks.
 
 + Then with your cursor in between the ~BEGIN_SRC~ and the ~END_SRC~
   lines, give the command C-c ' (that is, press Ctrl-C, release, and
@@ -878,13 +874,12 @@ Code block [[readdata-code]] is an example of such a code block. Note
 
 #+name: readdata-code
 #+BEGIN_SRC org
-  ,#+name: readdata-code
-  ,#+BEGIN_SRC R :results silent :exports none
+    ,#+name: readdata-code
+    ,#+BEGIN_SRC R :results silent :exports none
+          read.data("datafile1.csv",sep=",",
+                    header=T)->mydata1
 
-  read.data("datafile1.csv",sep=",",header=T)->mydata1
-
-
-  ,#+END_SRC
+    ,#+END_SRC
 #+END_SRC
 
 ** Code blocks that produce results in the form of a table
@@ -903,13 +898,13 @@ create a table that shows average BMI by country.
 #+name: r-code-table
 #+BEGIN_SRC org
   ,#+name: bmi-table-code
-  ,#+BEGIN_SRC R :results value :colnames yes :hline yes
-  aggregate(height~Country,data=mydata1,mean)->a1
-  read.data("datafile2.csv",sep=",",header=T)->mydata2
-  aggregate(weight~Country,data=mydata2,mean)->a2
-  merge(a1,a2,by="Country")->a1
-  a1$weight/a1$height->a1$BMI
-  subset(a1,select=c("Country","BMI"))
+  ,#+BEGIN_SRC R :results value :exports results :colnames yes :hline
+    aggregate(height~Country,data=mydata1,mean)->a1
+    read.data("datafile2.csv",sep=",",header=T)->mydata2
+    aggregate(weight~Country,data=mydata2,mean)->a2
+    merge(a1,a2,by="Country")->a1
+    a1$weight/a1$height->a1$BMI
+    subset(a1,select=c("Country","BMI"))
   ,#+END_SRC
 #+END_SRC
 
@@ -950,12 +945,14 @@ produces a graph that we would like to be included in the document.
 The following code shows an example of a code block that produces a
 graph.
 
+#+begin_footnotesize
 #+BEGIN_SRC org
  ,#+name: mygraph-code
- ,#+BEGIN_SRC R :results file graphics :file bmi2.png :width 825 :height 1050 :fonts serif :res 300
+ ,#+BEGIN_SRC R :results file graphics :exports results :file bmi2.png :width 825 :height 1050 :fonts serif :res 300
 
  ,#+END_SRC
 #+END_SRC
+#+end_footnotesize
 
 You can use snippet ~<srcg~ and press tab to insert an empty code
 block, and then go into a temporary ESS buffer by using C-c '.
@@ -987,11 +984,14 @@ output.[fn:5] Every time you evaluate the code using ~C-c C-c~, the
 underlying image file containing the graph is overwritten by a new
 file.
 
-As with the tables, we shall add a caption and a name to it as follows
+As with the tables, we shall add a caption and a name to it. We can
+also use ~:attr_latex~ to adjust width (andcorrespondingly the
+height, maintaining the aspect ratio).
 
 #+BEGIN_SRC org
   ,#+name: my-bmi-graph
   ,#+caption: Average BMI, by Country
+  ,#+attr_latex: :width 5in
   ,#+RESULTS: mygraph-code
   [[gini.png]]
 #+END_SRC
@@ -1228,6 +1228,14 @@ lines are as follows:
   vertical lines in the table (that is, ~:align~ should not have any
   ~|~).
 
+*** Multicolumn cells and horizontal rules
+
+One limitation of Org is lack of support for merging of cells in a
+Table. However, Eric Schulte has created useful functions that can be
+used to overcome this limitation while exporting to LaTeX or HTML.
+
+
+
 *** Formatting tables using tabulary package
 
 Package ~tabulary~ extends the ~tabular~ environment by providing
@@ -1433,7 +1441,6 @@ font. Option [flushleft] is used to align the notes to the left.
 
 *** Using tabularray package for making tables
 
-
 ** Creating LaTeX and/or PDF files
 
 The file [[file:default_packages.org]] lists a set of LaTeX packages that
@@ -1478,6 +1485,7 @@ template file, so that the fonts and other formatting attributes are
 to your liking.
 
 ** HTML
+
 
 For html as well, there is a built-in exporter in Org. The built-in
 exporter is very good, and the way to go if you are planning to
