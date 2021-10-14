@@ -1160,31 +1160,6 @@ further conversion.
 Built-in exporters can be called in Org using ~C-c C-e~ or ~M-x
 org-export-dispatch~.
 
-** Defining LaTeX classes
-
-If are using my emacs configuration, you will have access to three
-custom classes: vreport, vmemoir and varticle. Of these, vmemoir and
-varticle are based on the [[https://ctan.org/pkg/memoir?lang=en][Memoir]] class, a very versatile LaTeX package
-that allows for many customisations.
-
-While vmemoir and varticle classes should work for books and articles,
-you will benefit by looking at [[https://github.com/ep624/emacs.d.2021/blob/main/_configs/use-org-contrib.el][~/.emacs.d/_configs/use-org-contrib.el]]
-and customising them for your need.
-
-LaTeX class is specified in the org header using a line as follows
-
-~#+LATEX_CLASS: vmemoir#~
-
-Additional options can be provided by using the keyword ~latex_class_options~:
-
-~#+latex_class_options: [11pt,twoside,openany,strict,extrafontsizes,article]~
-
-Those using my emacs configuration can call the snippet latex-class,
-taken from Scimax, using keyword ~lc~ to insert this line. The snippet
-shows LaTeX classes that are defined in your installation of
-org. Additional options for any latex class can be specified by
-calling another snippet using ~lco~.
-
 ** Formatting tables and images for LaTeX/PDF export
 
 There are many LaTeX packages that can be used to format tables and
@@ -1205,6 +1180,11 @@ between ~#+attr_latex~ lines and the object.
 
 Some key attributes that need to be specified using ~#+attr_latex~
 lines are as follows:
+
++ ~:environment:~ :: ~:environment~ specifies the LaTeX package to be
+  used for a particular table. This is the simplest of all but allows
+  limited possibilities for formatting columns. We will use tabulary,
+  tabularx and tabularray packages for most of our tables.
 
 + ~:align~ :: ~:align~ specifies how to render each columns by using
   one letter (l,L,r,R,c,C or J) for each column. Each column type is
@@ -1238,69 +1218,15 @@ lines are as follows:
 + ~:center~ :: This option followed by ~t~ or ~nil~ would center align
   or left align the table horizontally.
 
-+ ~:float~ :: This option followed by ~t~ or ~nil~ specifies whether
-  this object (table, figure or any other special block) is a floating
-  object which can be optimally placed by LaTeX or do you want it
-  exactly where you have placed it in the document. In most cases, you
-  would want these objects to float so that LaTeX can optimally place
-  them.
++ ~:float~ :: This option specifies whether this object (table, figure
+  or any other special block) is a floating object which can be
+  optimally placed by LaTeX. In most cases, you would want these
+  objects to float so that LaTeX can optimally place them.
 
 + ~:booktabs~ :: This option followed by ~t~ gives us nice horizontal
   lines. In most cases, when using ~booktabs~, one should not use
   vertical lines in the table (that is, ~:align~ should not have any
   ~|~).
-
-*** Using tabular environment with dcolumn
-
-The default LaTeX ~tabular~ environment is the simplest of all but
-allows only a few column types. In particular, there is limited
-support in tabular environment for wrapping text in different types of
-columns. We will use booktabs and dcolumn along with tabular. These
-can be called using the following lines in the preamble.
-
-~#+LATEX_HEADER: \usepackage{booktabs,dcolumn}~
-
-The LaTeX [[https://ctan.org/pkg/memoir?lang=en][memoir]] class, which is a very versatile class for writing
-articles and books, includes functions provided by LaTeX packages like
-booktabs and dcolumn. This means that, if you are using the memoir
-class, you can use functions provided by these packages without having
-to call them.
-
-I suggest adding the following lines to the preamble too.
-
-: #+LATEX_HEADER: \newcolumntype{d}[1]{D{.}{\cdot}{#1}}
-: #+MACRO: M @@latex:\multicolumn{1}{c}{$1}@@
-
-Following tables illustrate the use of tabular environment for laying
-out the tables. Since tabular is the default environment, there is no
-need to specify ~:environment tabular~.
-
-#+begin_footnotesize
-#+name: tabular-yield-in
-#+BEGIN_SRC org :results replace drawer
-  ,#+name: tabular-yield-out
-  ,#+caption: Table formatted using tabular, dcolumn and booktabs packages
-  ,#+attr_latex: :align @{}ld{0}*{2}{d{5.2}}@{}
-  ,#+attr_latex: :center t :booktabs t :float t
-     | State          | {{{M(Average yield)}}} | {{{M(Average output)}}} | {{{M(Average income)}}} |
-     |----------------+------------------------+-------------------------+-------------------------|
-     | Madhya Pradesh |                    669 |                13121.25 |                 7234.25 |
-     | Haryana        |                    300 |                 2532.30 |                   234.3 |
-     | Punjab         |                    260 |                35232.45 |                 15235.0 |
-#+End_SRC
-#+end_footnotesize
-
-#+name: tabular-yield-out
-#+caption: Table formatted using tabular, dcolumn and booktabs packages
-#+attr_latex: :align @{}l*{3}{d{5.2}}@{}
-#+attr_latex: :center t :booktabs t :float t
-| State          | <3colc>This long header does not wrap |                         |                         |
-|                |                {{{M(Average yield)}}} | {{{M(Average output)}}} | {{{M(Average income)}}} |
-|----------------+---------------------------------------+-------------------------+-------------------------|
-| Madhya Pradesh |                                   669 |                13121.25 |                 7234.25 |
-| Haryana        |                                   300 |                 2532.30 |                   234.3 |
-| Punjab         |                                   260 |                35232.45 |                 15235.0 |
-
 
 *** Formatting tables using tabulary package
 
@@ -1575,6 +1501,30 @@ document, you can use Pandoc for converting LaTeX  to html.
 This section points some additional solutions that you may like to
 use. Some of these may come handy when you start using Org for
 documenting your research.
+** Defining LaTeX classes
+
+If are using my emacs configuration, you will have access to three
+custom classes: vreport, vmemoir and varticle. Of these, vmemoir and
+varticle are based on the [[https://ctan.org/pkg/memoir?lang=en][Memoir]] class, a very versatile LaTeX package
+that allows for many customisations.
+
+While vmemoir and varticle classes should work for books and articles,
+you will benefit by looking at [[https://github.com/ep624/emacs.d.2021/blob/main/_configs/use-org-contrib.el][~/.emacs.d/_configs/use-org-contrib.el]]
+and customising them for your need.
+
+LaTeX class is specified in the org header using a line as follows
+
+~#+LATEX_CLASS: vmemoir#~
+
+Additional options can be provided by using the keyword ~latex_class_options~:
+
+~#+latex_class_options: [11pt,twoside,openany,strict,extrafontsizes,article]~
+
+Those using my emacs configuration can call the snippet latex-class,
+taken from Scimax, using keyword ~lc~ to insert this line. The snippet
+shows LaTeX classes that are defined in your installation of
+org. Additional options for any latex class can be specified by
+calling another snippet using ~lco~.
 
 ** Evaluating code during export
 
@@ -1600,11 +1550,11 @@ the top:
 
 : #+LaTeX_CLASS_OPTIONS: [garamond]
 
-** Margins
+** TODO Page size and margins
 
-In LaTeX, package Geometry allows you to modify page margins. The
-following line in [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]] sets the margins. You can tweak this to
-define the margins as you like.
+In LaTeX, package ~geometry~ allows you to modify page margins. The
+following line in [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]] sets the margins. You can tweak
+this to define the margins as you like.
 
 : ("innermargin=1.5in,outermargin=1.25in,vmargin=1.25in" "geometry" t)
 
@@ -1613,6 +1563,8 @@ above line, and add the following special line at the top in your
 documents.
 
 : #+LaTeX_HEADER: \usepackage[innermargin=1.5in,outermargin=1.25in,vmargin=3cm]{geometry}
+
+*** TODO Add instructions for memoir
 
 ** Line spacing
 
