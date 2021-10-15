@@ -20,15 +20,16 @@
 
 * Introduction
 
-This guide introduces an open-source toolkit for writing research
-papers and monographs. The main features of this toolkit centered
-around Emacs and Org-mode are:
+This guide introduces an open-source toolkit for academic research and
+writing. The main features of this toolkit centered around Emacs and
+Org-mode are:
 + embedded R code in the document that allows for statistical results
   to be revised and reproduced,
 + bibliographic citations from a personal bibliographic database,
 + formatting using well defined styles with minimal markup,
 + support for production of final output as pdf, odt, docx, html and
   many other formats.
+
 ** Will this guide be useful for you?
 
 This guide will be useful for you if you are writing a research paper,
@@ -873,22 +874,21 @@ Code block [[readdata-code]] is an example of such a code block. Note
 
 #+name: readdata-code
 #+BEGIN_SRC org
-    ,#+name: readdata-code
-    ,#+BEGIN_SRC R :results silent :exports none
-          read.data("datafile1.csv",sep=",",
-                    header=T)->mydata1
-
-    ,#+END_SRC
+  ,#+name: readdata-code
+  ,#+BEGIN_SRC R :results silent :exports none
+     read.data("datafile1.csv",sep=",",
+               header=T)->mydata1
+  ,#+END_SRC
 #+END_SRC
 
 ** Code blocks that produce results in the form of a table
 
-Most of code blocks in my papers fall in this category. The code block
-may use data and functions made available by previous code blocks,
-read some new data and may load some new functions. The code block
-does some statistical processing. The last command of the code block
-produces an object (for example, a data.frame) that is included in the
-document as a Table.
+Most of code blocks in my writing fall in this category. The code
+block may use data and functions made available by previous code
+blocks, read some new data and may load some new functions. The code
+block does some statistical processing. The last command of the code
+block produces an object (for example, a data frame) that is included
+in the document as a Table.
 
 For example, the code block [[r-code-table]] below uses mydata1 read in
 the previous code block, reads a new dataset, and processes them to
@@ -919,12 +919,11 @@ like below
 : #+RESULTS: bmi-table-code
 
 Note that the results are tied to the code block using the name of the
-code block. Every time you go to the source code block and press
-~C-c C-c~, the code will be evaluated again and the results will be
-updated.
+code block. Every time you go to the source code block and press ~C-c
+C-c~, the code is evaluated again and the results are updated.
 
 On top of the line starting with ~#+RESULTS:~, we shall add two more
-lines, to give the table a title and a name. Note that both the code
+lines, to give the table a caption and a name. Note that the code
 block and the result of the code block have separate names.
 
 #+BEGIN_SRC org
@@ -945,11 +944,14 @@ The following code shows an example of a code block that produces a
 graph.
 
 #+begin_footnotesize
-#+BEGIN_SRC org
- ,#+name: mygraph-code
- ,#+BEGIN_SRC R :results file graphics :exports results :file bmi2.png :width 825 :height 1050 :fonts serif :res 300
-
- ,#+END_SRC
+#+BEGIN_SRC org :results replace drawer
+  ,#+name: mygraph-code
+  ,#+BEGIN_SRC R :results file graphics :exports results :file bmi2.png :width 825 :height 1050 :fonts serif :res 300
+    library(ggplot2)
+    data.frame(var1=c(1:10),var2=c(1:10)^2)->data
+    ggplot(data,aes(x=var1,y=var2))->p
+    p+geom_line()
+  ,#+END_SRC
 #+END_SRC
 #+end_footnotesize
 
@@ -958,8 +960,8 @@ block, and then go into a temporary ESS buffer by using C-c '.
 
 + Once in this temporary ESS buffer, you can write the R commands for
   making your graph.
-+ As you write, you can evaluate the commands using ~C-j~, ~C-r~ and
-  ~C-b~ and see what your output looks like.
++ As you write, you can evaluate the commands using ~C-c C-n~, ~C-c
+  C-r~ and ~C-c C-b~ and see what your output looks like.
 + The output is displayed on your screen using the default graphic
   device used by R (X11, quartz or windows graphic device depending
   upon your operating system).
@@ -1048,7 +1050,6 @@ formats.
 
 In a BibTeX/BibLaTeX database, each bibliographic record is given a
 unique key, which is used to cite it. Each record is classified as one
-
 among various categories of publications (journal article, book,
 chapter, etc.), and for the given publication type, the record
 specifies values for various fields (author, title, volume, publisher,
@@ -1384,7 +1385,8 @@ better formatting of notes below the table
 
 : #+LATEX_HEADER: \renewcommand{\TPTminimum}{\linewidth}
 
-The following code produces a table with notes below.
+The following code produces a table (Table [[threeparttable-table-yield]])
+with notes below.
 
 #+name: org-threeparttable-in
 #+BEGIN_SRC org
@@ -1405,10 +1407,12 @@ The following code produces a table with notes below.
   ,#+begin_tablenotes
   ,#+begin_footnotesize
     + Notes: :: \mbox{}
-      1. This table is very nice. This note is very long. But the long note wraps nicely under the table.
+      1. This table is very nice. This note is very long. But the long
+         note wraps nicely under the table.
       2. This is the second note. But this is not very wide.
       +  We can use bullets.
-      + a :: Or use description lists to refer to footnote markets in the table
+      + a :: Or use description lists to refer to footnote markets in
+        the table
     + Source: :: https://www.indianstatistics.org
   ,#+end_footnotesize
   ,#+end_tablenotes
@@ -1430,6 +1434,10 @@ font. Option [flushleft] is used to align the notes to the left.
 flexible ways of creating multi-row and multi-column cells, adding
 table notes and using colours in the tables. You can also create
 multi-page tables with tabularray.
+
+You are strongly advised to go through the [[http://mirrors.ctan.org/macros/latex/contrib/tabularray/tabularray.pdf][manual]] of tabularray
+package to understand various options. The focus here is to illustrate
+how to use the package in org documents.
 
 #+name: threeparttable-table-yield
 #+caption: Table created using tabularx, siunitx, with table notes added below using threeparttable
@@ -1654,6 +1662,8 @@ Download the file, adjust the path to the file in the line below and
 add it to your org file.
 
 ~#+INCLUDE: /path-to-the-file/vikas-bibstyle.org~
+
+** Index
 
 * Important Resources
 + [[http://orgmode.org/manual/][Org-mode manual]]
