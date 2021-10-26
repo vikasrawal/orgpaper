@@ -18,6 +18,7 @@
 #+MACRO: M @@latex:\mcone{$1}@@
 #+MACRO: MCD @@latex:\multicolumn{1}{c}{$1}@@
 
+
 * Introduction
 
 This guide introduces an open-source toolkit for academic research and
@@ -1439,32 +1440,62 @@ You are strongly advised to go through the [[http://mirrors.ctan.org/macros/late
 package to understand various options. The focus here is to illustrate
 how to use the package in org documents.
 
-#+name: threeparttable-table-yield
-#+caption: Table created using tabularx, siunitx, with table notes added below using threeparttable
-#+begin_table
-#+ATTR_LATEX: :float :options [b]
-#+begin_threeparttable
-#+ATTR_LATEX: :environment tabularx :width 0.8\textwidth
-#+ATTR_LATEX: :align @{}l{S[table-format=3.0]}{S[table-format=5.2]}@{}
-#+ATTR_LATEX: :booktabs t
-| State          | {{{M(Average yield)}}} | {{{M(Average income)}}} |
-|----------------+------------------------+-------------------------|
-| Madhya Pradesh |                    669 |                13121.25 |
-| Haryana^{a}    |                    300 |                 2532.30 |
-| Punjab         |                    260 |                35232.45 |
-#+attr_latex: :options [flushleft]
-#+begin_tablenotes
-#+begin_footnotesize
-   + Notes: :: \mbox{}
-     1. This table is very nice. This note is very long. But the long note wraps nicely under the table.
-     2. This is the second note. But this is not very wide.
-     +  We can use bullets instead using + or -.
-     + a :: We can also use description lists to refer to note markers in the table
-   + Source: :: https://www.indianstatistics.org
-#+end_footnotesize
-#+end_tablenotes
-#+end_threeparttable
-#+end_table
+There are three environments provided by ~tabularray~:
+
++ tblr: :: Basic tabularray environment with excellent support for merging
+  cells across columns and rows.
+
++ talltblr: :: In addition to features of ~tblr~, this also allows for
+  notes below the tables.
+
++ longtblr: :: For tables running across multiple pages. All the
+  features of ~tblr~ and ~talltblr~ are available here.
+
+
+To use ~siunitx~, ~booktabs~ and ~diagbox~ along with ~tabularray~,
+you need to add these lines to the preamble of the orgmode file.
+
+: #+LATEX_HEADER: \usepackage{comment,multirow,tabularray}
+: #+latex_header: \UseTblrLibrary{booktabs}
+: #+latex_header: \UseTblrLibrary{siunitx}
+: #+latex_header: \UseTblrLibrary{diagbox}
+
+Three additional hacks are required for using these environments in orgmode.
+
+We will add this macro specification to the header.
+: #+MACRO: mc @@latex:{{{$1}}}@@
+
+You can also optionally create macros such as this to conveniently add colour/highlights to specific cells:
+: #+MACRO: HG @@latex:\SetCell{bg=gray9} $1@@
+
+The following table
+
+#+name: tabularray-yield-in
+#+BEGIN_SRC org :results replace drawer
+  ,#+name: tabularrray-yield-out
+  ,#+caption: Table formatted using tabularray and siunitx packages
+  ,#+ATTR_LATEX: :environment talltblr
+  ,#+ATTR_LATEX: :align width=0.8\textwidth,colspec={l*{2}{S[table-format=3.1,table-alignment-mode=marker]}}
+  ,#+ATTR_LaTeX: :options [remark{Notes} = {This note goes below the table},label=none]
+  ,#+ATTR_LATEX: :center :booktabs t :font \small
+     | State          | {{{mc(Average yield)}}} | {{{mc(Average income)}}} |
+     |----------------+-------------------------+--------------------------|
+     | Madhya Pradesh |                     669 |                 13121.25 |
+     | Haryana        |                     300 |                  2532.30 |
+     | Punjab         |                     260 |                 35232.45 |
+#+End_SRC
+
+#+name: tabularrray-yield-out
+#+caption: Table formatted using tabularray and siunitx packages
+#+ATTR_LATEX: :environment talltblr
+#+ATTR_LATEX: :align width=0.8\textwidth,colspec={l*{2}{S[table-format=3.1,table-alignment-mode=marker]}}
+#+ATTR_LaTeX: :options [remark{Notes} = {This note goes below the table},label=none]
+#+ATTR_LATEX: :center :booktabs t :font \small
+   | State          | {{{mc(Average yield)}}} | {{{mc(Average income)}}} |
+   |----------------+-------------------------+--------------------------|
+   | Madhya Pradesh |                     669 |                 13121.25 |
+   | Haryana        |                     300 |                  2532.30 |
+   | Punjab         |                     260 |                 35232.45 |
 
 
 ** Creating LaTeX and/or PDF files
