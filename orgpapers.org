@@ -1239,8 +1239,10 @@ One limitation of Org is lack of support for merging of cells in a
 Table. However, Eric Schulte has created useful functions that can be
 used to overcome this limitation while exporting to LaTeX or HTML. I
 have extended those functions to also provide facilities for creating
-horizontal lines (~\midrule~ and ~\cmidrule~). These functions are already
-included in my emacs configuration in (~_configs/use-org-contrib.el~).
+horizontal lines (~\midrule~ and ~\cmidrule~). These functions
+(org-export-midrule-filter-latex and org-export-cmidrule-filter-latex)
+are already included in my emacs configuration in
+(~_configs/use-org-contrib.el~).
 
 The method of creating multicolumn (and multirow) cells in ~tabularay~
 is different from other tabular environments and will be discussed
@@ -1271,9 +1273,9 @@ in a table by the code block that is generating the tables.
   | <2cid3>        |                        |          |           |
   |                |                  Yield |   Income |           |
   | <mid>          |                        |          |           |
-  | Madhya Pradesh |                    669 | 13121.25 |           |
-  | Haryana        |                    300 |  2532.30 |           |
-  | Punjab         |                    260 | 35232.45 |           |
+  | Madhya Pradesh |                    669 | 13121.25 |       123 |
+  | Haryana        |                    300 |  2532.30 |        22 |
+  | Punjab         |                    260 | 35232.45 |       324 |
   #+End_SRC
 
 
@@ -1497,7 +1499,7 @@ you need to add these lines to the preamble of the orgmode file.
 : #+latex_header: \UseTblrLibrary{siunitx}
 : #+latex_header: \UseTblrLibrary{diagbox}
 
-Three additional hacks are required for using these environments in
+A few additional hacks are required for using these environments in
 orgmode.
 
 1. :align
@@ -1531,19 +1533,32 @@ orgmode.
    ~:options~ keyword to specify such arguments. This is included in
    ~_configs/use-org-contrib.el~ in my emacs configuration.
 
+4. ~\cmidrules~
+
+   The LaTeX syntax for ~\cmidrules~ in ~tabularray~ is slightly
+   different from other tabular environments. Just as we use <2cid3>
+   to declare that we want a line going from second to third column,
+   we can use <2cd3> with ~tabularray~ environment. This feature is
+   provided by the function
+   org-export-tabularray-cmidrule-filter-latex defined in
+   ~_configs/use-org-contrib.el~.
+
+
 #+name: tabularray-yield-in
 #+BEGIN_SRC org :results replace drawer
-    ,#+name: tabularrray-yield-out
-    ,#+caption: Table formatted using tabularray and siunitx packages
-    ,#+ATTR_LATEX: :environment talltblr
-    , #+ATTR_LATEX: :align width=0.8\textwidth,colspec={lS[table-format=3.0,round-mode=off,add-integer-zero = false]S[table-format=5.2,round-mode=places,round-integer-to-decimal,add-integer-zero=true,table-alignment-mode=marker]}
-    ,#+ATTR_LaTeX: :options [remark{Notes} = {This note goes below the table},label=none]
-    ,#+ATTR_LATEX: :center :booktabs t :font \small
-       | State          | {{{mc(Average yield)}}} | {{{mc(Average income)}}} |
-       |----------------+-------------------------+--------------------------|
-       | Madhya Pradesh |                     669 |                 13121.25 |
-       | Haryana        |                     300 |                  2532.30 |
-       | Punjab         |                     260 |                 35232.45 |
+  ,#+name: tabularrray-yield-out
+  ,#+caption: Table formatted using tabularray and siunitx packages
+  ,#+ATTR_LATEX: :environment talltblr
+  ,#+ATTR_LATEX: :align width=0.8\textwidth,colspec={lS[table-format=3.0,round-mode=off,add-integer-zero = false]S[table-format=5.2,round-mode=places,round-integer-to-decimal,add-integer-zero=true,table-alignment-mode=marker]}
+  ,#+ATTR_LaTeX: :options [remark{Notes} = {This note goes below the table},label=none]
+  ,#+ATTR_LATEX: :center :booktabs t :font \small
+  | State          |  <2colc>Two Column Text |                          | {{{mc(Variable4)}}} |
+  | <2cd3>         |                         |                          |                     |
+  |                | {{{mc(Average yield)}}} | {{{mc(Average income)}}} |                     |
+  | <mid>          |                         |                          |                     |
+  | Madhya Pradesh |                     669 |                 13121.25 |                 123 |
+  | Haryana        |                     300 |                  2532.30 |                  22 |
+  | Punjab         |                     260 |                 35232.45 |                 324 |
 #+End_SRC
 
 #+name: tabularrray-yield-out
@@ -1552,11 +1567,15 @@ orgmode.
 #+ATTR_LATEX: :align width=0.8\textwidth,colspec={lS[table-format=3.0,round-mode=off,add-integer-zero = false]S[table-format=5.2,round-mode=places,round-integer-to-decimal,add-integer-zero=true,table-alignment-mode=marker]}
 #+ATTR_LaTeX: :options [remark{Notes} = {This note goes below the table},label=none]
 #+ATTR_LATEX: :center :booktabs t :font \small
-| State          | {{{mc(Average yield)}}} | {{{mc(Average income)}}} |
-|----------------+-------------------------+--------------------------|
-| Madhya Pradesh |                     669 |                 13121.25 |
-| Haryana        |                     300 |                  2532.30 |
-| Punjab         |                     260 |                 35232.45 |
+| State          | <2colc>Two Column Text |                         | {{{M(Variable4)}}} |
+| <2cd3>         |                        |                         |                    |
+|                | {{{M(Average yield)}}} | {{{M(Average income)}}} |                    |
+| <mid>          |                        |                         |                    |
+| Madhya Pradesh |                    669 |                13121.25 |                    |
+| Haryana        |                    300 |                 2532.30 |                    |
+| Punjab         |                    260 |                35232.45 |                    |
+
+
 
 ** Creating LaTeX and/or PDF files
 
