@@ -1229,17 +1229,18 @@ lines are as follows:
 + ~:booktabs~ :: This option followed by ~t~ gives us nice horizontal
   lines. In most cases, when using ~booktabs~, one should not use
   vertical lines in the table (that is, ~:align~ should not have any
-  ~|~). Booktabs automatically inserts a top line (\toprule in LaTeX),
-  a middle line just below the header row (\midrule) and a line at the
-  bottom of the table (\bottomrule).
+  ~|~). Booktabs automatically inserts a top line (~\toprule~ in LaTeX),
+  a middle line just below the header row (~\midrule~) and a line at the
+  bottom of the table (~\bottomrule~).
 
 *** Multicolumn cells and horizontal rules
 
 One limitation of Org is lack of support for merging of cells in a
 Table. However, Eric Schulte has created useful functions that can be
-used to overcome this limitation while exporting to LaTeX or
-HTML. These functions are already included in my emacs configuration
-in (~_configs/use-org-contrib.el~).
+used to overcome this limitation while exporting to LaTeX or HTML. I
+have extended those functions to also provide facilities for creating
+horizontal lines (~\midrule~ and ~\cmidrule~). These functions are already
+included in my emacs configuration in (~_configs/use-org-contrib.el~).
 
 The method of creating multicolumn (and multirow) cells in ~tabularay~
 is different from other tabular environments and will be discussed
@@ -1248,17 +1249,32 @@ separately when I discuss ~tabularray~ environment. For all other
 preceded by a string such as <3colc> to make those contents span and
 centred across 3 columns to the right.
 
+In addition, <mid> placed in a cell draws a ~\midrule~ at that
+position across the entire width of the table. Other cells in that row
+will be ignored.
+
+A string such as <2cid4> can be used to say that a horizontal line be
+drawn to span second and fourth columns.
+
+The table below illustrates the use of <2colc> to write text that
+spans two columns, <mid> to draw a horizontal line across the width of
+the table, and <2cid3> to draw a line spanning second and third columns.
+
+A particular advantage of these functions is that they can be inserted
+in a table by the code block that is generating the tables.
+
 #+name: multicolumns-in
 #+BEGIN_SRC org :results replace drawer
   ,#+name: tabulary-yield-out
   ,#+caption: Table formatted using tabulary package
-  | State          | <2colc>Two Column Text |                |
-  |                |          Average yield | Average income |
-  |----------------+------------------------+----------------|
-  | Madhya Pradesh |                    669 |       13121.25 |
-  | Haryana        |                    300 |        2532.30 |
-  | Punjab         |                    260 |       35232.45 |
-#+End_SRC
+  | State          | <2colc>Two Column Text |          | Variable4 |
+  | <2cid3>        |                        |          |           |
+  |                |                  Yield |   Income |           |
+  | <mid>          |                        |          |           |
+  | Madhya Pradesh |                    669 | 13121.25 |           |
+  | Haryana        |                    300 |  2532.30 |           |
+  | Punjab         |                    260 | 35232.45 |           |
+  #+End_SRC
 
 
 *** Formatting tables using tabulary package
