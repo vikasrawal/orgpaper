@@ -1116,7 +1116,7 @@ add entries to your database. org-ref.el provided by John Kitchin
 As a sample, my own bibliographic database is available from
 https://github.com/indianstatistics/bibliobase/blob/master/bibliobase.bib.
 
-** Using biblatex with Org                                        :noexport:
+** Using biblatex with Org (under revision)
 
 *** Setup
 Using biblatex with Org requires some customisation of variables. This
