@@ -333,8 +333,7 @@ them. You may also want some others depending upon your use. You can
 always delete the ones you do not need, and add any other packages
 that you need.
 
-#+begin_footnotesize
-#+begin_src emacs-lisp :exports code
+#+begin_src emacs-lisp
   (setq package-selected-packages '(ag anzu async auto-complete avy
                                     bibretrieve auctex cdlatex
                                     citeproc coffee-mode consult
@@ -388,7 +387,6 @@ that you need.
                                     zenburn-theme))
 (package-install-selected-packages)
 #+end_src
-#+end_footnotesize
 
 You can copy the above lines, paste them in an empty buffer (e.g.,
 \*scratch\*), select them, and do M-x eval-region.
