@@ -1,3 +1,4 @@
+
 #+STARTUP: hidestars
 #+TITLE: Using Emacs, Org-mode and R for Research Writing in Social Sciences
 #+SUBTITLE: A Toolkit for Writing Reproducible Research Papers and Monographs
@@ -333,7 +334,7 @@ always delete the ones you do not need, and add any other packages
 that you need.
 
 #+begin_footnotesize
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp :exports code
   (setq package-selected-packages '(ag anzu async auto-complete avy
                                     bibretrieve auctex cdlatex
                                     citeproc coffee-mode consult
@@ -1038,16 +1039,38 @@ different working directories, etc).
 
 * Citations and Bibliographies using Org-mode
 
+Starting Version 9.5, Org-mode has introduced a new system for
+embedding citations and creating bibliographies in org-mode
+documents. You must upgrade your org-mode to Version >9.5 to be able
+to use this new citation syntax. If you are using my emacs
+configuration, you should have the latest version of org-mode. My
+configuration of functions related to citations and bibliography
+resides in ~_configs/use-oc.el~. It is loaded if sym-linked to
+~_activated/use-uc.el~.
+
+The tasks related to citations and bibliography can be divided into
+two parts: maintaining a bibliographic database and embedding
+citations in org-mode documents. The new syntax of citations divides
+the process of embedding citations in org-mode into four components:
+insert, follow, activate and export. The core functionality is
+designed to allow development and use of different tools for each of
+these.
+
+** Building and maintaining your bibliographic database
+
+The citation processors available for org-mode allow the use of
+bibliographic databases maintained in bibtex, biblatex or
+citeproc/json formats.
+
+I use a biblatex database because biblatex provide tools that are
+highly customisable, to format bibliographies in any
+style. Citeproc/json has become increasingly popular in recent years
+because this is the native format used by pandoc and other
+applications in the markdown ecosystem.
+
 We shall use a master bibliographic database to contain bibliographic
 records for the literature that we cite. The database, in Biblatex or
 BibTex format, is stored in a text file with .bib extension.
-
-A native syntax for handling citations and bibliographies has been
-introduced in the latest version of org-mode. This provides ability to
-use bibliographic databases in bibtex, biblatex or citeproc/json
-formats.
-
-** Building your database
 
 In a BibTeX/BibLaTeX database, each bibliographic record is given a
 unique key, which is used to cite it. Each record is classified as one
@@ -1069,14 +1092,16 @@ yourself.
 
 To start with, you may wish to use a GUI application like JabRef
 (cross-platform, http://jabref.sourceforge.net/) or BibDesk (OS-X
-only, http://bibdesk.sourceforge.net/) to build and maintain your database.
+only, http://bibdesk.sourceforge.net/) to build and maintain your
+database. In my experience, most of these tend to add additional junk
+to stamp the entries that a particular application has been used to
+create the database.
 
-Emacs also has excellent tools that can be used to build your
-database. Once you are comfortable using emacs, you will find that the
-Emacs tools are actually the most efficient and cleanest. Ebib gives a
-nice interface to manually enter the records. Bibretrieve and org-ref
-give you commands that can download BibTeX records directly from
-online databases.
+It is much cleaner, and efficient, to use excellent tools available
+for maintaining the database in emacs itself. Ebib gives a nice
+interface to manually enter the records. Bibretrieve and org-ref give
+you commands that can download BibTeX records directly from online
+databases.
 
 Eventually, you should use bibretrieve from within Emacs to
 add entries to your database. org-ref.el provided by John Kitchin
@@ -1085,11 +1110,11 @@ add entries to your database. org-ref.el provided by John Kitchin
 As a sample, my own bibliographic database is available from
 https://github.com/indianstatistics/bibliobase/blob/master/bibliobase.bib.
 
-** Using biblatex with Org
+** Using biblatex with Org                                        :noexport:
 
 *** Setup
 Using biblatex with Org requires some customisation of variables. This
-is already done for you if you have installed [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]].
+is already done for you if you have installed [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit..
 
 The operative part in [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]] is the following:
 : (setq org-latex-to-pdf-process
@@ -1549,8 +1574,9 @@ orgmode.
   ,#+name: tabularrray-yield-out
   ,#+caption: Table formatted using tabularray and siunitx packages
   ,#+ATTR_LATEX: :environment talltblr
-  ,#+ATTR_LATEX: :align width=0.8\textwidth,colspec={lS[table-format=3.0,round-mode=off,add-integer-zero = false]S[table-format=5.2,round-mode=places,round-integer-to-decimal,add-integer-zero=true,table-alignment-mode=marker]}
-  ,#+ATTR_LaTeX: :options [remark{Notes} = {This note goes below the table},label=none]
+  ,#+ATTR_LATEX: :align width=0.8\textwidth,colspec={lS[table-format=3.0,round-precision=0]S[table-format=5.2,round-mode=places,round-precision=true,alignment-mode=marker]S[table-format=3.0,round-precision=0]}
+  ,#+ATTR_LaTeX: :options remark{Notes} = {This note goes below the table},
+  ,#+ATTR_LaTeX: :options remark{Source} = {Second note goes below the first note}
   ,#+ATTR_LATEX: :center :booktabs t :font \small
   | State          |  <2colc>Two Column Text |                          | {{{mc(Variable4)}}} |
   | <2cd3>         |                         |                          |                     |
@@ -1561,19 +1587,20 @@ orgmode.
   | Punjab         |                     260 |                 35232.45 |                 324 |
 #+End_SRC
 
-#+name: tabularrray-yield-out
 #+caption: Table formatted using tabularray and siunitx packages
+#+name: tabularrray-yield-out
 #+ATTR_LATEX: :environment talltblr
-#+ATTR_LATEX: :align width=0.8\textwidth,colspec={lS[table-format=3.0,round-mode=off,add-integer-zero = false]S[table-format=5.2,round-mode=places,round-integer-to-decimal,add-integer-zero=true,table-alignment-mode=marker]}
-#+ATTR_LaTeX: :options [remark{Notes} = {This note goes below the table},label=none]
+#+ATTR_LATEX: :align width=0.8\textwidth, colspec={lSSS}
+#+ATTR_LaTeX: :options remark{Notes} = {This note goes below the table},
+#+ATTR_LaTeX: :options remark{Source} = {Second note goes below the first note}
 #+ATTR_LATEX: :center :booktabs t :font \small
 | State          | <2colc>Two Column Text |                         | {{{M(Variable4)}}} |
 | <2cd3>         |                        |                         |                    |
 |                | {{{M(Average yield)}}} | {{{M(Average income)}}} |                    |
 | <mid>          |                        |                         |                    |
-| Madhya Pradesh |                    669 |                13121.25 |                    |
-| Haryana        |                    300 |                 2532.30 |                    |
-| Punjab         |                    260 |                35232.45 |                    |
+| Madhya Pradesh |                    669 |                13121.25 |                123 |
+| Haryana        |                    300 |                 2532.30 |                 22 |
+| Punjab         |                    260 |                35232.45 |                324 |
 
 
 
