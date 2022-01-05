@@ -1040,19 +1040,27 @@ different working directories, etc).
 Starting Version 9.5, Org-mode has introduced a new system for
 embedding citations and creating bibliographies in org-mode
 documents. You must upgrade your org-mode to Version >9.5 to be able
-to use this new citation syntax. If you are using my emacs
-configuration, you should have the latest version of org-mode. My
-configuration of functions related to citations and bibliography
-resides in ~_configs/use-oc.el~. It is loaded if sym-linked to
-~_activated/use-uc.el~.
+to use this new citation syntax.
+
+Users are advised to read the discussion on citation handling in the
+[[https://orgmode.org/manual/Citation-handling.html#Citation-handling][org-mode manual]] and a very useful [[https://blog.tecosaur.com/tmio/2021-07-31-citations.html#fn.3][summary article]] by Timothy.
+
+If you are using my emacs configuration, you should have the latest
+version of org-mode. My configuration of functions related to
+citations and bibliography resides in ~_configs/use-oc.el~. It is
+loaded if sym-linked to ~_activated/use-uc.el~.
 
 The tasks related to citations and bibliography can be divided into
-two parts: maintaining a bibliographic database and embedding
-citations in org-mode documents. The new syntax of citations divides
-the process of embedding citations in org-mode into four components:
-insert, follow, activate and export. The core functionality is
-designed to allow development and use of different tools for each of
-these.
+two parts: (i) maintaining a bibliographic database and (ii) inserting
+citations in org-mode documents and processing them to create
+formatted citations and bibliography at the time of export.
+
+The new syntax of citations divides the process of inserting and
+processing citations in org-mode into four components: insert, follow,
+activate and export. The core functionality is designed to allow
+development and use of different tools for each of these. John Kitchin
+and Bruce D'Arcus have built useful extensions on top of the core
+functionality.
 
 ** Building and maintaining your bibliographic database
 
@@ -1112,14 +1120,18 @@ https://github.com/indianstatistics/bibliobase/blob/master/bibliobase.bib.
 
 *** Setup
 Using biblatex with Org requires some customisation of variables. This
-is already done for you if you have installed [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit..
+is already done in ~_config/use-org-contrib.el~ file (which is
+sym-linked to ~_activated/use-org-contrib.el~).
 
-The operative part in [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]] is the following:
-: (setq org-latex-to-pdf-process
-:   '("pdflatex %f" "biber %b" "pdflatex %f" "pdflatex %f"))
+The operative part in this file is the following:
+: (setq org-latex-pdf-process
+:       '("xelatex -interaction nonstopmode -output-directory %o %f"
+:         "biber %b"
+:         "xelatex -interaction nonstopmode -output-directory %o %f"
+:         "xelatex -interaction nonstopmode -output-directory %o %f"))
 
 Once this is done, every time you export the document to pdf via
-latex, it runs pdflatex, then runs Biber and then runs pdflatex twice
+latex, it runs xelatex, then runs Biber and then runs xelatex twice
 again. This is necessary to get the citations in the pdf file.
 
 In [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]], the package biblatex is loaded with following options:
