@@ -1119,11 +1119,34 @@ https://github.com/indianstatistics/bibliobase/blob/master/bibliobase.bib.
 ** Using biblatex with Org (under revision)
 
 *** Setup
-Using biblatex with Org requires some customisation of variables. This
-is already done in ~_config/use-org-contrib.el~ file (which is
-sym-linked to ~_activated/use-org-contrib.el~).
+Using biblatex with Org requires some customisation of variables. These
+are done in ~_config/use-oc.el~ and ~_config/use-org-contrib.el~ files. Both the files are sym-linked to files with the same names in ~_activated~ directory).
 
-The operative part in this file is the following:
+Please note the configuration of ivy-bibtex in ~_config/use-oc.el~. You may want to modify the values of variables bibtex-completion-bibliography (default bibliographic database), bibtex-completion-notes-path (directory where you may optionally keep your notes for each source), bibtex-completion-library-path (the directory where you optionally keep pdf files for each source) and bibtex-completion-pdf-open-function (the application that should be used to open the pdfs).
+
+: (use-package ivy-bibtex
+:   :ensure t
+:   :init
+:   (setq bibtex-completion-bibliography '("~/bibliobase/bibliobase.bib")
+:         bibtex-completion-notes-path "~/bibliobase/notes/"
+:         bibtex-completion-notes-template-multiple-files "#+TITLE: Notes on: ${author-or-editor} (${year}): ${title}\n\nSee [cite/t:@${=key=}]\n"
+:         bibtex-completion-library-path '("~/pdfbibliobase/")
+:         bibtex-completion-additional-search-fields '(keywords)
+:         bibtex-completion-display-formats
+:         '((article       . "${=has-pdf=:1}${=has-note=:1} ${author:36} ${year:4} ${title:*} ${journal:40}")
+:           (inbook        . "${=has-pdf=:1}${=has-note=:1} ${author:36} ${year:4} ${title:*} Chapter ${chapter:32}")
+:           (book          . "${=has-pdf=:1}${=has-note=:1} ${author:36} ${year:4} ${title:*}")
+:           (incollection  . "${=has-pdf=:1}${=has-note=:1} ${author:36} ${year:4} ${title:*} ${booktitle:40}")
+:           (inproceedings . "${=has-pdf=:1}${=has-note=:1} ${author:36} ${year:4} ${title:*} ${booktitle:40}")
+:           (t             . "${=has-pdf=:1}${=has-note=:1} ${author:36} ${year:4} ${title:*}")))
+:   (setq bibtex-completion-pdf-open-function
+:         (lambda (fpath)
+:           (call-process "evince" nil 0 nil fpath)))
+:   )
+:
+
+The operative part in the ~_config/use-org-contrib.el~ file is the following:
+
 : (setq org-latex-pdf-process
 :       '("xelatex -interaction nonstopmode -output-directory %o %f"
 :         "biber %b"
@@ -1155,40 +1178,63 @@ I like. These customisations are in the file [[https://github.com/indianstatisti
 the document as follows:
 : #+INCLUDE: PATH-TO-FILE/vikas-bibstyle.org
 
-*** Adding citations and bibliography in Latex/PDF export
+*** Inserting citations
 
-The following special line, to be placed among other special lines at
-the top of the file, specifies the BibTex/Biber database that has the
-bibliographic records.
+Let us first understand the general syntax of citations in org. To
+insert a citation at any point in the document, you need to use the
+following syntax in square brackets.
 
-: #+LATEX_HEADER: \addbibresource{filename.bib}
+: [cite/style/variant: common_prefix; prefix@key1 pageno suffix; prefix@key2 pageno suffix; common_suffix]
 
-There are various commands that you can use for citations. These use
-different styles for citation. The general syntax of citation commands
-is:
+Let us understand this syntax. There are four parts in the syntax.
 
-~\command[<prenote>][<postnote>]{<Key>}~
+1. cite/style/variant: :: First, you specify the citation style. Table [[citation-commands]] lists citations styles and variants available with the biblatex citation processor in org. You can use abbreviations provided in the parentheses rather than the full notation for the citation styles and variants. This part ends in a colon.
 
-Where ~[<prenote>]~ refers to any text you want before citation (for
-example "for more details, see") and ~[<postnote>]~ refers to any text
-you want after citation (for example, "Chapter 2").
+2. common_prefix: :: You may optionally use some arbitrary text as prefix. This would be ~see~ in a citation that you want to export as ~(see Seema, 2010 and Nancy, 2011 as examples of this)~. This part ends in a semicolon.
 
-The two most useful citation commands are ~\parencite~ (or ~\citep~) and
-~\citet~. Their usage is illustrated in Table [[citation-commands]].
+3. citations: :: Then you specify the sources that you want to cite. Each source that you want to cite at this point is separated by a semicolon. The source is cited using the citation key from your bibliographic database. So, if the citation key for ~Seema, 2010~ in the database is ~seema2010~, you would cite it as ~@seema2010~. The citation key may be preceded by a source-specific prefix, and followed by a location identifier such as page number and citation-specific suffix. Prefix, pageno and suffix are optional.
+
+4. Finally, you may optionally use some arbitrary text as a common suffix. This would be ~as examples of this~ in the citation to be exported ~(see Seema, 2010 and Nancy, 2011 as examples of this)~.
 
 #+name: citation-commands
-#+caption: Important citation commands in biblatex
+#+caption: Important citation styles and variants provided by the biblatex processor in org
 #+attr_latex: :environment tabularx :width \textwidth :align lX
-| Citation command                  | Output                             |
-|-----------------------------------+------------------------------------|
-| ~\parencite{jon90}~               | (Jones et al., 1990)               |
-| ~\parencite[chap. 2]{jon90}~      | (Jones et al., 1990, chap. 2)      |
-| ~\parencite[see][]{jon90}~        | (see Jones et al., 1990)           |
-| ~\parencite[see][chap. 2]{jon90}~ | (see Jones et al., 1990, chap. 2)  |
-| ~\parencite*{jon90}~              | (Jones, Baker, and Williams, 1990) |
-| ~\citet{jon90}~                   | Jones et al. (1990)                |
-| ~\citet[chap. 2]{jon90}~          | Jones et al. (1990, chap. 2)       |
-| ~\citet*{jon90}~                  | Jones, Baker, and Williams (1990)  |
+| Style (abbreviation) | Variant (abbreviation) | Exported output |
+|----------------------+------------------------+-----------------|
+| author(a)            | caps(c)                | Citeauthor*     |
+| author(a)            | full(f)                | citeauthor      |
+| author(a)            | caps-full(cf)          | Citeauthor      |
+| author(a)            | nil                    | citeauthor*     |
+| locators(l)          | bare(b)                | notecite        |
+| locators(l)          | caps(c)                | Pnotecite       |
+| locators(l)          | bare-caps(bc)          | Notecite        |
+| locators(l)          | nil                    | pnotecite       |
+| noauthor(na)         | bare(b)                | cite*           |
+| noauthor(na)         | nil                    | autocite*       |
+| nocite(n)            | nil                    | nocite          |
+| text(t)              | caps(c)                | Textcite        |
+| text(t)              | nil                    | textcite        |
+| nil                  | bare(b)                | cite            |
+| nil                  | caps(c)                | Autocite        |
+| nil                  | bare-caps(bc)          | Cite            |
+| nil                  | nil                    | autocite        |
+
+Insert processors provide convenient shortcuts for inserting the
+citations and this does not need to be done manually. I use the insert
+processor from the [[https://github.com/jkitchin/org-ref-cite][org-ref-cite]] repository created by John
+Kitchin. Although this insert processor is created for use with
+bibtex/natbib, it works reasonably well for biblatex as well. ~C-c \~
+is bound to org-cite-insert. It would open your database in a
+convenient form using Ivy completion framework, where you can type
+keywords to select the source you want to cite, and press enter to
+insert it. Please look at [[https://github.com/jkitchin/org-ref-cite][org-ref-cite]] for additional details on how
+to modify citation styles, insert multiple citations, and insert
+prefixes and suffixes.
+
+[[org-ref-cite]] also provides other useful facilities. You can follow a citation by clicking on it.
+
+*** Creating a bibliography
+
 
 To insert the bibliography, add the following line where you want to
 insert the bibliography (usually, at the end of your paper, but before
