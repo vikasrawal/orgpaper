@@ -1198,26 +1198,26 @@ Let us understand this syntax. There are four parts in the syntax.
 
 #+name: citation-commands
 #+caption: Important citation styles and variants provided by the biblatex processor in org
-#+attr_latex: :environment tabularx :width \textwidth :align lX
-| Style (abbreviation) | Variant (abbreviation) | Exported output |
-|----------------------+------------------------+-----------------|
-| author(a)            | caps(c)                | Citeauthor*     |
-| author(a)            | full(f)                | citeauthor      |
-| author(a)            | caps-full(cf)          | Citeauthor      |
-| author(a)            | nil                    | citeauthor*     |
-| locators(l)          | bare(b)                | notecite        |
-| locators(l)          | caps(c)                | Pnotecite       |
-| locators(l)          | bare-caps(bc)          | Notecite        |
-| locators(l)          | nil                    | pnotecite       |
-| noauthor(na)         | bare(b)                | cite*           |
-| noauthor(na)         | nil                    | autocite*       |
-| nocite(n)            | nil                    | nocite          |
-| text(t)              | caps(c)                | Textcite        |
-| text(t)              | nil                    | textcite        |
-| nil                  | bare(b)                | cite            |
-| nil                  | caps(c)                | Autocite        |
-| nil                  | bare-caps(bc)          | Cite            |
-| nil                  | nil                    | autocite        |
+#+attr_latex: :environment tabularx :width \textwidth :align lXXX
+| Style (abbreviation) | Variant (abbreviation) | Biblatex command | Output                  |
+|----------------------+------------------------+------------------+-------------------------|
+| author(a)            | caps(c)                | Citeauthor*      | Seema et al.            |
+| author(a)            | full(f)                | citeauthor       | Seema, K and David, P   |
+| author(a)            | caps-full(cf)          | Citeauthor       | Seema, K and David, P   |
+| author(a)            | nil                    | citeauthor*      | Seema et al.            |
+| locators(l)          | bare(b)                | notecite         | p. 56                   |
+| locators(l)          | caps(c)                | Pnotecite        | (P. 56)                 |
+| locators(l)          | bare-caps(bc)          | Notecite         | P. 56                   |
+| locators(l)          | nil                    | pnotecite        | (p. 56)                 |
+| noauthor(na)         | bare(b)                | cite*            | 2010                    |
+| noauthor(na)         | nil                    | autocite*        | (2010)                  |
+| nocite(n)            | nil                    | nocite           | nil                     |
+| text(t)              | caps(c)                | Textcite         | Seema and David (2010)  |
+| text(t)              | nil                    | textcite         | Seema and David (2010)  |
+| nil                  | bare(b)                | cite             | (Seema and David, 2010) |
+| nil                  | caps(c)                | Autocite         | (Seema and David, 2010) |
+| nil                  | bare-caps(bc)          | Cite             | Seema and David, 2010   |
+| nil                  | nil                    | autocite         | (Seema and David, 2010) |
 
 Insert processors provide convenient shortcuts for inserting the
 citations and this does not need to be done manually. I use the insert
@@ -1235,12 +1235,12 @@ prefixes and suffixes.
 
 *** Creating a bibliography
 
-
 To insert the bibliography, add the following line where you want to
 insert the bibliography (usually, at the end of your paper, but before
 the Footnotes)
 
-: \printbibliography
+: #+print_bibliography:
+
 
 * Producing a formatted LaTeX, pdf, odt, docx or html file
 
