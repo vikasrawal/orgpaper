@@ -1162,7 +1162,7 @@ to get the citations in the pdf file.
 Three sets of things have to be specified for each document.
 
 First, the following line in the header of the org file calls biblatex. You may want to modify the options used here.
-: #+LATEX_HEADER: \usepackage[hyperref=true,maxcitenames=3,doi=false,url=true, \
+: #+LATEX_HEADER: \usepackage[hyperref=true,maxcitenames=3,doi=false,url=true,
 : backend=biber,natbib=true, maxbibnames=99,uniquename=false,uniquelist=false,
 : indexing=cite,sorting=nyt,mergedate=compact,innamebeforetitle=true,articlein=false]{biblatex}
 
