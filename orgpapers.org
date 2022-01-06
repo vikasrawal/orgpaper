@@ -1130,20 +1130,30 @@ The operative part in this file is the following:
 :         "xelatex -interaction nonstopmode -output-directory %o %f"
 :         "xelatex -interaction nonstopmode -output-directory %o %f"))
 
-Once this is done, every time you export the document to pdf via
-latex, it runs xelatex, then runs Biber and then runs xelatex twice
-again. This is necessary to get the citations in the pdf file.
+Every time you export the document to pdf via latex, it runs xelatex,
+then runs Biber and then runs xelatex twice again. This is necessary
+to get the citations in the pdf file.
 
-In [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]], the package biblatex is loaded with following options:
-: ("citestyle=authoryear-icomp,bibstyle=authoryear,hyperref=true,backref=true,
-: maxcitenames=3,url=true,backend=biber,natbib=true" "biblatex" t)
+*** Document configuration
 
-You may want to modify this if you want to change the citation and
-bibliography styles. If you want to do it differently in each
-document, you can remove this line from [[https://github.com/vikasrawal/orgpaper/blob/master/research-toolkit.org][research-toolkit.org]], and add the
-following special line in your document.
-: #+LATEX_HEADER: \usepackage["citestyle=authoryear-icomp,bibstyle=authoryear, \
-: hyperref=true,backref=true,maxcitenames=3,url=true,backend=biber,natbib=true"] {biblatex}
+Three sets of things have to be specified for each document.
+
+First, the following line in the header of the org file calls biblatex. You may want to modify the options used here.
+: #+LATEX_HEADER: \usepackage[hyperref=true,maxcitenames=3,doi=false,url=true, \
+: backend=biber,natbib=true, maxbibnames=99,uniquename=false,uniquelist=false,
+: indexing=cite,sorting=nyt,mergedate=compact,innamebeforetitle=true,articlein=false]{biblatex}
+
+Second, the following line in the header of the org file specifies the biblatex citation and bibliographic styles to be used.
+: #+cite_export: biblatex authoryear/authoryear-comp
+
+Third, the following line specifies the bibliographic database to be used for this document.
+: #+bibliography: bibliobase/bibliobase.bib
+
+Where I have the choice, I also customise the bibliography in the way
+I like. These customisations are in the file [[https://github.com/indianstatistics/bibliobase/blob/master/vikas-bibstyle.org][vikas-bibstyle.org]] in
+[[https://github.com/indianstatistics/bibliobase.git][indianstatistics/bibliobase]] repository. This file can be included in
+the document as follows:
+: #+INCLUDE: PATH-TO-FILE/vikas-bibstyle.org
 
 *** Adding citations and bibliography in Latex/PDF export
 
