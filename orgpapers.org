@@ -1199,25 +1199,25 @@ Let us understand this syntax. There are four parts in the syntax.
 #+name: citation-commands
 #+caption: Important citation styles and variants provided by the biblatex processor in org
 #+attr_latex: :environment tabularx :width \textwidth :align lXXX
-| Style (abbreviation) | Variant (abbreviation) | Biblatex command | Example output          |
-|----------------------+------------------------+------------------+-------------------------|
-| author(a)            | caps(c)                | Citeauthor*      | Seema et al.            |
-| author(a)            | full(f)                | citeauthor       | Seema, K and David, P   |
-| author(a)            | caps-full(cf)          | Citeauthor       | Seema, K and David, P   |
-| author(a)            | nil                    | citeauthor*      | Seema et al.            |
-| locators(l)          | bare(b)                | notecite         | p. 56                   |
-| locators(l)          | caps(c)                | Pnotecite        | (P. 56)                 |
-| locators(l)          | bare-caps(bc)          | Notecite         | P. 56                   |
-| locators(l)          | nil                    | pnotecite        | (p. 56)                 |
-| noauthor(na)         | bare(b)                | cite*            | 2010                    |
-| noauthor(na)         | nil                    | autocite*        | (2010)                  |
-| nocite(n)            | nil                    | nocite           | nil                     |
-| text(t)              | caps(c)                | Textcite         | Seema and David (2010)  |
-| text(t)              | nil                    | textcite         | Seema and David (2010)  |
-| nil                  | bare(b)                | cite             | (Seema and David, 2010) |
-| nil                  | caps(c)                | Autocite         | (Seema and David, 2010) |
-| nil                  | bare-caps(bc)          | Cite             | Seema and David, 2010   |
-| nil                  | nil                    | autocite         | (Seema and David, 2010) |
+| Style (abbreviation) | Variant (abbreviation) | Biblatex command | Example output                           |
+|----------------------+------------------------+------------------+------------------------------------------|
+| author(a)            | caps(c)                | Citeauthor*      | Seema et al.                             |
+| author(a)            | full(f)                | citeauthor       | Seema, K and David, P                    |
+| author(a)            | caps-full(cf)          | Citeauthor       | Seema, K and David, P                    |
+| author(a)            | nil                    | citeauthor*      | Seema et al.                             |
+| locators(l)          | bare(b)                | notecite         | p. 56                                    |
+| locators(l)          | caps(c)                | Pnotecite        | (P. 56)                                  |
+| locators(l)          | bare-caps(bc)          | Notecite         | P. 56                                    |
+| locators(l)          | nil                    | pnotecite        | (p. 56)                                  |
+| noauthor(na)         | bare(b)                | cite*            | 2010                                     |
+| noauthor(na)         | nil                    | autocite*        | (2010)                                   |
+| nocite(n)            | nil                    | nocite           | No citation but included in bibliography |
+| text(t)              | caps(c)                | Textcite         | Seema and David (2010)                   |
+| text(t)              | nil                    | textcite         | Seema and David (2010)                   |
+| nil                  | bare(b)                | cite             | (Seema and David, 2010)                  |
+| nil                  | caps(c)                | Autocite         | (Seema and David, 2010)                  |
+| nil                  | bare-caps(bc)          | Cite             | Seema and David, 2010                    |
+| nil                  | nil                    | autocite         | (Seema and David, 2010)                  |
 
 Insert processors provide convenient shortcuts for inserting the
 citations and this does not need to be done manually. I use the insert
