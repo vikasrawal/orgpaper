@@ -1196,8 +1196,8 @@ Let us understand this syntax. There are four parts in the syntax.
 
 4. Finally, you may optionally use some arbitrary text as a common suffix. This would be ~as examples of this~ in the citation to be exported ~(see Seema, 2010 and Nancy, 2011 as examples of this)~.
 
-#+name: citation-commands
 #+caption: Important citation styles and variants provided by the biblatex processor in org
+#+name: citation-commands
 #+attr_latex: :environment tabularx :width \textwidth :align lXXX
 | Style (abbreviation) | Variant (abbreviation) | Biblatex command | Example output                           |
 |----------------------+------------------------+------------------+------------------------------------------|
