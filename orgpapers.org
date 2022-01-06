@@ -1231,7 +1231,15 @@ insert it. Please look at [[https://github.com/jkitchin/org-ref-cite][org-ref-ci
 to modify citation styles, insert multiple citations, and insert
 prefixes and suffixes.
 
-[[org-ref-cite]] also provides other useful facilities. You can follow a citation by clicking on it.
+[[org-ref-cite]] also provides other useful facilities. If you click on
+the citation, a menu opens which gives you several options including
+to go to the entry in the biblatex database (in case you want to edit
+it), to look at your notes about the source or to open the pdf file of
+the source document. org-ref-cite also colours the citations
+differently including colouring them differently (red) if the citation
+key does not match with any valid entry in the database. Please note
+that since the fontification is designed for bibtex/natbib, it may
+give some false alerts for a biblatex database.
 
 *** Creating a bibliography
 
